@@ -17,6 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$', include('rilouw.apps.main.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    # main module
+    url(r'', include('rilouw.apps.main.urls')),
+
+    # admin
+    #url(r'^admin/', include(admin.site.urls)),
+
+    # resume module
+    #url(r'^resume/', include('rilouw.apps.resume.urls')),
 ]

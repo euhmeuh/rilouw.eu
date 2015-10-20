@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from rilouw.common.views import BaseView
 
-class HomeView(TemplateView):
-    template_name = "main/home.html"
+class HomeView(BaseView):
+    template_name = "main/home.jade"
