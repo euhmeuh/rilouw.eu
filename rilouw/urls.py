@@ -29,5 +29,5 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
 
     # resume module
-    #url(r'^resume/', include('rilouw.apps.resume.urls')),
+    url(r'^resume/', include('rilouw.apps.resume.urls')),
 ]

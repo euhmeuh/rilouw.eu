@@ -1,0 +1,17 @@
+- extends "_base.html"
+- load staticfiles
+
+block head
+  link(rel='stylesheet', href='{{ STATIC_URL }}resume/css/resume.css')
+
+block title
+  |Jérôme Martin, Project Manager
+
+block header
+  p 履歴書
+
+block content
+  p 行きましょう！
+
+block footer
+  img(src='{{ STATIC_URL }}main/img/fishroom_logo.png', alt='魚室会社 Fishroom Corp.')
