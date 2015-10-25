@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'rilouw.apps.main',
+    'rilouw.apps.resume',
 )
 
 MIDDLEWARE_CLASSES = (

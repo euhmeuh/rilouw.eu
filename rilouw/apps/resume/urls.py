@@ -8,8 +8,9 @@
 
 from django.conf.urls import include, url
 
-from rilouw.apps.resume.views import ResumeView
+from rilouw.apps.resume.views import ResumeView, ContactView
 
 urlpatterns = [
     url(r'^$', ResumeView.as_view(), name='resume'),
+    url(r'^contact$', ContactView.as_view(), name='resume-contact')
 ]

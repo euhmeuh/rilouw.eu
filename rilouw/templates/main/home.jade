@@ -15,5 +15,9 @@ block content
     br
     | Bienvenue dans le potager !
 
+  p Click 
+    a(href="{% url 'resume' %}") here
+    |  for my resume
+
 block footer
   img(src='{{ STATIC_URL }}main/img/fishroom_logo.png', alt='魚室会社 Fishroom Corp.')

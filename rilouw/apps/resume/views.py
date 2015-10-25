@@ -7,3 +7,6 @@ from rilouw.common.views import BaseView
 
 class ResumeView(BaseView):
     template_name = "resume/resume.jade"
+
+class ContactView(BaseView):
+    template_name = "resume/contact.jade"

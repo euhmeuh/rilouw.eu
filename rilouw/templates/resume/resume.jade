@@ -5,13 +5,55 @@ block head
   link(rel='stylesheet', href='{{ STATIC_URL }}resume/css/resume.css')
 
 block title
-  |Jérôme Martin, Project Manager
+  |Jérôme Martin, IT Project Manager
 
 block header
-  p 履歴書
+  //- img(src='{{ STATIC_URL }}resume/img/profile.png', alt='A photo of myself')
+  h1
+    ruby Jérôme Martin
+      rt ジェローム・マルタン
+  aside An IT project manager's minimalist and clear resume for perfectionists with deadlines
 
 block content
-  p 行きましょう！
+  h2 I do project manage&shy;ment · 事業管理をします
+  p You know, things like trying to get a project done while holding back the continous stream of wacky improvements the client is asking for, keeping an eye on the budget which will get broken anyways, and motivating the team to meet the deadline even if John is home sick, Robert is out taking a business training course, and someone deleted the Facebook certificate by mistake when reinstalling his operating system. Well my job is to get all of that covered and expected before it happens.
+
+  h2 I have faith in 
+    strong human beings
+    |  · 人を信じます
+  p Project management may be about schedules, performance indicators, lots of schemas and piles of documentation. But in the end, it always sums up to human interactions, and to your team's will to get to the objective. I believe in happiness at work, and think that people who are free to do their best will always do so if they know where they are going and why. Precise and well defined objectives are the key, along with constant communication and short iterations. You guessed it already, I like scrum and agile methods.
+
+  h2 I want to work with you · 一緒に協力しましょう
+  p I can find my place in any working environment, as long as it permits me to express my passion for my job and gives me the ability to push the company forward.
+  p You are a small company growing up fast, even maybe a bit faster than expected, and you are starting to feel the need for more organization structure to assure a better quality of service and lead your project teams? I would be happy to help! You are a big international company kicking off new project everyday, hiring like crazy? Glad to meet you, when do I start?
+
+  h2 More about me · 私について
+  p I love to travel, meet new people, share with them, and learn languages on the way. Discussing different points of view with people all around the globe is my raison d'etre, so whether you are interested in hiring me, or just want to know more about me, don't hesitate to contact me using the links right below, and download my complete resume.
+
+  h2 Contact · 問い合わせ先
+  ul
+    li
+      a(href='{% url "resume-contact" %}') Email me
+    li
+      a(href='https://careers.stackoverflow.com/jerome-martin-304812') Stackoverflow Careers
+    li
+      a(href='https://github.com/euhmeuh') Github
+    li
+      a(href='{{ STATIC_URL }}resume/docs/JeromeMartinResume.pdf') Download my pdf resume · 
+        span.sans 履歴書をダウンロードする
+
+  hr
+
+  h2 Footnotes · 脚注
+  p You might have noticed the reference in the title, this website runs with 
+    a(href="https://djangoproject.com") Django
+    |, the web framework for perfectionists with deadlines. 
+    br
+    |This technology is based on 
+    a(href="https://python.org") Python
+    |, the best programming language in the world.
 
 block footer
-  img(src='{{ STATIC_URL }}main/img/fishroom_logo.png', alt='魚室会社 Fishroom Corp.')
+  p.copyright © 2015 Jérôme Martin, All rights reserved
+    br
+    |Photo credits: © Régis Routier | Ville de Nantes

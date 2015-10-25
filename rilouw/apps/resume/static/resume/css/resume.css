@@ -1,0 +1,87 @@
+html, body {
+  font-family: "DejaVu Serif", "IPAPMincho", serif;
+  font-family: "DejaVu Serif", "IPAPMincho",
+               "ヒラギノ明朝 Pro W3", 
+               "Hiragino Mincho Pro", 
+               "ＭＳ Ｐ明朝", "MS PMing", sans-serif;
+}
+
+/* Thanks to bettermotherfuckingwebsite.com
+   for the best 7 lines stylesheet in the world */
+body {
+  margin: 40px auto;
+  max-width: 650px;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #444;
+  padding: 0 10px;
+  background-color: #FEFEFE;
+}
+h1, h2, h3 { line-height:1.2 }
+
+/* custom */
+.nobold { font-weight: normal; }
+.sans { font-family: sans-serif; }
+.center { text-align: center; }
+
+ruby rt {
+  font-family: "DejaVu Sans", "IPAPGothic",
+               "ヒラギノ角ゴ Pro W3", 
+               "Hiragino Kaku Gothic Pro", 
+               "Osaka", 
+               "メイリオ", "Meiryo", 
+               "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 0.3em;
+}
+
+strong { color: green;}
+a, a:visited { color: green; }
+header { text-align: center; max-width: 650px; margin: 0px auto; }
+img {
+  width: 150px;
+  height: 150px;
+}
+
+#content {
+  text-align: justify;
+  max-width: 650px;
+  margin: 40px auto;
+}
+body{ max-width: none; }
+
+.copyright {
+  text-align: center;
+  font-size: 11px;
+}
+
+/* Big background image */
+html {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@media (orientation: landscape) {
+  html {
+    background-image: url('../img/background.jpg');
+  }
+
+  body {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 30%;
+    margin-right: 0px;
+
+    padding: 40px 10px;
+  }
+}
+
+@media (orientation: portrait) {
+  html {
+    background-image: none;
+  }
+}
