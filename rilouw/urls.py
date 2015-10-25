@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# 
+# Rilouw.eu website by Jérôme Martin
+# 魚室会社 Fishroom Corp. is a fictional company
+
 """rilouw URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -24,5 +29,5 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
 
     # resume module
-    #url(r'^resume/', include('rilouw.apps.resume.urls')),
+    url(r'^resume/', include('rilouw.apps.resume.urls')),
 ]

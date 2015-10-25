@@ -5,5 +5,8 @@
 
 from rilouw.common.views import BaseView
 
-class HomeView(BaseView):
-    template_name = "main/home.jade"
+class ResumeView(BaseView):
+    template_name = "resume/resume.jade"
+
+class ContactView(BaseView):
+    template_name = "resume/contact.jade"
