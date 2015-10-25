@@ -9,6 +9,6 @@ def settings(request):
     return {
         'STATIC_URL': rilouw.settings.STATIC_URL,
         'SITE_DESCRIPTION': 'An IT project manager\'s minimalist and clear resume',
-        'SITE_KEYWORDS': '',
+        'SITE_KEYWORDS': 'jérôme martin, jerome martin, project manager, information technology, management, risk management, manager, resume, scrum, agile, pmi, django, python',
         'SITE_AUTHOR': 'Jérôme Martin'
     }
