@@ -6,4 +6,9 @@
 import rilouw.settings
 
 def settings(request):
-    return {'STATIC_URL': rilouw.settings.STATIC_URL}
+    return {
+        'STATIC_URL': rilouw.settings.STATIC_URL,
+        'SITE_DESCRIPTION': 'An IT project manager\'s minimalist and clear resume',
+        'SITE_KEYWORDS': '',
+        'SITE_AUTHOR': 'Jérôme Martin'
+    }
