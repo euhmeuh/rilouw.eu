@@ -12,5 +12,6 @@ from rilouw.apps.resume.views import ResumeView, ContactView
 
 urlpatterns = [
     url(r'^$', ResumeView.as_view(), name='resume'),
-    url(r'^contact$', ContactView.as_view(), name='resume-contact')
+    url(r'^resume$', ResumeView.as_view(), name='resume'),
+    #url(r'^contact$', ContactView.as_view(), name='resume-contact')
 ]
