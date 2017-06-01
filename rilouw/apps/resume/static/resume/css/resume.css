@@ -23,6 +23,14 @@ h1, h2, h3 { line-height:1.2 }
 .nobold { font-weight: normal; }
 .sans { font-family: sans-serif; }
 .center { text-align: center; }
+.left {
+  float: left;
+  padding-right: 15px;
+}
+.right {
+  float: right;
+  padding-left: 15px;
+}
 
 ruby rt {
   font-family: "DejaVu Sans", "IPAPGothic",
@@ -38,8 +46,24 @@ strong { color: green;}
 a, a:visited { color: green; }
 header { text-align: center; max-width: 650px; margin: 0px auto; }
 img {
+  width: 100%;
+  height: auto;
+}
+img.small {
   width: 150px;
   height: 150px;
+}
+img.round {
+  border-radius: 50%;
+}
+div.small {
+  width: 150px;
+}
+div.medium {
+  width: 300px;
+}
+div.large {
+  width: 600px;
 }
 
 #content {
