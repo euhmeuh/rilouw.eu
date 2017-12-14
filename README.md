@@ -1,2 +1,2 @@
 # rilouw-website
-My personal website made with Django
+My personal website made with Racket
