@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/FiraCode-Regular.woff2') format('woff2'),
+       url('/fonts/FiraCode-Regular.woff') format('woff'),
+       url('/fonts/FiraCode-Regular.ttf') format('truetype'),
+       url('/fonts/FiraCode-Regular.eot');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes focus {
+  0% {
+    outline: 1px solid;
+    outline-offset: 1em;
+  }
+  100% {
+    outline: 6px solid;
+    outline-offset: .10em;
+  }
+}
+
+a:focus {
+  outline: 6px solid;
+  outline-offset: .10em;
+  animation: focus .15s
+}
+
+html {
+  font-family: "Fira Code";
+}
+
+body {
+  min-width: 26ch;
+  max-width: 60ch;
+  width: 100%;
+  margin: 0 auto;
+}
+
+aside {
+  width: 50%;
+  float: right;
+}
+
+aside p {
+  margin: 10px;
+  text-align: right;
+}
+
+p {
+  text-align: justify;
+}
+
+hr.fancy {
+  padding: 0;
+  margin: 1.5em 0 -1.5em 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+hr.fancy:after {
+  content: '\2766';
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.5em;
+  padding: 0 0.25em;
+  background: white;
+}
+
+article h2::before,
+article h3::before,
+article p::before,
+article p::after {
+  color: #CCC;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+article h2::before {
+  content: '(article ';
+}
+
+article h3::before {
+  content: '(section ';
+}
+
+article p::before {
+  content: '(\00A7  ';
+}
+
+article p::after {
+  content: ')'
+}
+
+article p:last-of-type::after {
+  content: '))';
+}
+
+.indent-1 {
+  text-indent: -2ch;
+  margin-left: 4ch;
+}
+
+.indent-2 {
+  text-indent: -2ch;
+  margin-left: 6ch;
+}
+
+.indent-3 {
+  text-indent: -2ch;
+  margin-left: 8ch;
+}
