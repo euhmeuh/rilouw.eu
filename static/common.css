@@ -19,6 +19,14 @@
   }
 }
 
+a {
+  color: #007fc5;
+}
+
+a:visited {
+  color: #9bdbff;
+}
+
 a:focus {
   outline: 6px solid;
   outline-offset: .10em;
@@ -27,6 +35,7 @@ a:focus {
 
 html {
   font-family: "Fira Code";
+  background-color: #008a8a;
 }
 
 body {
@@ -34,6 +43,10 @@ body {
   max-width: 60ch;
   width: 100%;
   margin: 0 auto;
+  background-color: #fff7e6;
+  padding: 60px;
+  border-left: dotted 15px #008a8a;
+  border-right: dotted 15px #008a8a;
 }
 
 aside {
@@ -66,14 +79,14 @@ hr.fancy:after {
   top: -0.7em;
   font-size: 1.5em;
   padding: 0 0.25em;
-  background: white;
+  background: #fff7e6;
 }
 
 article h2::before,
 article h3::before,
 article p::before,
 article p::after {
-  color: #CCC;
+  color: #D88551;
   font-size: 1rem;
   font-weight: normal;
 }
