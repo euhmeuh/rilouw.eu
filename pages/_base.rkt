@@ -1,13 +1,18 @@
 #lang racket/base
 
-(provide render-base)
+(provide
+  render-base
+  render-link)
 
 (require "../entities/base.rkt")
 
+(define (render-link link)
+  `(a ([href ,(link-url link)]) ,(link-text link)))
+
 (define (render-navigation links)
-  (define (render-link link)
-    `(li (a ([href ,(link-url link)]) ,(link-text link))))
-  `(nav (ul ,@(map render-link links))))
+  `(nav (ul ,@(map (lambda (link)
+                     `(li ,(render-link link)))
+                   links))))
 
 (define (render-base page-title links render-page)
   `(html ([lang "en"])
