@@ -3,6 +3,8 @@
 (provide
   (all-from-out "base.rkt")
 
+  load-article
+
   ;; public interface gives only access to special constructors,
   ;; predicates and some accessors
   element-indent
@@ -29,15 +31,15 @@
 (struct element ([indent #:mutable]))
 (struct container element (elements))
 
-(struct article container (id title))
+(struct article container (id title tags))
 (struct paragraph container ())
 (struct section container ([id #:mutable] title))
 (struct note container ())
 
-(define (make-article title . body)
+(define (make-article title tags . body)
   (walk-and-set-indents!
     (walk-and-set-section-ids!
-      (article 0 body (normalize title) title))))
+      (article 0 body (normalize title) title tags))))
 
 (define (make-paragraph . text-or-links)
   (paragraph 0 text-or-links))
@@ -46,7 +48,7 @@
   (section 0 elements (normalize title) title))
 
 (define (make-note . elements)
-  (paragraph 0 elements))
+  (note 0 elements))
 
 (define (walk-and-set-indents! element [indent 0])
   (when (element? element)
@@ -69,3 +71,6 @@
 (define (normalize str)
   (string-downcase
     (string-normalize-spaces str #rx"[^a-zA-Z0-9]+" "-")))
+
+(define (load-article path)
+  (dynamic-require path 'article))
