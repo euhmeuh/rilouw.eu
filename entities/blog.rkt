@@ -7,7 +7,6 @@
 
   ;; public interface gives only access to special constructors,
   ;; predicates and some accessors
-  element-indent
   container?
   container-elements
   (rename-out [make-article article])
@@ -21,42 +20,38 @@
   section-id
   section-title
   (rename-out [make-note note])
-  note?)
+  note?
+  (rename-out [make-dotted-list dotted-list])
+  dotted-list?
+  )
 
 (require
   racket/string
   racket/function
   "base.rkt")
 
-(struct element ([indent #:mutable]))
-(struct container element (elements))
-
+(struct container (elements))
 (struct article container (id title tags))
 (struct paragraph container ())
 (struct section container ([id #:mutable] title))
 (struct note container ())
+(struct dotted-list container ())
 
 (define (make-article title tags . body)
-  (walk-and-set-indents!
-    (walk-and-set-section-ids!
-      (article 0 body (normalize title) title tags))))
+  (walk-and-set-section-ids!
+    (article body (normalize title) title tags)))
 
 (define (make-paragraph . text-or-links)
-  (paragraph 0 text-or-links))
+  (paragraph text-or-links))
 
 (define (make-section title . elements)
-  (section 0 elements (normalize title) title))
+  (section elements (normalize title) title))
 
 (define (make-note . elements)
-  (note 0 elements))
+  (note elements))
 
-(define (walk-and-set-indents! element [indent 0])
-  (when (element? element)
-    (set-element-indent! element indent))
-  (when (container? element)
-    (for-each (curryr walk-and-set-indents! (add1 indent))
-              (container-elements element)))
-  element)
+(define (make-dotted-list . elements)
+  (dotted-list elements))
 
 (define (walk-and-set-section-ids! article)
   (for-each

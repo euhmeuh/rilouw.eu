@@ -84,8 +84,8 @@ hr.fancy:after {
 
 article h2::before,
 article h3::before,
-article p::before,
-article p::after {
+.indent::before,
+.indent::after {
   color: #D88551;
   font-size: 1rem;
   font-weight: normal;
@@ -107,21 +107,30 @@ article p::after {
   content: ')'
 }
 
-article p:last-of-type::after {
-  content: '))';
+article > p:last-child::after,
+article .indent > p:last-child::after {
+  content: '))'
 }
 
-.indent-1 {
+article > .indent:last-child > p:last-child::after,
+article .indent > .indent:last-child > p:last-child::after {
+  content: ')))'
+}
+
+article .indent {
   text-indent: -2ch;
   margin-left: 4ch;
 }
 
-.indent-2 {
+.indent .indent {
   text-indent: -2ch;
-  margin-left: 6ch;
+  margin-left: 2ch;
 }
 
-.indent-3 {
-  text-indent: -2ch;
-  margin-left: 8ch;
+article ul {
+  padding: 0;
+}
+
+article ul li {
+  text-indent: initial;
 }

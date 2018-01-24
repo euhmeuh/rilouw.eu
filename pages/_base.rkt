@@ -28,7 +28,8 @@
        ,(render-page)
        (footer
          (hr ([class "fancy"]))
-         (h2 ([id "about"]) "About us")
-         (p "We like vegetables and fruits")
+         (h2 ([id "about"]) "About this blog")
+         (p "I learn new things everyday, and I like to put up great and useless theories about the inner workings of the world.")
+         (p "You'll find them here.")
          (hr)
          (p "Copyright © euhmeuh - All rights reserved.")))))
