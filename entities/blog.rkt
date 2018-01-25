@@ -38,8 +38,10 @@
 (struct dotted-list container ())
 
 (define (make-article title tags . body)
-  (walk-and-set-section-ids!
-    (article body (normalize title) title tags)))
+  (define the-article (article body (normalize title) title tags))
+  (walk-and-set-section-ids! (article-id the-article)
+                             (container-elements the-article))
+  the-article)
 
 (define (make-paragraph . text-or-links)
   (paragraph text-or-links))
@@ -53,15 +55,17 @@
 (define (make-dotted-list . elements)
   (dotted-list elements))
 
-(define (walk-and-set-section-ids! article)
+(define (walk-and-set-section-ids! id elements)
   (for-each
     (lambda (element)
-      (when (section? element)
-        (set-section-id! element (string-append (article-id article)
-                                                "-"
-                                                (section-id element)))))
-    (container-elements article))
-  article)
+      (cond
+        [(section? element)
+         (let ([id (string-append id "-" (section-id element))])
+           (set-section-id! element id)
+           (walk-and-set-section-ids! id (container-elements element)))]
+        [(container? element)
+         (walk-and-set-section-ids! id (container-elements element))]))
+    elements))
 
 (define (normalize str)
   (string-downcase
