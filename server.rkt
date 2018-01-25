@@ -7,6 +7,16 @@
     #:preamble #"<!DOCTYPE html>"
     (renderer)))
 
+(define (load-article path)
+  (dynamic-require path 'article))
+
+(define (response-index req)
+  (define articles
+    (list (load-article (build-path article-root "vegetables.rkt"))
+          (load-article (build-path article-root "failure.rkt"))))
+  (response-page req (lambda ()
+                       (render-index articles))))
+
 (define (response-not-found)
   (local-require "pages/404.rkt")
   (response/xexpr
@@ -47,10 +57,14 @@
   (path->string
     (build-path (current-directory) "static")))
 
+(define article-root
+  (path->string
+    (build-path (current-directory) "articles")))
+
 (define-values
   (blog-dispatcher blog-url)
   (dispatch-rules
-    [("") (lambda (req) (response-page req render-index))]
+    [("") response-index]
     [else handle-file-request]))
 
 (serve/dispatch blog-dispatcher)

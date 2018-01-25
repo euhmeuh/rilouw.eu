@@ -3,8 +3,6 @@
 (provide
   (all-from-out "base.rkt")
 
-  load-article
-
   ;; public interface gives only access to special constructors,
   ;; predicates and some accessors
   container?
@@ -70,6 +68,3 @@
 (define (normalize str)
   (string-downcase
     (string-normalize-spaces str #rx"[^a-zA-Z0-9]+" "-")))
-
-(define (load-article path)
-  (dynamic-require path 'article))

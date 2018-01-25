@@ -70,6 +70,7 @@ hr.fancy {
   border-top: medium double #333;
   color: #333;
   text-align: center;
+  overflow: visible;
 }
 
 hr.fancy:after {
