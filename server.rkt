@@ -1,6 +1,11 @@
 #lang web-server
 
-(require "pages/index.rkt")
+(require
+  web-server/servlet
+  web-server/servlet-env)
+
+(define-syntax-rule (if-debug then else)
+  (if (getenv "DEBUG") then else))
 
 (define (response-page req renderer)
   (response/xexpr
@@ -11,60 +16,40 @@
   (dynamic-require path 'article))
 
 (define (response-index req)
+  (local-require "pages/index.rkt")
   (define articles
-    (list (load-article (build-path article-root "vegetables.rkt"))
-          (load-article (build-path article-root "failure.rkt"))))
+    (list (load-article (build-path article-root-path "vegetables.rkt"))
+          (load-article (build-path article-root-path "failure.rkt"))))
   (response-page req (lambda ()
                        (render-index articles))))
 
-(define (response-not-found)
+(define (response-not-found req)
   (local-require "pages/404.rkt")
   (response/xexpr
     #:code 404
     #:message #"Not found"
     (render-404)))
 
-(define (response-raw data mime-type)
-  (response/output
-    (lambda (client-out)
-      (write-bytes data client-out))
-    #:message #"OK"
-    #:mime-type mime-type))
+(define server-root-path (make-parameter (if-debug (current-directory) "/www")))
 
-(define mime-types
-  #hash((#""     . TEXT/HTML-MIME-TYPE)
-        (#"html" . TEXT/HTML-MIME-TYPE)
-        (#"css"  . #"text/css; charset=utf-8")
-        (#"png"  . #"image/png")
-        (#"rkt"  . #"text/x-racket; charset=utf-8")))
-
-(define (extension->mime-type extension)
-  (hash-ref mime-types extension
-    (lambda () TEXT/HTML-MIME-TYPE)))
-
-(define (handle-file-request req)
-  (define uri (request-uri req))
-  (define resource (map path/param-path (url-path uri)))
-  (define file (apply build-path (cons static-root resource)))
-  (if (file-exists? file)
-    (let* ([extension (filename-extension file)]
-           [mime-type (extension->mime-type extension)]
-           [data (file->bytes file)])
-      (response-raw data mime-type))
-    (response-not-found)))
-
-(define static-root
+(define static-root-path
   (path->string
-    (build-path (current-directory) "static")))
+    (build-path (server-root-path) "static")))
 
-(define article-root
+(define article-root-path
   (path->string
-    (build-path (current-directory) "articles")))
+    (build-path (server-root-path) "articles")))
 
 (define-values
   (blog-dispatcher blog-url)
   (dispatch-rules
-    [("") response-index]
-    [else handle-file-request]))
+    [("") response-index]))
 
-(serve/dispatch blog-dispatcher)
+(serve/servlet
+  blog-dispatcher
+  #:command-line? #t
+  #:servlet-regexp #rx""
+  #:listen-ip (if-debug "127.0.0.1" #f)
+  #:server-root-path (server-root-path)
+  #:extra-files-paths (list static-root-path)
+  #:file-not-found-responder response-not-found)
