@@ -32,9 +32,16 @@
       (string-ci=? (article-id article) id))
     *articles*))
 
-(define *articles*
-  (list (load-article (build-path article-root-path "vegetables.rkt"))
-        (load-article (build-path article-root-path "failure.rkt"))))
+(define (get-articles)
+  (local-require "entities/blog.rkt")
+  (filter
+    (not/c draft?)
+    (for/list ([article-path (in-directory article-root-path
+                                           (lambda (path)
+                                             (regexp-match? #rx"\\.rkt$" path)))])
+      (load-article article-path))))
+
+(define *articles* (get-articles))
 
 (define (response-index req)
   (local-require "pages/index.rkt")

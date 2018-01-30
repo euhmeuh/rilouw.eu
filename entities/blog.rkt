@@ -21,7 +21,9 @@
   note?
   (rename-out [make-dotted-list dotted-list])
   dotted-list?
-  )
+
+  ;; is an article a draft?
+  draft?)
 
 (require
   racket/string
@@ -63,6 +65,9 @@
         [(container? element)
          (walk-and-set-section-ids! id element)]))
     (container-elements container)))
+
+(define (draft? article)
+  (memq 'draft (article-tags article)))
 
 (define (normalize str)
   (string-downcase
