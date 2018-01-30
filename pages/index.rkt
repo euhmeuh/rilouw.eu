@@ -5,41 +5,11 @@
 (require
   racket/list
   "_base.rkt"
+  "_blog.rkt"
   "../entities/blog.rkt")
 
 (define (make-article-url article-id)
   (format "/article/~a" article-id))
-
-(define (render-paragraph paragraph)
-  `(p ([class "indent"])
-      ,@(render-elements (container-elements paragraph))))
-
-(define (render-section section)
-  `(section ([class "indent"])
-            (h3 ([id ,(section-id section)])
-                ,(section-title section))
-            ,@(render-elements (container-elements section))))
-
-(define (render-note note)
-  `(aside ,@(render-elements (container-elements note))))
-
-(define (render-dotted-list dotted-list)
-  `(ul ([class "indent"])
-       ,@(map (lambda (element)
-                `(li ,(render-element element)))
-              (container-elements dotted-list))))
-
-(define (render-element element)
-  (cond
-    [(paragraph? element) (render-paragraph element)]
-    [(section? element) (render-section element)]
-    [(note? element) (render-note element)]
-    [(dotted-list? element) (render-dotted-list element)]
-    [(link? element) (render-link element)]
-    [else element]))
-
-(define (render-elements elements)
-  (map render-element elements))
 
 (define (render-article-preview article)
   (define full-article-link
