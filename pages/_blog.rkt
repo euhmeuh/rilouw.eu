@@ -28,10 +28,15 @@
          [(note? element) (render-note element)]
          [(dotted-list? element) (render-dotted-list element)]
          [(link? element) (render-link element)]
+         [(symbol? element) (render-tag element)]
          [else element])))
 
 (define (render-elements container)
   (map render-element (container-elements container)))
+
+(define (render-tag symbol)
+  (render-link (link (symbol->string symbol)
+                     (make-tag-url symbol))))
 
 (define (render-paragraph paragraph)
   `(p ([class "indent"])

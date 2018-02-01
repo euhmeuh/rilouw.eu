@@ -23,7 +23,11 @@
   dotted-list?
 
   ;; is an article a draft?
-  draft?)
+  draft?
+
+  ;; url builders
+  make-article-url
+  make-tag-url)
 
 (require
   racket/string
@@ -72,3 +76,9 @@
 (define (normalize str)
   (string-downcase
     (string-normalize-spaces str #rx"[^a-zA-Z0-9]+" "-")))
+
+(define (make-article-url article-id)
+  (format "/article/~a" article-id))
+
+(define (make-tag-url symbol)
+  (format "/tag/~a" symbol))

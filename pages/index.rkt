@@ -8,9 +8,6 @@
   "_blog.rkt"
   "../entities/blog.rkt")
 
-(define (make-article-url article-id)
-  (format "/article/~a" article-id))
-
 (define (render-article-preview article)
   (define full-article-link
     (paragraph (link "Full article..." (make-article-url (article-id article)))))
