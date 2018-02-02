@@ -3,7 +3,8 @@
 (provide (except-out (all-from-out racket/base)
                      #%module-begin)
          (rename-out (module-begin #%module-begin))
-         (all-from-out "blog.rkt"))
+         (all-from-out "blog.rkt")
+         (rename-out (newline n)))
 
 (require "blog.rkt")
 
