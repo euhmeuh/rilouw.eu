@@ -8,6 +8,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Source Serif Pro';
+  src: url('/fonts/SourceSerifPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @keyframes focus {
   0% {
     outline: 1px solid;
@@ -24,7 +31,7 @@ a {
 }
 
 a:visited {
-  color: #9bdbff;
+  color: #D88551;
 }
 
 a:focus {
@@ -60,7 +67,17 @@ aside p {
 }
 
 p {
+  font-family: "Source Serif Pro";
+  font-size: larger;
   text-align: justify;
+}
+
+.small {
+  font-size: small;
+}
+
+.center {
+  text-align: center;
 }
 
 hr.fancy {
@@ -87,6 +104,7 @@ article h2::before,
 article h3::before,
 .indent::before,
 .indent::after {
+  font-family: "Fira Code";
   color: #D88551;
   font-size: 1rem;
   font-weight: normal;
