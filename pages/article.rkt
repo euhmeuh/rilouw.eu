@@ -7,8 +7,8 @@
   "_blog.rkt"
   "../entities/blog.rkt")
 
-(define (render-article article)
-    (render-base (article-title article) '()
+(define (render-article article tags)
+    (render-base (article-title article) '() tags
       (lambda ()
         `(main
            (article

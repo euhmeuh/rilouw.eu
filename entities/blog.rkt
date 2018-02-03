@@ -11,6 +11,7 @@
   article?
   article-id
   article-title
+  article-tags
   (rename-out [make-paragraph paragraph])
   paragraph?
   (rename-out [make-section section])

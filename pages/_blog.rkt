@@ -7,12 +7,13 @@
   render-dotted-list
   render-elements
   render-element
+  render-tag
+  render-link
   ;; you can customize this parameter to change renderers for specific element types
   custom-renderer)
 
 (require
   anaphoric
-  "_base.rkt"
   "../entities/blog.rkt")
 
 (define custom-renderer
@@ -50,6 +51,9 @@
 
 (define (render-note note)
   `(aside ,@(render-elements note)))
+
+(define (render-link link)
+  `(a ([href ,(link-url link)]) ,(link-text link)))
 
 (define (render-dotted-list dotted-list)
   `(ul ([class "indent"])

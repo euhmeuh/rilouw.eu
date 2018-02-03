@@ -16,17 +16,19 @@
      ,(render-element (first (container-elements article)))
      ,(render-paragraph full-article-link)))
 
+(define separator '(hr ([class "fancy"])))
+
 (define (render-articles articles)
-  (define separator '(hr ([class "fancy"])))
   (add-between (map render-article-preview articles) separator))
 
 (define (article->link article)
   (link (article-title article)
         (format "#~a" (article-id article))))
 
-(define (render-index articles)
-  (define article-links (map article->link articles))
-  (define links (append article-links (list (link "About" "#about"))))
-  (render-base "Hello Rilouw!" links
+(define (render-index articles tags [title "Home"])
+  (render-base title (map article->link articles) tags
     (lambda ()
-      `(main ,@(render-articles articles)))))
+      `(main
+         (h2 ,title)
+         ,separator
+         ,@(render-articles articles)))))
