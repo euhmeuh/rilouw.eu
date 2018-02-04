@@ -1,16 +1,16 @@
 #lang racket/base
 
-(provide render-article)
+(provide
+  article-page)
 
 (require
   "_base.rkt"
-  "_blog.rkt"
   "../entities/blog.rkt")
 
-(define (render-article article tags)
-    (render-base (article-title article) '() tags
-      (lambda ()
-        `(main
-           (article
-             (h2 ([id ,(article-id article)]) ,(article-title article))
-             ,@(render-elements article))))))
+(define (article-page db article)
+  (base-page db (article-title article) '()
+    (lambda ()
+      `(main
+         (article
+           (h2 ([id ,(article-id article)]) ,(article-title article))
+           ,@(render-elements article))))))

@@ -5,59 +5,106 @@
 
   ;; public interface gives only access to special constructors,
   ;; predicates and some accessors
-  container?
-  container-elements
   (rename-out [make-article article])
   article?
   article-id
   article-title
   article-tags
+
   (rename-out [make-paragraph paragraph])
   paragraph?
+  render-paragraph
+
   (rename-out [make-section section])
   section?
   section-id
   section-title
+  render-section
+
   (rename-out [make-note note])
   note?
+  render-note
+
   (rename-out [make-dotted-list dotted-list])
   dotted-list?
+  render-dotted-list
 
   ;; is an article a draft?
-  draft?
-
-  ;; url builders
-  make-article-url
-  make-tag-url)
+  draft?)
 
 (require
   racket/string
   racket/function
   "base.rkt")
 
-(struct container (elements))
 (struct article container (id title tags))
-(struct paragraph container ())
-(struct section container ([id #:mutable] title))
-(struct note container ())
-(struct dotted-list container ())
 
 (define (make-article title tags . body)
   (define the-article (article body (normalize title) title tags))
   (walk-and-set-section-ids! (article-id the-article) the-article)
   the-article)
 
+(define (draft? article)
+  (memq 'draft (article-tags article)))
+
+(struct paragraph container ()
+  #:methods gen:renderer
+  [(define (render paragraph)
+     ((render-paragraph) paragraph))])
+
 (define (make-paragraph . text-or-links)
   (paragraph text-or-links))
+
+(define render-paragraph
+  (make-parameter
+    (lambda (paragraph)
+      `(p ([class "indent"])
+          ,@(render-elements paragraph)))))
+
+(struct section container ([id #:mutable] title)
+  #:methods gen:renderer
+  [(define (render section)
+     ((render-section) section))])
 
 (define (make-section title . elements)
   (section elements (normalize title) title))
 
+(define render-section
+  (make-parameter
+    (lambda (section)
+      `(section ([class "indent"])
+                (h3 ([id ,(section-id section)])
+                    ,(section-title section))
+                ,@(render-elements section)))))
+
+(struct note container ()
+  #:methods gen:renderer
+  [(define (render note)
+     ((render-note) note))])
+
 (define (make-note . elements)
   (note elements))
 
+(define render-note
+  (make-parameter
+    (lambda (note)
+      `(aside ,@(render-elements note)))))
+
+(struct dotted-list container ()
+  #:methods gen:renderer
+  [(define (render dotted-list)
+     ((render-dotted-list) dotted-list))])
+
 (define (make-dotted-list . elements)
   (dotted-list elements))
+
+(define render-dotted-list
+  (make-parameter
+    (lambda (dotted-list)
+      `(ul ([class "indent"])
+           ,@(map (lambda (element)
+                    `(li ,(render-element element)))
+                  (container-elements dotted-list))))))
 
 (define (walk-and-set-section-ids! id container)
   (for-each
@@ -71,15 +118,6 @@
          (walk-and-set-section-ids! id element)]))
     (container-elements container)))
 
-(define (draft? article)
-  (memq 'draft (article-tags article)))
-
 (define (normalize str)
   (string-downcase
     (string-normalize-spaces str #rx"[^a-zA-Z0-9]+" "-")))
-
-(define (make-article-url article-id)
-  (format "/article/~a" article-id))
-
-(define (make-tag-url symbol)
-  (format "/tag/~a" symbol))

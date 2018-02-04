@@ -1,4 +1,4 @@
-#lang s-exp "../entities/article-lang.rkt"
+#lang s-exp "../database/article-lang.rkt"
 
 (article "Hello world!" '(english meta)
   (paragraph

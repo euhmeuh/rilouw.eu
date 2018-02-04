@@ -1,12 +1,14 @@
 #lang racket/base
 
-(provide render-index)
+(provide
+  index-page)
 
 (require
   racket/list
+  racket/class
   "_base.rkt"
-  "_blog.rkt"
-  "../entities/blog.rkt")
+  "../entities/blog.rkt"
+  "../entities/urls.rkt")
 
 (define (render-article-preview article)
   (define full-article-link
@@ -14,7 +16,7 @@
   `(article
      (h2 ([id ,(article-id article)]) ,(article-title article))
      ,(render-element (first (container-elements article)))
-     ,(render-paragraph full-article-link)))
+     ,(render-element full-article-link)))
 
 (define separator '(hr ([class "fancy"])))
 
@@ -25,8 +27,10 @@
   (link (article-title article)
         (format "#~a" (article-id article))))
 
-(define (render-index articles tags [title "Home"])
-  (render-base title (map article->link articles) tags
+(define (index-page db [title "Home"] [articles #f])
+  (when (not articles)
+    (set! articles (send db get-recent-articles)))
+  (base-page db title (map article->link articles)
     (lambda ()
       `(main
          (h2 ,title)

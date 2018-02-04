@@ -1,9 +1,10 @@
 #lang web-server
 
 (require
-  anaphoric
+  racket/class
   web-server/servlet
-  web-server/servlet-env)
+  web-server/servlet-env
+  "database/article-db.rkt")
 
 (define-syntax-rule (if-debug then else)
   (if (getenv "DEBUG") then else))
@@ -23,70 +24,26 @@
   (path->string
     (build-path (server-root-path) "articles")))
 
-(define (load-article path)
-  (dynamic-require path 'article))
-
-(define (find-article-by-id id)
-  (local-require "entities/blog.rkt")
-  (findf
-    (lambda (article)
-      (string-ci=? (article-id article) id))
-    *articles*))
-
-(define (find-articles-tagged tag)
-  (local-require "entities/blog.rkt")
-  (define articles
-    (filter (lambda (article)
-              (memq tag (article-tags article)))
-            *articles*))
-  (if (empty? articles)
-      #f
-      articles))
-
-(define (get-articles)
-  (local-require "entities/blog.rkt")
-  (filter
-    (not/c draft?)
-    (for/list ([article-path (in-directory article-root-path
-                                           (lambda (path)
-                                             (regexp-match? #rx"\\.rkt$" path)))])
-      (load-article article-path))))
-
-(define (count-tags articles)
-  (local-require "entities/blog.rkt")
-  (define tags (make-hash))
-  (for ([article articles])
-    (for ([tag (article-tags article)])
-      (aif (hash-ref tags tag #f)
-           (hash-set! tags tag (add1 it))
-           (hash-set! tags tag 1))))
-  (hash->list tags))
-
-(define (get-frequent-tags articles #:at-least [at-least 2])
-  (map car (filter (lambda (tag)
-                     (>= (cdr tag) at-least))
-                   (count-tags articles))))
-
-(define *articles* (get-articles))
-(define *tags* (get-frequent-tags *articles* #:at-least 1))
-
 (define (response-index req)
   (local-require "pages/index.rkt")
-  (response-page (render-index *articles* *tags*)))
+  (response-page (index-page article-db)))
 
 (define (response-article req article-id)
   (local-require "pages/article.rkt")
-  (define article (find-article-by-id article-id))
+  (define article (send article-db find-article-by-id article-id))
   (if article
-      (response-page (render-article article *tags*))
+      (response-page (article-page article-db article))
       (response-not-found req)))
 
 (define (response-tag req tag)
   (local-require "pages/index.rkt")
-  (aif (find-articles-tagged (string->symbol tag))
-       (response-page
-         (render-index it *tags* (format "Articles tagged '~a'" tag)))
-       (response-not-found req)))
+  (define found-articles
+    (send article-db find-articles-tagged (string->symbol tag)))
+  (if found-articles
+      (response-page (index-page article-db
+                                 (format "Articles tagged '~a'" tag)
+                                 found-articles))
+      (response-not-found req)))
 
 (define (response-not-found req)
   (local-require "pages/404.rkt")
@@ -94,7 +51,7 @@
     #:code 404
     #:message #"Not found"
     #:preamble #"<!DOCTYPE html>"
-    (render-404 *tags*)))
+    (not-found-page article-db)))
 
 (define-values
   (blog-dispatcher blog-url)
@@ -102,6 +59,9 @@
     [("") response-index]
     [("article" (string-arg)) response-article]
     [("tag" (string-arg)) response-tag]))
+
+(define article-db (new article-db% [path article-root-path]))
+(send article-db start)
 
 (serve/servlet
   blog-dispatcher

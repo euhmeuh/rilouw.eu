@@ -1,4 +1,4 @@
-#lang s-exp "../entities/article-lang.rkt"
+#lang s-exp "../database/article-lang.rkt"
 
 (article "Le rapport à l'erreur" '(french workplace human-rights failure error agile methodology unit-tests tests TDD)
   (paragraph

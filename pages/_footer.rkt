@@ -5,16 +5,17 @@
 
 (require
   racket/list
-  "_blog.rkt")
+  racket/class
+  "../entities/blog.rkt")
 
 (define (render-frequent-tags tags)
-  `(p ([class "center"]) ,@(add-between (map render-tag tags) 'nbsp)))
+  `(p ([class "center"]) ,@(add-between (map render-element tags) 'nbsp)))
 
-(define (render-footer tags)
+(define (render-footer db)
   `(footer
      (hr ([class "fancy"]))
      (h2 ([id "topics"]) "Hot topics")
-     ,(render-frequent-tags tags)
+     ,(render-frequent-tags (send db get-frequent-tags))
      (h2 ([id "about"]) "About this blog")
      (p "I learn new things everyday, and I like to put up great and useless theories about the inner workings of the world.")
      (p "You'll find them here.")

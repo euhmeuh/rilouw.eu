@@ -1,4 +1,4 @@
-#lang s-exp "../entities/article-lang.rkt"
+#lang s-exp "../database/article-lang.rkt"
 
 (article "Vegetables & Fruits" '(english meta)
   (section "Vegetables"

@@ -1,12 +1,11 @@
 #lang racket/base
 
 (provide
-  render-base)
+  base-page)
 
 (require
-  "_blog.rkt"
   "_footer.rkt"
-  "../entities/base.rkt")
+  "../entities/blog.rkt")
 
 (define basic-links
   (list
@@ -15,23 +14,23 @@
 
 (define (render-navigation links)
   `(nav (ul ,@(map (lambda (link)
-                     `(li ,(render-link link)))
+                     `(li ,(render-element link)))
                    links))))
 
 (define (render-title title)
   `(title ,(string-append title " | Rilouw.eu")))
 
-(define (render-base page-title links tags render-page)
+(define (base-page db title links renderer)
   `(html ([lang "en"])
      (head
        (meta ([charset "utf-8"]))
        (meta ([name "viewport"]
               [content "width=device-width, initial-scale=1.0, shrink-to-fit=no"]))
-       ,(render-title page-title)
+       ,(render-title title)
        (link ([rel "stylesheet"] [type "text/css"] [href "/common.css"])))
      (body
        (header (h1 "Rilouw.eu"))
        ,(render-navigation (cons (link "Home" "/")
                                  (append links basic-links)))
-       ,(render-page)
-       ,(render-footer tags))))
+       ,(renderer)
+       ,(render-footer db))))
