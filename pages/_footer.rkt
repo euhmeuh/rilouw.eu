@@ -15,7 +15,7 @@
   `(footer
      (hr ([class "fancy"]))
      (h2 ([id "topics"]) "Hot topics")
-     ,(render-frequent-tags (send db get-frequent-tags))
+     ,(render-frequent-tags (send db get-frequent-tags #:at-least 1))
      (h2 ([id "about"]) "About this blog")
      (p "I learn new things everyday, and I like to put up great and useless theories about the inner workings of the world.")
      (p "You'll find them here.")

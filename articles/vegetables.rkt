@@ -1,6 +1,6 @@
 #lang s-exp "../database/article-lang.rkt"
 
-(article "Vegetables & Fruits" '(english meta)
+(article "Vegetables & Fruits" '(draft english meta)
   (section "Vegetables"
     (paragraph "I love vegetables.")
     (paragraph "abcdefghijklmnopqrstuvwxyz")
