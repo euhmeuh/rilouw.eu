@@ -100,6 +100,11 @@ hr.fancy:after {
   background: #fff7e6;
 }
 
+h2:target,
+h3:target {
+  animation: focus .5s;
+}
+
 article h2::before,
 article h3::before,
 .indent::before,
@@ -139,6 +144,8 @@ article .indent > .indent:last-child > p:last-child::after {
 article .indent {
   text-indent: -2ch;
   margin-left: 4ch;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .indent .indent {
