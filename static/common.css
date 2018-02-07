@@ -51,9 +51,21 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: #fff7e6;
-  padding: 60px;
-  border-left: dotted 15px #008a8a;
-  border-right: dotted 15px #008a8a;
+}
+
+@media (orientation: landscape) {
+  body {
+    padding: 60px;
+    border-left: dotted 15px #008a8a;
+    border-right: dotted 15px #008a8a;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    width: auto;
+    padding: 10px;
+  }
 }
 
 aside {
