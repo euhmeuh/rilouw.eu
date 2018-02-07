@@ -58,8 +58,7 @@
 (define render-paragraph
   (make-parameter
     (lambda (paragraph)
-      `(p ([class "indent"])
-          ,@(render-elements paragraph)))))
+      `(p ,@(render-elements paragraph)))))
 
 (struct section container ([id #:mutable] title)
   #:methods gen:renderer
@@ -72,8 +71,7 @@
 (define render-section
   (make-parameter
     (lambda (section)
-      `(section ([class "indent"])
-                (h3 ([id ,(section-id section)])
+      `(section (h3 ([id ,(section-id section)])
                     ,(section-title section))
                 ,@(render-elements section)))))
 
@@ -101,8 +99,7 @@
 (define render-dotted-list
   (make-parameter
     (lambda (dotted-list)
-      `(ul ([class "indent"])
-           ,@(map (lambda (element)
+      `(ul ,@(map (lambda (element)
                     `(li ,(render-element element)))
                   (container-elements dotted-list))))))
 

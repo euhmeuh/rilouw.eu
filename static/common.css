@@ -107,8 +107,8 @@ h3:target {
 
 article h2::before,
 article h3::before,
-.indent::before,
-.indent::after {
+article h2::after,
+article h3::after {
   font-family: "Fira Code";
   color: #D88551;
   font-size: 1rem;
@@ -123,40 +123,7 @@ article h3::before {
   content: '(section ';
 }
 
-article p::before {
-  content: '(\00A7  ';
-}
-
-article p::after {
-  content: ')'
-}
-
-article > p:last-child::after,
-article .indent > p:last-child::after {
-  content: '))'
-}
-
-article > .indent:last-child > p:last-child::after,
-article .indent > .indent:last-child > p:last-child::after {
-  content: ')))'
-}
-
-article .indent {
-  text-indent: -2ch;
-  margin-left: 4ch;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.indent .indent {
-  text-indent: -2ch;
-  margin-left: 2ch;
-}
-
-article ul {
-  padding: 0;
-}
-
-article ul li {
-  text-indent: initial;
+article h2::after,
+article h3::after {
+  content: ')';
 }
