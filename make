@@ -17,5 +17,5 @@
   `([install ,(thunk (call "raco pkg install --auto --skip-installed ~a" (string-join dependencies)))]
     [dev     ,(thunk (call "/usr/bin/env DEBUG=true racket ./server.rkt"))]
     [run     ,(thunk (call "racket ./server.rkt"))]
-    [test    ,(thunk (call "raco test ./tests/test-all.rkt"))])
+    [test    ,(thunk (call "racket ./tests/test-all.rkt"))])
   (current-command-line-arguments))
