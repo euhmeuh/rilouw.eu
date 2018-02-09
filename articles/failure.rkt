@@ -5,6 +5,7 @@
     "L'erreur doit être un moteur, un moyen d'expression."
     "Ne plus avoir peur de ses erreurs (grâce à des «filets de protection» humains et techniques), "
     "c'est libérer son expressivité et permettre à l'innovation d'avoir lieu.")
+  (fold)
   (paragraph
     "Les enfants son créatifs car on créé pour eux un environnement où ils peuvent expérimenter sans craintes. "
     "Les scientifiques sont créatifs car ils oublient de faire des choses «utiles» (comprendre «rentables») et se concentrent sur «essayer ce qui n'a pas encore été essayé». "

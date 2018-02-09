@@ -11,6 +11,9 @@
   article-title
   article-tags
 
+  (struct-out fold)
+  render-fold
+
   (rename-out [make-paragraph paragraph])
   paragraph?
   render-paragraph
@@ -46,6 +49,14 @@
 
 (define (draft? article)
   (memq 'draft (article-tags article)))
+
+(struct fold ()
+  #:methods gen:renderer
+  [(define (render fold)
+     ((render-fold) fold))])
+
+(define render-fold
+  (make-parameter (lambda (fold) `(hr))))
 
 (struct paragraph container ()
   #:methods gen:renderer

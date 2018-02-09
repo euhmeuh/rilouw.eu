@@ -4,12 +4,14 @@
   (paragraph
     "Hello world! I'm Jérôme, professional developer and hacker." (n)
     (n)
-    "This is my brand new blog where I talk about " 'slow-tech ", " 'DIY " projects, " 'feminism ", " 'ecology ", metaphysical aspects of life..." (n)
-    (n)
+    "This is my brand new blog where I talk about " 'slow-tech ", " 'programming ", " 'feminism ", " 'ecology ", "
+    "and sometimes metaphysical aspects of life...")
+  (paragraph
     "Technically speaking, I wanted to make a blog from scratch using " 'Racket ", to see how simple "
-    "and stupid you can keep a web server when using a " 'lisp " language." (n)
-    (n)
+    "and stupid you can keep a web server when using a " 'lisp " language.")
+  (paragraph
     "Most importantly, I wanted to write about things that please and displease me in this world.")
+  (fold)
   (paragraph
     "My head spins every time I stumble upon a new evidence that humans are brutal, ruthless and unable to live together, "
     "while in the same time being forced by their very nature to actually live together.")
