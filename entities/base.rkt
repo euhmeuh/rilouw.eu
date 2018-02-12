@@ -2,6 +2,7 @@
 
 (provide
   gen:renderer
+  define-renderer
   render-element
   (struct-out container)
   render-elements
@@ -14,34 +15,54 @@
   racket/generic
   "urls.rkt")
 
+(require
+  (for-syntax racket/base)
+  (for-syntax racket/syntax))
+
 (define-generics renderer
   (render renderer))
 
+#|
+(define-renderer link (text url)
+  `(a ([href ,(link-url link)]) ,(link-text link)))
+
+;; should expand to:
+
+(struct link (text url)
+  #:methods gen:renderer
+  [(define (render link)
+    ((render-link) link))])
+
+(define render-link
+  (make-parameter
+    (lambda (link)
+      `(a ([href ,(link-url link)]) ,(link-text link)))))
+|#
 (define-syntax (define-renderer stx)
-  (define (make-body stx name body)
-    (syntax->list stx
-      #'(#:methods gen:renderer
-         [(define (render 'name) body)])))
-  (syntax-case stx
-    [(_ name field ... body)
-     (with-syntax ([(body-el ...) (make-body stx #'name #'body)])
-       (struct name (field ...) body-el ...))]
-    [(_ name parent field ... body)
-     (with-syntax ([(body-el ...) (make-body stx #'name #'body)])
-       (struct name parent (field ...) body-el ...))]))
+  (define (make-struct-elements stx name body)
+    (syntax->list
+      #`(#:methods gen:renderer
+         [(define (render #,name) #,body)])))
 
+  (define (make-render-function stx name fields body)
+    (with-syntax ([function-name (format-id stx "render-~a" name)])
+      #`(define function-name
+          (make-parameter (lambda (#,name) #,body)))))
 
-#'(begin
-    (struct name parent? (fields ...)
-      #:methods gen:renderer
-      [(define (render name)
-        ((render-name) name))])
-    (define render-name
-      (make-parameter
-        (lambda (name)
-          (let (name-field... name)
-            body)))))
+  (syntax-case stx ()
+    [(_ name (field ...) body)
+     (with-syntax ([(struct-el ...) (make-struct-elements stx #'name #'body)]
+                   [render-function (make-render-function stx #'name #'(field ...) #'body)])
+       #'(begin
+           (struct name (field ...) struct-el ...)
+           render-function))]
 
+    [(_ name parent (field ...) body)
+     (with-syntax ([(struct-el ...) (make-struct-elements stx #'name #'body)]
+                   [render-function (make-render-function stx #'name #'(field ...) #'body)])
+       #'(begin
+           (struct name parent (field ...) struct-el ...)
+           render-function))]))
 
 (define (render-element element)
   (cond
@@ -56,19 +77,7 @@
   (map render-element (container-elements container)))
 
 (define-renderer link (text url)
-  `(a ([href ,url]) ,text))
-#| should expand to:
-
-(struct link (text url)
-  #:methods gen:renderer
-  [(define (render link)
-    ((render-link) link))])
-
-(define render-link
-  (make-parameter
-    (lambda (link)
-      `(a ([href ,(link-url link)]) ,(link-text link)))))
-|#
+  `(a ([href ,(link-url link)]) ,(link-text link)))
 
 (define render-tag
   (make-parameter
