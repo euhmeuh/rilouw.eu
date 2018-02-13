@@ -2,8 +2,8 @@
 
 (article "Hello world!" '(english meta)
   (paragraph
-    "Hello world! I'm Jérôme, professional developer and hacker." (n)
-    (n)
+    "Hello world! I'm Jérôme, professional developer and hacker.")
+  (paragraph
     "This is my brand new blog where I talk about " 'slow-tech ", " 'programming ", " 'feminism ", " 'ecology ", "
     "and sometimes metaphysical aspects of life...")
   (paragraph
@@ -43,7 +43,7 @@
     "our interactions with the planet, and the management and regulation of our waste." (n)
     "If we don't understand ourselves, we cannot understand nor question our place on Earth.")
   (paragraph
-    "It won't immediately be good, well written and documented, but I hope this blog will bring you confidence, "
-    "will make you want to fight for you rights, and hopefully will make you learn a thing or two.")
+    "It won't immediately be good, well written and documented, but I hope this blog will bring me confidence, "
+    "will make me want to fight for better rights, and hopefully will make me learn a thing or two.")
   (paragraph
     "Feel free to pick up whatever you please, get inspired, and share your thoughts around."))

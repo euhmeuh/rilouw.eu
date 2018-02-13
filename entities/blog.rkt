@@ -50,69 +50,35 @@
 (define (draft? article)
   (memq 'draft (article-tags article)))
 
-(struct fold ()
-  #:methods gen:renderer
-  [(define (render fold)
-     ((render-fold) fold))])
+(define-renderer fold () `(hr))
 
-(define render-fold
-  (make-parameter (lambda (fold) `(hr))))
-
-(struct paragraph container ()
-  #:methods gen:renderer
-  [(define (render paragraph)
-     ((render-paragraph) paragraph))])
+(define-renderer paragraph container ()
+  `(p ,@(render-elements paragraph)))
 
 (define (make-paragraph . text-or-links)
   (paragraph text-or-links))
 
-(define render-paragraph
-  (make-parameter
-    (lambda (paragraph)
-      `(p ,@(render-elements paragraph)))))
-
-(struct section container ([id #:mutable] title)
-  #:methods gen:renderer
-  [(define (render section)
-     ((render-section) section))])
+(define-renderer section container ([id #:mutable] title)
+  `(section (h3 ([id ,(section-id section)])
+                ,(section-title section))
+            ,@(render-elements section)))
 
 (define (make-section title . elements)
   (section elements (normalize title) title))
 
-(define render-section
-  (make-parameter
-    (lambda (section)
-      `(section (h3 ([id ,(section-id section)])
-                    ,(section-title section))
-                ,@(render-elements section)))))
-
-(struct note container ()
-  #:methods gen:renderer
-  [(define (render note)
-     ((render-note) note))])
+(define-renderer note container ()
+  `(aside ,@(render-elements note)))
 
 (define (make-note . elements)
   (note elements))
 
-(define render-note
-  (make-parameter
-    (lambda (note)
-      `(aside ,@(render-elements note)))))
-
-(struct dotted-list container ()
-  #:methods gen:renderer
-  [(define (render dotted-list)
-     ((render-dotted-list) dotted-list))])
+(define-renderer dotted-list container ()
+  `(ul ,@(map (lambda (element)
+                `(li ,(render-element element)))
+              (container-elements dotted-list))))
 
 (define (make-dotted-list . elements)
   (dotted-list elements))
-
-(define render-dotted-list
-  (make-parameter
-    (lambda (dotted-list)
-      `(ul ,@(map (lambda (element)
-                    `(li ,(render-element element)))
-                  (container-elements dotted-list))))))
 
 (define (walk-and-set-section-ids! id container)
   (for-each
