@@ -23,4 +23,12 @@
       (check-equal? (render-element 'ponies)
                     '(a ([href "/tag/ponies"]) "ponies")))
 
+    (test-case
+      "Can overwrite renderers"
+      (define my-link (link "More..." "/full/article"))
+      (define not-a-link '(span "Nothing here"))
+      (check-equal? (parameterize ([render-link (lambda (link) not-a-link)])
+                      (render-element my-link))
+                    not-a-link))
+
     ))

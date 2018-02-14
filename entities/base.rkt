@@ -38,26 +38,28 @@
       `(a ([href ,(link-url link)]) ,(link-text link)))))
 |#
 (define-syntax (define-renderer stx)
-  (define (make-struct-elements stx name body)
+  (define (make-struct-elements stx name function-name)
     (syntax->list
       (quasisyntax/loc stx
         (#:methods gen:renderer
-         [(define (render #,name) #,body)]))))
+         [(define (render #,name)
+            ((#,function-name) #,name))]))))
 
-  (define (make-render-function stx name body)
-    (with-syntax ([function-name (format-id stx "render-~a" name)])
-      (quasisyntax/loc stx
-        (define function-name
-          (make-parameter (lambda (#,name) #,body))))))
+  (define (make-render-function stx name function-name body)
+    (quasisyntax/loc stx
+      (define #,function-name
+        (make-parameter (lambda (#,name) #,body)))))
 
   (define (make-struct-and-renderer stx name-maybe-parent fields body)
-    (with-syntax ([(struct-el ...)
-                   (make-struct-elements stx (stx-car name-maybe-parent) body)]
-                  [render-function
-                   (make-render-function stx (stx-car name-maybe-parent) body)])
-       #`(begin
-           (struct #,@name-maybe-parent #,fields struct-el ...)
-           render-function)))
+    (let* ([name (stx-car name-maybe-parent)]
+           [function-name (format-id stx "render-~a" name)])
+      (with-syntax ([(struct-el ...)
+                     (make-struct-elements stx name function-name)]
+                    [render-function
+                     (make-render-function stx name function-name body)])
+        #`(begin
+            (struct #,@name-maybe-parent #,fields struct-el ...)
+            render-function))))
 
   (syntax-case stx ()
     [(_ name (field ...) body)
