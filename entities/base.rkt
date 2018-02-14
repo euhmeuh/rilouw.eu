@@ -12,12 +12,11 @@
   newline)
 
 (require
+  (for-syntax racket/base
+              racket/syntax
+              syntax/stx)
   racket/generic
   "urls.rkt")
-
-(require
-  (for-syntax racket/base)
-  (for-syntax racket/syntax))
 
 (define-generics renderer
   (render renderer))
@@ -26,7 +25,7 @@
 (define-renderer link (text url)
   `(a ([href ,(link-url link)]) ,(link-text link)))
 
-;; should expand to:
+;; will expand to:
 
 (struct link (text url)
   #:methods gen:renderer
@@ -41,28 +40,30 @@
 (define-syntax (define-renderer stx)
   (define (make-struct-elements stx name body)
     (syntax->list
-      #`(#:methods gen:renderer
-         [(define (render #,name) #,body)])))
+      (quasisyntax/loc stx
+        (#:methods gen:renderer
+         [(define (render #,name) #,body)]))))
 
-  (define (make-render-function stx name fields body)
+  (define (make-render-function stx name body)
     (with-syntax ([function-name (format-id stx "render-~a" name)])
-      #`(define function-name
-          (make-parameter (lambda (#,name) #,body)))))
+      (quasisyntax/loc stx
+        (define function-name
+          (make-parameter (lambda (#,name) #,body))))))
+
+  (define (make-struct-and-renderer stx name-maybe-parent fields body)
+    (with-syntax ([(struct-el ...)
+                   (make-struct-elements stx (stx-car name-maybe-parent) body)]
+                  [render-function
+                   (make-render-function stx (stx-car name-maybe-parent) body)])
+       #`(begin
+           (struct #,@name-maybe-parent #,fields struct-el ...)
+           render-function)))
 
   (syntax-case stx ()
     [(_ name (field ...) body)
-     (with-syntax ([(struct-el ...) (make-struct-elements stx #'name #'body)]
-                   [render-function (make-render-function stx #'name #'(field ...) #'body)])
-       #'(begin
-           (struct name (field ...) struct-el ...)
-           render-function))]
-
+     (make-struct-and-renderer stx #'(name) #'(field ...) #'body)]
     [(_ name parent (field ...) body)
-     (with-syntax ([(struct-el ...) (make-struct-elements stx #'name #'body)]
-                   [render-function (make-render-function stx #'name #'(field ...) #'body)])
-       #'(begin
-           (struct name parent (field ...) struct-el ...)
-           render-function))]))
+     (make-struct-and-renderer stx #'(name parent) #'(field ...) #'body)]))
 
 (define (render-element element)
   (cond
