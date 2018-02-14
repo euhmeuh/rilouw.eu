@@ -13,6 +13,7 @@
 
   (struct-out fold)
   render-fold
+  before-the-fold
 
   (rename-out [make-paragraph paragraph])
   paragraph?
@@ -36,8 +37,10 @@
   draft?)
 
 (require
-  racket/string
+  racket/contract
   racket/function
+  racket/list
+  racket/string
   "base.rkt")
 
 (struct article container (id title tags))
@@ -51,6 +54,13 @@
   (memq 'draft (article-tags article)))
 
 (define-renderer fold () `(hr))
+
+(define (before-the-fold article)
+  (define elements (container-elements article))
+  (if (findf fold? elements)
+    (takef elements
+           (not/c fold?))
+    (first elements)))
 
 (define-renderer paragraph container ()
   `(p ,@(render-elements paragraph)))

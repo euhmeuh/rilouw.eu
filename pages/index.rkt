@@ -15,7 +15,7 @@
     (paragraph (link "Full article..." (make-article-url (article-id article)))))
   `(article
      (h2 ([id ,(article-id article)]) ,(article-title article))
-     ,(render-element (first (container-elements article)))
+     ,@(map render-element (before-the-fold article))
      ,(render-element full-article-link)))
 
 (define separator '(hr ([class "fancy"])))
