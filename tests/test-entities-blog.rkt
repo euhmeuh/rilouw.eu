@@ -25,7 +25,7 @@
         "Find elements before the fold"
 
         (define my-article
-          (article "I like ponies" '(draft ponies)
+          (article "I like ponies" #f '(draft ponies)
             (paragraph "Hey, did you know I liked ponies?")
             (paragraph "They're so cool and fluffy.")
             (paragraph "Want to know more? Check out after the fold!")
@@ -41,9 +41,9 @@
 
         (define first-paragraph (paragraph "There's no fold here?"))
         (define my-article
-          (article "Hey" '()
+          (article "Hey" #f '()
             first-paragraph
             (paragraph "Nope, I'm fine, thanks.")))
         (check-equal? (before-the-fold my-article)
-                      first-paragraph))
+                      (list first-paragraph)))
     )))

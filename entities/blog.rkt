@@ -9,6 +9,7 @@
   article?
   article-id
   article-title
+  article-date
   article-tags
 
   (struct-out fold)
@@ -43,10 +44,10 @@
   racket/string
   "base.rkt")
 
-(struct article container (id title tags))
+(struct article container (id title date tags))
 
-(define (make-article title tags . body)
-  (define the-article (article body (normalize title) title tags))
+(define (make-article title date tags . body)
+  (define the-article (article body (normalize title) title date tags))
   (walk-and-set-section-ids! (article-id the-article) the-article)
   the-article)
 
@@ -60,7 +61,7 @@
   (if (findf fold? elements)
     (takef elements
            (not/c fold?))
-    (first elements)))
+    (take elements 1)))
 
 (define-renderer paragraph container ()
   `(p ,@(render-elements paragraph)))
