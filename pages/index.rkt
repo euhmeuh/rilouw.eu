@@ -14,7 +14,9 @@
   (define full-article-link
     (paragraph (link "Full article..." (make-article-url (article-id article)))))
   `(article
-     (h2 ([id ,(article-id article)]) ,(article-title article))
+     (header
+       (h2 ([id ,(article-id article)]) ,(article-title article))
+       (small "Published " ,(render-element (article-date article))))
      ,@(map render-element (before-the-fold article))
      ,(render-element full-article-link)))
 

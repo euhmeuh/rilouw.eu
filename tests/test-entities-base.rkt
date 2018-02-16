@@ -31,4 +31,10 @@
                       (render-element my-link))
                     not-a-link))
 
+    (test-case
+      "Publication dates should render as <time>"
+      (define my-date (pubdate 2018 2 16))
+      (check-equal? (render-element my-date)
+                    '(time ([datetime "2018-02-16"]) "Friday, February 16, 2018")))
+
     ))

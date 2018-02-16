@@ -18,7 +18,9 @@
     (lambda ()
       `(main
          (article
-           (h2 ([id ,(article-id article)]) ,(article-title article))
+           (header
+             (h2 ([id ,(article-id article)]) ,(article-title article))
+             (small "Published " ,(render-element (article-date article))))
            ,@(render-elements article)
            ,(render-element tags-list)
            ,(render-element back-home-link))))))

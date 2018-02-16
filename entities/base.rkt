@@ -9,6 +9,8 @@
   (struct-out link)
   render-link
   render-tag
+  (struct-out pubdate)
+  render-pubdate
   newline)
 
 (require
@@ -48,7 +50,7 @@
   (define (make-render-function stx name function-name body)
     (quasisyntax/loc stx
       (define #,function-name
-        (make-parameter (lambda (#,name) #,body)))))
+        (make-parameter (lambda (#,name) #,@body)))))
 
   (define (make-struct-and-renderer stx name-maybe-parent fields body)
     (let* ([name (stx-car name-maybe-parent)]
@@ -62,10 +64,10 @@
             render-function))))
 
   (syntax-case stx ()
-    [(_ name (field ...) body)
-     (make-struct-and-renderer stx #'(name) #'(field ...) #'body)]
-    [(_ name parent (field ...) body)
-     (make-struct-and-renderer stx #'(name parent) #'(field ...) #'body)]))
+    [(_ name (field ...) body ...)
+     (make-struct-and-renderer stx #'(name) #'(field ...) #'(body ...))]
+    [(_ name parent (field ...) body ...)
+     (make-struct-and-renderer stx #'(name parent) #'(field ...) #'(body ...))]))
 
 (define (render-element element)
   (cond
@@ -87,6 +89,18 @@
     (lambda (symbol)
       (render-element (link (symbol->string symbol)
                             (make-tag-url symbol))))))
+
+(define-renderer pubdate (year month day)
+  (local-require (only-in srfi/19 date->string))
+  (define the-date (pubdate->date pubdate))
+  `(time ([datetime ,(date->string the-date "~1")])
+         ,(date->string the-date "~A, ~B ~e, ~Y")))
+
+(define (pubdate->date pubdate)
+  (local-require (only-in srfi/19 make-date))
+  (make-date 0 0 0 0 (pubdate-day pubdate)
+                     (pubdate-month pubdate)
+                     (pubdate-year pubdate) 0))
 
 (define (newline)
   '(br))

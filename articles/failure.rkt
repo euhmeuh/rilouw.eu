@@ -1,7 +1,7 @@
 #lang s-exp "../database/article-lang.rkt"
 
 (article "Le rapport à l'erreur"
-         (date 2018 2 15)
+         (pubdate 2018 2 15)
          '(draft french workplace human-rights failure error agile methodology unit-tests tests TDD)
   (paragraph
     "L'erreur doit être un moteur, un moyen d'expression."

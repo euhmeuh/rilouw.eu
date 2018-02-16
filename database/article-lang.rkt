@@ -6,8 +6,7 @@
          (rename-out (module-begin #%module-begin))
          (all-from-out "../entities/blog.rkt")
          (rename-out (paragraph p))
-         (rename-out (newline n))
-         (rename-out (make-date date)))
+         (rename-out (newline n)))
 
 (require
   "../entities/blog.rkt")
@@ -16,7 +15,3 @@
   (#%module-begin
     (provide article)
     (define article expr)))
-
-(define (make-date year month day)
-  (local-require gregor)
-  (date year month day))

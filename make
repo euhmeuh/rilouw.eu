@@ -8,8 +8,7 @@
   command-tree)
 
 (define dependencies
-  (list "anaphoric"
-        "gregor"))
+  (list "anaphoric"))
 
 (define (call command . args)
   (system (apply format (cons command args)) #:set-pwd? #t))
