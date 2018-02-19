@@ -8,43 +8,49 @@
    and sometimes metaphysical aspects of life...}
 
 @p{Technically speaking, I wanted to make a blog from scratch using @'|Racket|, to see how simple
-   and stupid you can keep a web server when using a @'lisp language.}
+   and stupid you can make a web server when using a @'lisp language (Keep It Simple, Stupid).}
 
-@p{Most importantly, I wanted to write about things that please and displease me in this world.}
+@p{Most importantly, I wanted to write about things that please and displease me in this world, so that I can try out and sharpen my ideas.}
 
 @(fold)
 
-@p{My head spins every time I stumble upon a new evidence that humans are brutal, ruthless and unable to live together,
-   while in the same time being forced by their very nature to actually live together.}
+@p{I wanna start from an itch in the back, a faint feeling of something "bad", and pull out the strings until I
+   find an interesting aspect of life, a battle to fight, or a sad truth to ponder upon (not always in that order).}
 
-@p{In order to understand why I am touched by this aching feeling, I wanna write about every thing that triggers it.
-   I want to talk about @'|work|, especially work in the IT industry, and how we are pointlessly building
-   hopes in machines to save us, as if it was a new bio-mechanical god.}
+@p{I wanna talk about things that trigger me.
+   I want to talk about @'|work|, especially work in the IT industry, and more generally how we seem to build
+   hopes in machines to save us (maybe its a kind of new god we're making there?).}
 
-@p{I want to talk about being a white european man with full @'privileges in a society that pushes me to destroy others and aim for the top.}
-
-@p{I want to talk about people convinced that we are building a better world
-   while we are in fact shitting our pants and trying random stuff (alas it is not always a bad thing).}
+@p{I want to talk about @'|feminism|, especially about being a white european man with full @'privileges in a society that pushes me to destroy
+   others and aim for the top. Rest assured, I promise no mansplaining nor male tears here, I'll start by shutting my mouth, listen to women, discuss
+   different subjects in my local feminist association, then I'll be able to talk.}
 
 @p{I also wanted to write about stuff I like or love in this world,
-   because I want to focus my life on those and I can't find them if I don't put words on them.}
+   because I want to focus my life on those and I can't find them if I don't put words on them.
+   Expect some bobo hipster hobbies like gardening, DIY projects, retro stuff, sewing...}
 
-@p{I want to talk about taking it slow, or how you can have fun building small and environment-friendly computers (see the @'slow-tech tag).}
+@p{Notably what I'd like to call @'|slow-tech|: taking it slow and have fun building small and environment-friendly
+   computers (the high-tech of yesterday is today's hobbyist's treasure).}
 
-@p{I want to talk about how the 'hottest new technology available' is far from being artificial intelligence nor the latest smartphone on the market,
-   but discoveries made in the 60's by passionate programmers and thinkers.
+@p{I want to talk about how the 'hottest new technology available' is far from being artificial intelligence
+   (it was already discovered and studied 50 years ago) nor the latest smartphone on the market,
+   but discoveries made mostly in the 60's by passionate programmers and thinkers
+   (think Gerald Jay Sussman, Harold Abelson, Edsger Wybe Dijkstra, Margaret Hamilton, Grace Hopper...).
    I want to stress out to the IT croud around the fact that IT is moving SLOW, very, very SLOW.
    So please let the hype pass by, and focus on what's essential and really makes the core of your job.}
 
-@p{I want to talk about relationships, love, how difficult it is to study human relations, and how wonderful the world would be if we understood them better.}
+@p{I want to talk about relationships, love, how difficult it is to study human relations, and how wonderful the world would be
+   if we understood them better, especially through gender studies.}
 
 @p{I want to talk about preserving the one and only planet we have, and get humanity into a sane relationship with it.
-   We're plunging towards an ecological recession, and the more we are prepared, the less painfull it'll be (especially if we understand better how to live together). @(n)
-   This is why I think studying love, sex, gender, and other social constructions is deeply linked to ecology,
+   We're plunging towards an ecological recession, and the more we are prepared, the less painfull it'll be (especially if we understand better how to live together).}
+
+@p{This is why I think studying love, sex, gender, and other social constructions is deeply linked to ecology,
    our interactions with the planet, and the management and regulation of our waste. @(n)
-   If we don't understand ourselves, we cannot understand nor question our place on Earth.}
+   If we don't understand ourselves, we cannot understand nor question our place on Earth, so expect eco-feminism to appear in my speech.}
 
 @p{It won't immediately be good, well written and documented, but I hope this blog will bring me confidence,
-   will make me want to fight for better rights, and hopefully will make me learn a thing or two.}
+   will make me want to fight for better rights, and hopefully will make me learn a thing or two.
+   If I can bring people together and make them talk, discuss, debate, I'll be the happiest.}
 
 @p{Feel free to pick up whatever you please, get inspired, and share your thoughts around.}]

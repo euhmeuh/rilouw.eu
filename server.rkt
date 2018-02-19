@@ -14,7 +14,7 @@
     #:preamble #"<!DOCTYPE html>"
     content))
 
-(define server-root-path (make-parameter (if-debug (current-directory) "/www")))
+(define server-root-path (make-parameter (current-directory)))
 
 (define static-root-path
   (path->string
@@ -68,6 +68,7 @@
   #:command-line? #t
   #:servlet-regexp #rx""
   #:listen-ip (if-debug "127.0.0.1" #f)
+  #:port 8000
   #:server-root-path (server-root-path)
   #:extra-files-paths (list static-root-path)
   #:file-not-found-responder response-not-found)
