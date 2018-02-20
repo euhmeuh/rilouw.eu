@@ -71,4 +71,5 @@
   #:port 8000
   #:server-root-path (server-root-path)
   #:extra-files-paths (list static-root-path)
-  #:file-not-found-responder response-not-found)
+  #:file-not-found-responder response-not-found
+  #:log-file "logs.txt")
