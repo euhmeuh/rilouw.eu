@@ -4,7 +4,9 @@
   racket/class
   web-server/servlet
   web-server/servlet-env
-  "database/article-db.rkt")
+  web-server/page
+  "database/article-db.rkt"
+  "pages/editor.rkt")
 
 (define-syntax-rule (if-debug then else)
   (if (getenv "DEBUG") then else))
@@ -45,6 +47,10 @@
                                  found-articles))
       (response-not-found req)))
 
+(define/page (response-editor [article #f])
+  (local-require "pages/editor.rkt")
+  (response-page (editor-page response-editor embed/url article)))
+
 (define (response-not-found req)
   (local-require "pages/404.rkt")
   (response/xexpr
@@ -58,7 +64,8 @@
   (dispatch-rules
     [("") response-index]
     [("article" (string-arg)) response-article]
-    [("tag" (string-arg)) response-tag]))
+    [("tag" (string-arg)) response-tag]
+    [("editor") response-editor]))
 
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)

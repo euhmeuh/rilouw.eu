@@ -38,10 +38,11 @@
       (filter (not/c draft?) articles))
 
     (define/public (find-article-by-id id)
-      (findf
-        (lambda (article)
-          (string-ci=? (article-id article) id))
-        (get-public-articles)))
+      (and id
+           (findf
+             (lambda (article)
+               (string-ci=? (article-id article) id))
+             (get-public-articles))))
 
     (define/public (find-articles-tagged tag)
       (define found-articles
