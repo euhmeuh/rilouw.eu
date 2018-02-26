@@ -4,10 +4,10 @@
   racket/class
   web-server/servlet
   web-server/servlet-env
-  "database/article-db.rkt")
-
-(define-syntax-rule (if-debug then else)
-  (if (getenv "DEBUG") then else))
+  web-server/managers/none
+  web-server/configuration/responders
+  "database/article-db.rkt"
+  "site-mode.rkt")
 
 (define-syntax-rule (response-page content)
   (response/xexpr
@@ -53,6 +53,17 @@
     #:preamble #"<!DOCTYPE html>"
     (not-found-page article-db)))
 
+(define (response-error url exception)
+  (local-require "pages/500.rkt")
+  (log-error "~s" `((exn ,(exn-message exception))
+                    (uri ,(url->string url))
+                    (time ,(current-seconds))))
+  (response/xexpr
+    #:code 500
+    #:message #"Internal server error"
+    #:preamble #"<!DOCTYPE html>"
+    (error-page article-db)))
+
 (define-values
   (blog-dispatcher blog-url)
   (dispatch-rules
@@ -60,16 +71,25 @@
     [("article" (string-arg)) response-article]
     [("tag" (string-arg)) response-tag]))
 
+(define (wrap-in-logger dispatcher)
+  (local-require (only-in web-server/dispatchers/dispatch-log
+                          extended-format))
+  (lambda (req)
+    (display (extended-format req))
+    (dispatcher req)))
+
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)
 
 (serve/servlet
-  blog-dispatcher
+  (wrap-in-logger blog-dispatcher)
   #:command-line? #t
+  #:banner? #t
   #:servlet-regexp #rx""
   #:listen-ip (if-debug "127.0.0.1" #f)
   #:port 8000
+  #:manager (create-none-manager response-not-found)
+  #:servlet-responder (if-debug servlet-error-responder response-error)
   #:server-root-path (server-root-path)
   #:extra-files-paths (list static-root-path)
-  #:file-not-found-responder response-not-found
-  #:log-file "logs.txt")
+  #:file-not-found-responder response-not-found)

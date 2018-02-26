@@ -15,7 +15,7 @@
 
 (command-tree
   `([install ,(thunk (call "raco pkg install --auto --skip-installed ~a" (string-join dependencies)))]
-    [dev     ,(thunk (call "/usr/bin/env DEBUG=true racket ./server.rkt"))]
-    [run     ,(thunk (call "racket ./server.rkt"))]
+    [dev     ,(thunk (call "racket ./server.rkt"))]
+    [run     ,(thunk (call "/usr/bin/env SITE_MODE=prod racket ./server.rkt"))]
     [test    ,(thunk (call "racket ./tests/test-all.rkt"))])
   (current-command-line-arguments))
