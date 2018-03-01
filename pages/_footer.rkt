@@ -20,7 +20,7 @@
      (p "I learn new things everyday, and I like to put up great and useless theories about the inner workings of the world.")
      (p "You'll find them here.")
      (hr)
-     (p "Copyright © euhmeuh - All rights reserved.")
+     (p "Copyright © Jérôme Martin - All rights reserved.")
      (p ([class "small"])
         "Fira Code © Mozilla, used under the OFL license." (br)
         "Source Serif Pro © Adobe, used under the OFL license.")))
