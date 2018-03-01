@@ -76,6 +76,7 @@
                           extended-format))
   (lambda (req)
     (display (extended-format req))
+    (flush-output)
     (dispatcher req)))
 
 (define article-db (new article-db% [path article-root-path]))
