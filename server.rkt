@@ -87,7 +87,7 @@
   #:banner? #t
   #:servlet-regexp #rx""
   #:listen-ip (if-debug "127.0.0.1" #f)
-  #:port 8000
+  #:port (if-debug 8000 80)
   #:manager (create-none-manager response-not-found)
   #:servlet-responder (if-debug servlet-error-responder response-error)
   #:server-root-path (server-root-path)
