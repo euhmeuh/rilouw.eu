@@ -92,6 +92,11 @@ p {
   text-align: center;
 }
 
+.important-link:before {
+  content: url("/right-pointing-hand.svg");
+  margin-right: 7px;
+}
+
 hr.fancy {
   padding: 0;
   margin: 1.5em 0 -1.5em 0;
