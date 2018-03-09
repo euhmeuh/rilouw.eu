@@ -32,7 +32,9 @@
   (add-between (map render-article-preview articles) separator))
 
 (define (article->link article)
-  (link (article-title article)
+  (link (format "~a ~a"
+                (format-pubdate (article-date article) 'iso)
+                (article-title article))
         (format "#~a" (article-id article))))
 
 (define (index-page db [title "Home"] [articles #f])

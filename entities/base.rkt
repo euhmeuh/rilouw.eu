@@ -11,6 +11,12 @@
   render-tag
   (struct-out pubdate)
   render-pubdate
+  format-pubdate
+  pubdate<=?
+  pubdate<?
+  pubdate=?
+  pubdate>=?
+  pubdate>?
   newline)
 
 (require
@@ -91,16 +97,37 @@
                             (make-tag-url symbol))))))
 
 (define-renderer pubdate (year month day)
-  (local-require (only-in srfi/19 date->string))
   (define the-date (pubdate->date pubdate))
-  `(time ([datetime ,(date->string the-date "~1")])
-         ,(date->string the-date "~A, ~B ~e, ~Y")))
+  `(time ([datetime ,(format-date the-date 'iso)])
+         ,(format-date the-date 'full)))
 
 (define (pubdate->date pubdate)
   (local-require (only-in srfi/19 make-date))
   (make-date 0 0 0 0 (pubdate-day pubdate)
                      (pubdate-month pubdate)
                      (pubdate-year pubdate) 0))
+
+(define ((make-pubdate-comparator comp) a b)
+  (local-require (only-in srfi/19 date->julian-day))
+  (comp (date->julian-day (pubdate->date a))
+        (date->julian-day (pubdate->date b))))
+
+(define pubdate<=? (make-pubdate-comparator <=))
+(define pubdate<? (make-pubdate-comparator <))
+(define pubdate=? (make-pubdate-comparator =))
+(define pubdate>=? (make-pubdate-comparator >=))
+(define pubdate>? (make-pubdate-comparator >))
+
+(define pubdate-formats
+  #hash([iso   . "~1"]
+        [full  . "~A, ~B ~e, ~Y"]))
+
+(define (format-pubdate pubdate format)
+  (format-date (pubdate->date pubdate) format))
+
+(define (format-date date format)
+  (local-require (only-in srfi/19 date->string))
+  (date->string date (hash-ref pubdate-formats format)))
 
 (define (newline)
   '(br))

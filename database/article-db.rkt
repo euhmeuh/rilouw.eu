@@ -35,7 +35,9 @@
       (load-articles))
 
     (define/public (get-public-articles)
-      (filter (not/c draft?) articles))
+      (sort (filter (not/c draft?) articles)
+            pubdate>?
+            #:key article-date))
 
     (define/public (find-article-by-id id)
       (findf
