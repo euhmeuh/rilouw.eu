@@ -105,4 +105,36 @@
 
 (define (normalize str)
   (string-downcase
-    (string-normalize-spaces str #rx"[^a-zA-Z0-9]+" "-")))
+    (string-normalize-spaces
+      (string-normalize-french str)
+      #rx"[^a-zA-Z0-9]+" "-")))
+
+(define french-accent-dict
+  '(["a" . ("à" "â")]
+    ["e" . ("é" "è" "ê")]
+    ["i" . ("î" "ï")]
+    ["o" . ("ô" "ö")]
+    ["u" . ("ù" "ü")]
+    ["c" . ("ç")]
+    ["A" . ("À" "Â")]
+    ["E" . ("É" "È" "Ê")]
+    ["I" . ("Î" "Ï")]
+    ["O" . ("Ô" "Ö")]
+    ["U" . ("Ù" "Ü")]
+    ["C" . ("Ç")]))
+
+(define (string-normalize-french str)
+  (define (normalize str dict)
+    (if (pair? dict)
+        (normalize
+          (let loop ([rules (cdar dict)]
+                     [char (caar dict)]
+                     [str str])
+            (if (pair? rules)
+                (loop (cdr rules)
+                      char
+                      (string-replace str (car rules) char))
+                str))
+          (cdr dict))
+        str))
+  (normalize str french-accent-dict))
