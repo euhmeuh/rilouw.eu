@@ -42,6 +42,7 @@
   racket/function
   racket/list
   racket/string
+  anaphoric
   "base.rkt")
 
 (struct article container (id title date tags))
@@ -110,31 +111,28 @@
       #rx"[^a-zA-Z0-9]+" "-")))
 
 (define french-accent-dict
-  '(["a" . ("à" "â")]
-    ["e" . ("é" "è" "ê")]
-    ["i" . ("î" "ï")]
-    ["o" . ("ô" "ö")]
-    ["u" . ("ù" "ü")]
-    ["c" . ("ç")]
-    ["A" . ("À" "Â")]
-    ["E" . ("É" "È" "Ê")]
-    ["I" . ("Î" "Ï")]
-    ["O" . ("Ô" "Ö")]
-    ["U" . ("Ù" "Ü")]
-    ["C" . ("Ç")]))
+  '([#\a . (#\à #\â)]
+    [#\e . (#\é #\è #\ê)]
+    [#\i . (#\î #\ï)]
+    [#\o . (#\ô #\ö)]
+    [#\u . (#\ù #\ü)]
+    [#\c . (#\ç)]
+    [#\A . (#\À #\Â)]
+    [#\E . (#\É #\È #\Ê)]
+    [#\I . (#\Î #\Ï)]
+    [#\O . (#\Ô #\Ö)]
+    [#\U . (#\Ù #\Ü)]
+    [#\C . (#\Ç)]))
+
+(define (get-from-dict dict char)
+  (for/first ([rule dict]
+              #:when (member char (cdr rule)))
+    (car rule)))
 
 (define (string-normalize-french str)
-  (define (normalize str dict)
-    (if (pair? dict)
-        (normalize
-          (let loop ([rules (cdar dict)]
-                     [char (caar dict)]
-                     [str str])
-            (if (pair? rules)
-                (loop (cdr rules)
-                      char
-                      (string-replace str (car rules) char))
-                str))
-          (cdr dict))
-        str))
-  (normalize str french-accent-dict))
+  (apply
+    string
+    (for/list ([char str])
+      (aif (get-from-dict french-accent-dict char)
+           it
+           char))))
