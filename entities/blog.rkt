@@ -30,6 +30,10 @@
   note?
   render-note
 
+  (rename-out [make-lquote lquote])
+  lquote?
+  render-lquote
+
   (rename-out [make-dotted-list dotted-list])
   dotted-list?
   render-dotted-list
@@ -48,9 +52,7 @@
 (struct article container (id title date tags))
 
 (define (make-article title date tags . body)
-  (define the-article (article body (normalize title) title date tags))
-  (walk-and-set-section-ids! (article-id the-article) the-article)
-  the-article)
+  (article body (normalize title) title date tags))
 
 (define (draft? article)
   (memq 'draft (article-tags article)))
@@ -89,20 +91,19 @@
                 `(li ,(render-element element)))
               (container-elements dotted-list))))
 
+(define-renderer lquote container (author date source)
+  `(figure ([class "quote"])
+     (blockquote ,@(render-elements lquote))
+     (figcaption
+       (div ([class "author"]) ,(lquote-author lquote))
+       (div ,(render-element (lquote-date lquote)))
+       (cite ,(lquote-source lquote)))))
+
+(define (make-lquote author date source . elements)
+  (lquote elements author date source))
+
 (define (make-dotted-list . elements)
   (dotted-list elements))
-
-(define (walk-and-set-section-ids! id container)
-  (for-each
-    (lambda (element)
-      (cond
-        [(section? element)
-         (let ([id (string-append id "-" (section-id element))])
-           (set-section-id! element id)
-           (walk-and-set-section-ids! id element))]
-        [(container? element)
-         (walk-and-set-section-ids! id element)]))
-    (container-elements container)))
 
 (define (normalize str)
   (string-downcase

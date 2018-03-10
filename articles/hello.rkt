@@ -1,6 +1,6 @@
 #lang at-exp s-exp "../database/article-lang.rkt"
 
-@article["Hello world!" @pubdate[2018 2 15] @'(english meta)
+@article["Hello world!" @pubdate[2018 2 15] '(english meta)
 
 @p{Hello world! I'm Jérôme, professional developer and hacker.}
 

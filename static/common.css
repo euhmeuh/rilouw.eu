@@ -78,10 +78,46 @@ aside p {
   text-align: right;
 }
 
-p {
+p, ul {
   font-family: "Source Serif Pro";
+}
+
+p {
   font-size: larger;
   text-align: justify;
+}
+
+ul li {
+  font-size: initial;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+nav ul li {
+  font-size: larger;
+  font-family: "Fira Code";
+}
+
+.quote {
+  border-left: solid 5px #008a8a;
+}
+
+blockquote {
+  margin-left: 20px;
+  margin-right: 0px;
+}
+
+blockquote p {
+  font-size: initial;
+  font-style: italic;
+}
+
+figcaption {
+  margin-left: 10px;
+}
+
+figcaption .author {
+  font-weight: bold;
 }
 
 .small {

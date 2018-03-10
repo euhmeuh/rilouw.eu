@@ -2,7 +2,7 @@
 
 @article["Le rapport à l'erreur"
          @pubdate[2018 3 2]
-         @'(french workplace human-rights failure error agile methodology unit-tests tests TDD)
+         '(draft french workplace human-rights failure error agile methodology unit-tests tests TDD)
 
 @p{L'erreur doit être un moteur, un moyen d'expression.
    Ne plus avoir peur de ses erreurs (grâce à des «filets de protection» humains et techniques),
