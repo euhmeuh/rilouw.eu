@@ -37,7 +37,7 @@
                 (article-title article))
         (format "#~a" (article-id article))))
 
-(define (index-page db [title "Home"] [articles #f])
+(define (index-page db [title "Feminism, Hacking & Ecology"] [articles #f])
   (when (not articles)
     (set! articles (send db get-recent-articles)))
   (base-page db title (map article->link articles)

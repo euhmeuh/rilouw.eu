@@ -22,21 +22,20 @@
   (make-parameter
     (string-join
       (list
-        "slow tech"
         "feminism"
         "ecology"
+        "hacking"
+        "slow tech"
         "jerome martin"
         "jérôme martin"
         "information technology"
-        "IT"
         "technology"
         "lisp"
         "scheme"
         "racket"
         "programming"
-        "programmer"
-        "dev"
-        "development")
+        "development"
+        "blog")
       ", ")))
 
 (define (render-navigation links)
