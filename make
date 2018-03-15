@@ -13,9 +13,13 @@
 (define (call command . args)
   (system (apply format (cons command args)) #:set-pwd? #t))
 
+(define (run-server [port #f])
+  (define option (if port (format "--port ~a" port) ""))
+  (call "/usr/bin/env SITE_MODE=prod racket ./server.rkt ~a" option))
+
 (command-tree
   `([install ,(thunk (call "raco pkg install --auto --skip-installed ~a" (string-join dependencies)))]
     [dev     ,(thunk (call "racket ./server.rkt"))]
-    [run     ,(thunk (call "/usr/bin/env SITE_MODE=prod racket ./server.rkt"))]
+    [run     ,run-server]
     [test    ,(thunk (call "racket ./tests/test-all.rkt"))])
   (current-command-line-arguments))

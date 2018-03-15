@@ -1,6 +1,7 @@
 #lang web-server
 
 (require
+  racket/cmdline
   racket/class
   web-server/servlet
   web-server/servlet-env
@@ -15,14 +16,14 @@
     content))
 
 (define server-root-path (make-parameter (current-directory)))
+(define server-port (make-parameter (if-debug 8000 80)))
+(define server-listen-ip (make-parameter (if-debug "127.0.0.1" #f)))
 
 (define static-root-path
-  (path->string
-    (build-path (server-root-path) "static")))
+  (path->string (build-path (server-root-path) "static")))
 
 (define article-root-path
-  (path->string
-    (build-path (server-root-path) "articles")))
+  (path->string (build-path (server-root-path) "articles")))
 
 (define (response-index req)
   (local-require "pages/index.rkt")
@@ -79,6 +80,20 @@
     (flush-output)
     (dispatcher req)))
 
+(command-line
+  #:once-each
+  [("-p" "--port") port-arg
+   "Open the server on a specific port"
+   (let ([port (string->number port-arg)])
+     (if (and port
+              (exact-positive-integer? port)
+              (port . <= . 65535))
+        (server-port port)
+        (raise-user-error 'wrong-port "Port should be an integer between 1 and 65535 (given: ~a)" port-arg)))]
+  [("-a" "--address") address
+   "Listen on a specific IP address"
+   (server-listen-ip address)])
+
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)
 
@@ -87,8 +102,8 @@
   #:command-line? #t
   #:banner? #t
   #:servlet-regexp #rx""
-  #:listen-ip (if-debug "127.0.0.1" #f)
-  #:port (if-debug 8000 80)
+  #:listen-ip (server-listen-ip)
+  #:port (server-port)
   #:manager (create-none-manager response-not-found)
   #:servlet-responder (if-debug servlet-error-responder response-error)
   #:server-root-path (server-root-path)
