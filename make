@@ -18,7 +18,7 @@
   (call "/usr/bin/env SITE_MODE=prod racket ./server.rkt ~a" option))
 
 (command-tree
-  `([install ,(thunk (call "raco pkg install --auto --skip-installed ~a" (string-join dependencies)))]
+  `([install ,(thunk (call "raco pkg install -u --auto --binary-lib --skip-installed ~a" (string-join dependencies)))]
     [dev     ,(thunk (call "racket ./server.rkt"))]
     [run     ,run-server]
     [test    ,(thunk (call "racket ./tests/test-all.rkt"))])
