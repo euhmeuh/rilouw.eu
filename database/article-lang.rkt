@@ -6,7 +6,8 @@
          (rename-out (module-begin #%module-begin))
          (all-from-out "../entities/blog.rkt")
          (rename-out (paragraph p))
-         (rename-out (newline n)))
+         (rename-out (newline n))
+         (rename-out (strong str)))
 
 (require
   "../entities/blog.rkt")

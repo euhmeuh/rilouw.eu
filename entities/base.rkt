@@ -17,7 +17,8 @@
   pubdate=?
   pubdate>=?
   pubdate>?
-  newline)
+  newline
+  strong)
 
 (require
   (for-syntax racket/base
@@ -131,3 +132,6 @@
 
 (define (newline)
   '(br))
+
+(define (strong . text)
+  `(strong ,@text))
