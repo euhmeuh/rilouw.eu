@@ -9,9 +9,15 @@
   (struct-out link)
   render-link
   render-tag
-  (struct-out pubdate)
+
+  (rename-out [make-pubdate pubdate])
+  pubdate?
+  pubdate-year
+  pubdate-month
+  pubdate-day
   render-pubdate
   format-pubdate
+
   pubdate<=?
   pubdate<?
   pubdate=?
@@ -98,9 +104,13 @@
                             (make-tag-url symbol))))))
 
 (define-renderer pubdate (year month day)
+  (define day (pubdate-day pubdate))
   (define the-date (pubdate->date pubdate))
-  `(time ([datetime ,(format-date the-date 'iso)])
-         ,(format-date the-date 'full)))
+  `(time ([datetime ,(format-date the-date (if day 'iso 'iso-month))])
+         ,(format-date the-date (if day 'full 'month))))
+
+(define (make-pubdate year month [day #f])
+  (pubdate year month day))
 
 (define (pubdate->date pubdate)
   (local-require (only-in srfi/19 make-date))
@@ -121,7 +131,9 @@
 
 (define pubdate-formats
   #hash([iso   . "~1"]
-        [full  . "~A, ~B ~e, ~Y"]))
+        [full  . "~A, ~B ~e, ~Y"]
+        [iso-month . "~Y-~m"]
+        [month . "~B ~Y"]))
 
 (define (format-pubdate pubdate format)
   (format-date (pubdate->date pubdate) format))
