@@ -29,58 +29,27 @@
 (require
   (for-syntax racket/base
               racket/syntax
-              syntax/stx)
+              syntax/parse)
   racket/generic
   "urls.rkt")
 
 (define-generics renderer
   (render renderer))
 
-#|
-(define-renderer link (text url)
-  `(a ([href ,(link-url link)]) ,(link-text link)))
-
-;; will expand to:
-
-(struct link (text url)
-  #:methods gen:renderer
-  [(define (render link)
-    ((render-link) link))])
-
-(define render-link
-  (make-parameter
-    (lambda (link)
-      `(a ([href ,(link-url link)]) ,(link-text link)))))
-|#
 (define-syntax (define-renderer stx)
-  (define (make-struct-elements stx name function-name)
-    (syntax->list
-      (quasisyntax/loc stx
-        (#:methods gen:renderer
-         [(define (render #,name)
-            ((#,function-name) #,name))]))))
-
-  (define (make-render-function stx name function-name body)
-    (quasisyntax/loc stx
-      (define #,function-name
-        (make-parameter (lambda (#,name) #,@body)))))
-
-  (define (make-struct-and-renderer stx name-maybe-parent fields body)
-    (let* ([name (stx-car name-maybe-parent)]
-           [function-name (format-id stx "render-~a" name)])
-      (with-syntax ([(struct-el ...)
-                     (make-struct-elements stx name function-name)]
-                    [render-function
-                     (make-render-function stx name function-name body)])
-        #`(begin
-            (struct #,@name-maybe-parent #,fields struct-el ...)
-            render-function))))
-
-  (syntax-case stx ()
-    [(_ name (field ...) body ...)
-     (make-struct-and-renderer stx #'(name) #'(field ...) #'(body ...))]
-    [(_ name parent (field ...) body ...)
-     (make-struct-and-renderer stx #'(name parent) #'(field ...) #'(body ...))]))
+  (define-splicing-syntax-class name-maybe-parent
+    (pattern (~seq name:id parent:id))
+    (pattern name:id))
+  (syntax-parse stx
+    [(_ nmp:name-maybe-parent (field ...) body ...)
+     (with-syntax ([function-name (format-id stx "render-~a" #'nmp.name)])
+       #`(begin
+           (struct #,@ #'nmp (field ...)
+            #:methods gen:renderer
+            [(define (render nmp.name)
+              ((function-name) nmp.name))])
+           (define function-name
+             (make-parameter (lambda (nmp.name) body ...)))))]))
 
 (define (render-element element)
   (cond
