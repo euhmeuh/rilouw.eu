@@ -72,14 +72,6 @@
     [("article" (string-arg)) response-article]
     [("tag" (string-arg)) response-tag]))
 
-(define (wrap-in-logger dispatcher)
-  (local-require (only-in web-server/dispatchers/dispatch-log
-                          extended-format))
-  (lambda (req)
-    (display (extended-format req))
-    (flush-output)
-    (dispatcher req)))
-
 (command-line
   #:once-each
   [("-p" "--port") port-arg
@@ -98,7 +90,7 @@
 (send article-db start)
 
 (serve/servlet
-  (wrap-in-logger blog-dispatcher)
+  blog-dispatcher
   #:command-line? #t
   #:banner? #t
   #:servlet-regexp #rx""
@@ -108,4 +100,6 @@
   #:servlet-responder (if-debug servlet-error-responder response-error)
   #:server-root-path (server-root-path)
   #:extra-files-paths (list static-root-path)
-  #:file-not-found-responder response-not-found)
+  #:file-not-found-responder response-not-found
+  #:log-file (current-output-port)
+  #:log-format 'extended)
