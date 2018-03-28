@@ -8,6 +8,7 @@
   web-server/managers/none
   web-server/configuration/responders
   "database/article-db.rkt"
+  "l10n/locale.rkt"
   "site-mode.rkt")
 
 (define-syntax-rule (response-page content)
@@ -24,6 +25,9 @@
 
 (define article-root-path
   (path->string (build-path (server-root-path) "articles")))
+
+(parameterize ([current-locale-dir "l10n/locales"])
+  (load-locales!))
 
 (define (response-index req)
   (local-require "pages/index.rkt")
@@ -42,7 +46,7 @@
     (send article-db find-articles-tagged (string->symbol tag)))
   (if found-articles
       (response-page (index-page article-db
-                                 (format "Articles tagged '~a'" tag)
+                                 (loc articles-tagged-title tag)
                                  found-articles))
       (response-not-found req)))
 

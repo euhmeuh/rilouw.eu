@@ -4,9 +4,10 @@
   not-found-page)
 
 (require
-  "_base.rkt")
+  "_base.rkt"
+  (only-in "../l10n/locale.rkt" loc))
 
 (define (not-found-page db)
   (base-page db "404" '()
     (lambda ()
-      '(main (p "404 Not found - The page you are looking for does not exist. Sorry :(")))))
+      `(main (p ,(loc error-404))))))

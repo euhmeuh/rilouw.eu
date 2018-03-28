@@ -8,13 +8,11 @@
   racket/class
   racket/contract
   anaphoric
-  "../entities/blog.rkt")
+  "../entities/blog.rkt"
+  "../utils.rkt")
 
 (define (load-article path)
   (dynamic-require path 'article))
-
-(define (racket-file? path)
-  (regexp-match? #rx"\\.rkt$" path))
 
 (define (count-tags articles)
   (define tags (make-hash))

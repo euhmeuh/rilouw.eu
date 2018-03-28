@@ -9,14 +9,15 @@
 (require
   racket/string
   "_footer.rkt"
-  "../entities/blog.rkt")
+  "../entities/blog.rkt"
+  (only-in "../l10n/locale.rkt" loc))
 
-(define basic-links
+(define (basic-links)
   (list
-    (link "Hot topics" "#topics")
-    (link "About" "#about")))
+    (link (loc hot-topics-link) "#topics")
+    (link (loc about-link) "#about")))
 
-(define page-description (make-parameter "Jérôme's blog about slow-tech, feminism & ecology."))
+(define (page-description) (loc page-description))
 (define page-author (make-parameter "Jérôme Martin"))
 (define page-keywords
   (make-parameter
@@ -61,7 +62,7 @@
        ,(render-title title))
      (body
        (header (h1 "Rilouw.eu"))
-       ,(render-navigation (cons (link "Home" "/")
-                                 (append links basic-links)))
+       ,(render-navigation (cons (link (loc home-link) "/")
+                                 (append links (basic-links))))
        ,(renderer)
        ,(render-footer db))))
