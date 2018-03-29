@@ -9,12 +9,8 @@
   web-server/configuration/responders
   "database/article-db.rkt"
   "l10n/locale.rkt"
+  "response.rkt"
   "site-mode.rkt")
-
-(define-syntax-rule (response-page content)
-  (response/xexpr
-    #:preamble #"<!DOCTYPE html>"
-    content))
 
 (define server-root-path (make-parameter (current-directory)))
 (define server-port (make-parameter (if-debug 8000 80)))
@@ -26,31 +22,32 @@
 (define article-root-path
   (path->string (build-path (server-root-path) "articles")))
 
-(parameterize ([current-locale-dir "l10n/locales"])
-  (load-locales!))
+(current-locale "en")
+(current-locale-dir "l10n/locales")
+(load-locales!)
 
-(define (response-index req)
+(define-response (index)
   (local-require "pages/index.rkt")
   (response-page (index-page article-db)))
 
-(define (response-article req article-id)
+(define-response (article article-id)
   (local-require "pages/article.rkt")
   (define article (send article-db find-article-by-id article-id))
   (if article
       (response-page (article-page article-db article))
       (response-not-found req)))
 
-(define (response-tag req tag)
+(define-response (tag a-tag)
   (local-require "pages/index.rkt")
   (define found-articles
-    (send article-db find-articles-tagged (string->symbol tag)))
+    (send article-db find-articles-tagged (string->symbol a-tag)))
   (if found-articles
       (response-page (index-page article-db
-                                 (loc articles-tagged-title tag)
+                                 (loc articles-tagged-title a-tag)
                                  found-articles))
       (response-not-found req)))
 
-(define (response-not-found req)
+(define-response (not-found)
   (local-require "pages/404.rkt")
   (response/xexpr
     #:code 404
