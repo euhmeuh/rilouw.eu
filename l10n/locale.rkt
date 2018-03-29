@@ -22,13 +22,11 @@
 (define locales (make-hash))
 
 (define (load-locales!)
-  (for ([path (in-directory (current-locale-dir) racket-file?)])
-    (call-with-input-file path
-      (lambda (input)
-        (hash-set!
-          locales
-          (filename path)
-          (make-hash (read input)))))))
+  (for ([path (in-directory (current-locale-dir) sexp-file?)])
+    (hash-set!
+      locales
+      (filename path)
+      (make-hash (read-sexp-file path)))))
 
 (define (locale id . args)
   (define locale (or (hash-ref locales (current-locale) #f)
