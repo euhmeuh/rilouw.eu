@@ -9,7 +9,7 @@
   "_base.rkt"
   "../entities/blog.rkt"
   "../entities/urls.rkt"
-  (only-in "../l10n/locale.rkt" loc))
+  (only-in "../l10n/translate.rkt" tr))
 
 (define (render-important-link link)
   `(a ([href ,(link-url link)]
@@ -18,11 +18,11 @@
 
 (define (render-article-preview article)
   (define full-article-link
-    (paragraph (link (loc read-the-article) (make-article-url (article-id article)))))
+    (paragraph (link (tr read-the-article) (make-article-url (article-id article)))))
   `(article
      (header
        (h2 ([id ,(article-id article)]) ,(article-title article))
-       (small ,(loc published) ,(render-element (article-date article))))
+       (small ,(tr published) ,(render-element (article-date article))))
      ,@(map render-element (before-the-fold article))
      ,(parameterize ([render-link render-important-link])
         (render-element full-article-link))))
@@ -39,7 +39,7 @@
         (format "#~a" (article-id article))))
 
 (define (index-page db [title #f] [articles #f])
-  (set! title (or title (loc home-title)))
+  (set! title (or title (tr home-title)))
   (when (not articles)
     (set! articles (send db get-recent-articles)))
   (base-page db title (map article->link articles)

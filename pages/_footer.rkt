@@ -7,7 +7,7 @@
   racket/list
   racket/class
   "../entities/blog.rkt"
-  (only-in "../l10n/locale.rkt" loc))
+  (only-in "../l10n/translate.rkt" tr))
 
 (define (render-frequent-tags tags)
   `(p ([class "center"]) ,@(add-between (map render-element tags) 'nbsp)))
@@ -15,14 +15,14 @@
 (define (render-footer db)
   `(footer
      (hr ([class "fancy"]))
-     (h2 ([id "topics"]) ,(loc hot-topics-link))
+     (h2 ([id "topics"]) ,(tr hot-topics-link))
      ,(render-frequent-tags (send db get-frequent-tags #:at-least 1))
-     (h2 ([id "about"]) ,(loc about-title))
-     (p ,(loc about-presentation-01))
-     (p ,(loc about-presentation-02))
-     (p ,(loc about-presentation-03))
+     (h2 ([id "about"]) ,(tr about-title))
+     (p ,(tr about-presentation-01))
+     (p ,(tr about-presentation-02))
+     (p ,(tr about-presentation-03))
      (hr)
-     (p ,(loc copyright))
+     (p ,(tr copyright))
      (p ([class "small"])
-        ,(loc license-font-fira) (br)
-        ,(loc license-font-source))))
+        ,(tr license-font-fira) (br)
+        ,(tr license-font-source))))

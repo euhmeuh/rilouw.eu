@@ -5,9 +5,9 @@
 
 (require
   "_base.rkt"
-  (only-in "../l10n/locale.rkt" loc))
+  (only-in "../l10n/translate.rkt" tr))
 
 (define (not-found-page db)
   (base-page db "404" '()
     (lambda ()
-      `(main (p ,(loc error-404))))))
+      `(main (p ,(tr error-404))))))

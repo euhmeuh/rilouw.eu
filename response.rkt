@@ -11,7 +11,7 @@
               syntax/parse)
   racket/stxparam
   web-server/servlet
-  "l10n/locale.rkt")
+  "l10n/translate.rkt")
 
 (define-syntax-parameter req
   (lambda (stx)
@@ -28,5 +28,5 @@
      #:with func-name (format-id stx "response-~a" #'name)
      #`(define (func-name request arg ...)
          (syntax-parameterize ([req (make-rename-transformer #'request)])
-           (parameterize ([current-locale (request-locale req)])
+           (parameterize ([current-language (request-language req)])
              body ...)))]))

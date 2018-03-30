@@ -10,14 +10,16 @@
   racket/string
   "_footer.rkt"
   "../entities/blog.rkt"
-  (only-in "../l10n/locale.rkt" loc))
+  (only-in "../l10n/translate.rkt"
+           tr
+           current-language))
 
 (define (basic-links)
   (list
-    (link (loc hot-topics-link) "#topics")
-    (link (loc about-link) "#about")))
+    (link (tr hot-topics-link) "#topics")
+    (link (tr about-link) "#about")))
 
-(define (page-description) (loc page-description))
+(define (page-description) (tr page-description))
 (define page-author (make-parameter "Jérôme Martin"))
 (define page-keywords
   (make-parameter
@@ -48,7 +50,7 @@
   `(title ,(string-append title " | Rilouw.eu")))
 
 (define (base-page db title links renderer)
-  `(html ([lang "en"])
+  `(html ([lang ,(symbol->string (current-language))])
      (head
        (meta ([charset "utf-8"]))
        (meta ([name "viewport"]
@@ -62,7 +64,7 @@
        ,(render-title title))
      (body
        (header (h1 "Rilouw.eu"))
-       ,(render-navigation (cons (link (loc home-link) "/")
+       ,(render-navigation (cons (link (tr home-link) "/")
                                  (append links (basic-links))))
        ,(renderer)
        ,(render-footer db))))

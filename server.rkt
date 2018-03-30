@@ -8,7 +8,7 @@
   web-server/managers/none
   web-server/configuration/responders
   "database/article-db.rkt"
-  "l10n/locale.rkt"
+  "l10n/translate.rkt"
   "response.rkt"
   "site-mode.rkt")
 
@@ -22,9 +22,10 @@
 (define article-root-path
   (path->string (build-path (server-root-path) "articles")))
 
-(current-locale "en")
-(current-locale-dir "l10n/locales")
-(load-locales!)
+(current-language 'en)
+(current-country 'fr)
+(current-translations-dir "l10n/translations")
+(load-translations!)
 
 (define-response (index)
   (local-require "pages/index.rkt")
@@ -43,7 +44,7 @@
     (send article-db find-articles-tagged (string->symbol a-tag)))
   (if found-articles
       (response-page (index-page article-db
-                                 (loc articles-tagged-title a-tag)
+                                 (tr articles-tagged-title a-tag)
                                  found-articles))
       (response-not-found req)))
 
