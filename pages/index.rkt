@@ -9,7 +9,7 @@
   "_base.rkt"
   "../entities/blog.rkt"
   "../entities/urls.rkt"
-  (only-in "../l10n/translate.rkt" tr))
+  (only-in web-galaxy/translate tr))
 
 (define (render-important-link link)
   `(a ([href ,(link-url link)]

@@ -1,7 +1,9 @@
 #lang racket/base
 
 (provide
-  (all-from-out "base.rkt")
+  (all-from-out web-galaxy/entities)
+
+  render-tag
 
   ;; public interface gives only access to special constructors,
   ;; predicates and some accessors
@@ -47,7 +49,13 @@
   racket/list
   racket/string
   anaphoric
-  "base.rkt")
+  web-galaxy/renderer
+  web-galaxy/entities
+  "urls.rkt")
+
+(define (render-tag symbol)
+  (render-element (link (symbol->string symbol)
+                        (make-tag-url symbol))))
 
 (struct article container (id title date tags))
 

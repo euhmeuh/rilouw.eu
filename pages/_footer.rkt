@@ -7,7 +7,7 @@
   racket/list
   racket/class
   "../entities/blog.rkt"
-  (only-in "../l10n/translate.rkt" tr))
+  (only-in web-galaxy/translate tr))
 
 (define (render-frequent-tags tags)
   `(p ([class "center"]) ,@(add-between (map render-element tags) 'nbsp)))

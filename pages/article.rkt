@@ -7,7 +7,7 @@
   racket/list
   "_base.rkt"
   "../entities/blog.rkt"
-  (only-in "../l10n/translate.rkt" tr))
+  (only-in web-galaxy/translate tr))
 
 (define (article-page db article)
   (define back-home-link

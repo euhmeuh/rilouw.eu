@@ -10,7 +10,7 @@
   racket/string
   "_footer.rkt"
   "../entities/blog.rkt"
-  (only-in "../l10n/translate.rkt"
+  (only-in web-galaxy/translate
            tr
            current-language))
 

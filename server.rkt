@@ -3,28 +3,22 @@
 (require
   racket/cmdline
   racket/class
-  web-server/servlet
-  web-server/servlet-env
-  web-server/managers/none
-  web-server/configuration/responders
-  "database/article-db.rkt"
-  "l10n/translate.rkt"
-  "response.rkt"
-  "site-mode.rkt")
-
-(define server-root-path (make-parameter (current-directory)))
-(define server-port (make-parameter (if-debug 8000 80)))
-(define server-listen-ip (make-parameter (if-debug "127.0.0.1" #f)))
+  web-galaxy/translate
+  web-galaxy/response
+  web-galaxy/serve
+  (only-in web-galaxy/renderer current-custom-renderers)
+  (only-in "entities/blog.rkt" render-tag)
+  "database/article-db.rkt")
 
 (define static-root-path
-  (path->string (build-path (server-root-path) "static")))
+  (path->string (build-path (current-server-root-path) "static")))
 
 (define article-root-path
-  (path->string (build-path (server-root-path) "articles")))
+  (path->string (build-path (current-server-root-path) "articles")))
 
 (current-language 'en)
 (current-country 'fr)
-(current-translations-dir "l10n/translations")
+(current-translations-dir "translations")
 (load-translations!)
 
 (define-response (index)
@@ -67,21 +61,6 @@
     #:preamble #"<!DOCTYPE html>"
     (error-page article-db)))
 
-(define-values
-  (blog-dispatcher blog-url)
-  (dispatch-rules
-    [("") response-index]
-    [("article" (string-arg)) response-article]
-    [("tag" (string-arg)) response-tag]))
-
-(define (wrap-in-logger dispatcher)
-  (local-require (only-in web-server/dispatchers/dispatch-log
-                          extended-format))
-  (lambda (req)
-    (display (extended-format req))
-    (flush-output)
-    (dispatcher req)))
-
 (command-line
   #:once-each
   [("-p" "--port") port-arg
@@ -90,24 +69,20 @@
      (if (and port
               (exact-positive-integer? port)
               (port . <= . 65535))
-        (server-port port)
+        (current-server-port port)
         (raise-user-error 'wrong-port "Port should be an integer between 1 and 65535 (given: ~a)" port-arg)))]
   [("-a" "--address") address
    "Listen on a specific IP address"
-   (server-listen-ip address)])
+   (current-server-listen-ip address)])
 
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)
 
-(serve/servlet
-  (wrap-in-logger blog-dispatcher)
-  #:command-line? #t
-  #:banner? #t
-  #:servlet-regexp #rx""
-  #:listen-ip (server-listen-ip)
-  #:port (server-port)
-  #:manager (create-none-manager response-not-found)
-  #:servlet-responder (if-debug servlet-error-responder response-error)
-  #:server-root-path (server-root-path)
-  #:extra-files-paths (list static-root-path)
-  #:file-not-found-responder response-not-found)
+(parameterize ([current-server-static-paths (list static-root-path)]
+               [current-not-found-responder response-not-found]
+               [current-error-responder response-error]
+               [current-custom-renderers `([,symbol? . ,render-tag])])
+  (serve/all
+    [("") response-index]
+    [("article" (string-arg)) response-article]
+    [("tag" (string-arg)) response-tag]))

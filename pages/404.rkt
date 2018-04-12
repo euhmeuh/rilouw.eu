@@ -5,7 +5,7 @@
 
 (require
   "_base.rkt"
-  (only-in "../l10n/translate.rkt" tr))
+  (only-in web-galaxy/translate tr))
 
 (define (not-found-page db)
   (base-page db "404" '()
