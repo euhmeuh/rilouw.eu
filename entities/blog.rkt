@@ -5,43 +5,40 @@
 
   render-tag
 
-  ;; public interface gives only access to special constructors,
-  ;; predicates and some accessors
+  (except-out (struct-out article) article)
   (rename-out [make-article article])
-  article?
-  article-id
-  article-title
-  article-date
-  article-tags
+  draft? ;; is an article a draft?
 
   (struct-out fold)
   render-fold
   before-the-fold
 
+  (except-out (struct-out code) code)
+  (rename-out [make-code code])
+  render-code
+
+  (struct-out inline-code)
+  render-inline-code
+
   (rename-out [make-paragraph paragraph])
   paragraph?
   render-paragraph
 
+  (except-out (struct-out section) section)
   (rename-out [make-section section])
-  section?
-  section-id
-  section-title
   render-section
 
+  (except-out (struct-out note) note)
   (rename-out [make-note note])
-  note?
   render-note
 
+  (except-out (struct-out lquote) lquote)
   (rename-out [make-lquote lquote])
-  lquote?
   render-lquote
 
+  (except-out (struct-out dotted-list) dotted-list)
   (rename-out [make-dotted-list dotted-list])
-  dotted-list?
-  render-dotted-list
-
-  ;; is an article a draft?
-  draft?)
+  render-dotted-list)
 
 (require
   racket/contract
@@ -73,6 +70,18 @@
     (takef elements
            (not/c fold?))
     (take elements 1)))
+
+(define-renderer inline-code (text)
+  `(code ([class "inline"]) ,(inline-code-text inline-code)))
+
+(define-renderer code (language text)
+  (local-require xml)
+  `(div ([class "code"])
+     (div ([class "language"]) ,(code-language code))
+     (pre (code ,(code-text code)))))
+
+(define (make-code language . text)
+  (code language (string-join text "")))
 
 (define-renderer paragraph container ()
   `(p ,@(render-elements paragraph)))

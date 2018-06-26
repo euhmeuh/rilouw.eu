@@ -180,3 +180,30 @@ article h2::after,
 article h3::after {
   content: ')';
 }
+
+code {
+  font-family: "Fira Code";
+}
+
+code.inline {
+  font-size: .75em;
+  border: solid 1px #D88551;
+  background-color: #fff;
+  border-radius: .5em;
+  padding: 2px;
+}
+
+.code {
+  background-color: #faebd7;
+}
+
+.code .language {
+  background-color: #ffdbac;
+  text-align: right;
+  padding: 5px;
+}
+
+.code pre {
+  padding: 15px;
+  margin: 0;
+}
