@@ -13,12 +13,16 @@
   render-fold
   before-the-fold
 
+  (struct-out inline-code)
+  render-inline-code
+
   (except-out (struct-out code) code)
   (rename-out [make-code code])
   render-code
 
-  (struct-out inline-code)
-  render-inline-code
+  (except-out (struct-out console) console)
+  (rename-out [make-console console])
+  render-console
 
   (rename-out [make-paragraph paragraph])
   paragraph?
@@ -82,6 +86,15 @@
 
 (define (make-code language . text)
   (code language (string-join text "")))
+
+(define-renderer console (title text)
+  (local-require xml)
+  `(div ([class "console"])
+     (div ([class "title"]) ,(console-title console))
+     (pre (code ,(console-text console)))))
+
+(define (make-console title . text)
+  (console title (string-join text "")))
 
 (define-renderer paragraph container ()
   `(p ,@(render-elements paragraph)))

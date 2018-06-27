@@ -191,6 +191,7 @@ code.inline {
   background-color: #fff;
   border-radius: .5em;
   padding: 2px;
+  white-space: nowrap;
 }
 
 .code {
@@ -203,7 +204,19 @@ code.inline {
   padding: 5px;
 }
 
-.code pre {
+.code pre,
+.console pre {
   padding: 15px;
   margin: 0;
+}
+
+.console {
+  background-color: #004c4c;
+  color: #fff;
+}
+
+.console .title {
+  background-color: #007d7d;
+  text-align: right;
+  padding: 5px;
 }

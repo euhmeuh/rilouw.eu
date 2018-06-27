@@ -195,7 +195,32 @@
 
 @p{For the more savvy of you, if you want the exact technical term that refers to
    this property of lisp to be at the same time code and data:
-   it's called @link["Homoiconicity" "https://en.wikipedia.org/wiki/Homoiconicity"].}]
+   it's called @link["Homoiconicity" "https://en.wikipedia.org/wiki/Homoiconicity"].}
+
+@p{I can already hear you ask: But what is the point? Javascript is good as it is, I don't need this weird parentheses-everywhere syntax!}
+
+@p{Well, the fact that this javascript code is also @strong{data} means you can edit and modify it on-the-fly.
+   You can create new kinds of control words like @inline-code{do..until}, a truly working @inline-code{for-each}, some kind of integrated
+   SQL query language @inline-code{(select * from users)} that would work on JSON-lisp. You name it.}
+
+@p{You can do reflection on your own code:}
+
+@console["Console"]{
+  > (define code (read "percentage.js"))
+  > (first code)
+  'function
+
+  > (second code)
+  'print_percentage
+
+  > (find 'console.log code)
+  '((console.log "Error: {}" e)
+    (console.log "Percentage is {}%" result))
+}]
+
+@p{All your code is editable as a list of atoms. It is normally very difficult to parse and modify
+   Javascript because of its syntax (programmers of linters, minifiers or transpilers can testify), but
+   with s-expressions, everything becomes a lot simpler.}
 
 @section["Making languages with Racket"
 
