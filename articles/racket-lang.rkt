@@ -75,15 +75,141 @@
 
 @p{The bad news is that most programming languages are not suited for programming that kind of software. Because actually, that's not a software you want to make, but a language.}
 
-@p{The good news is that there is a family of languages that have been especially designed to create languages. It's called @'|lisp|.}
+@p{The good news is that there is a family of languages that have been specifically designed to create languages. It's called @'|lisp|.}
 
 @p{In the lisp family, there are a lot of different languages. Some designed for science, some designed for learning computer science, some general purposed, and some "language oriented".}
 
 @p{Racket is a language oriented language. It's my favorite lisp, and if you followed until now, you're now ready to discover some of the tricks that make this language incredibly powerful in creating domain specific languages, aka. DSL.}]
 
-@section["Racket basics"
+@section["Common Lisp vs Scheme"
 
-@p{}
+@p{Racket is an implementation of Scheme, which is one of the two major lisp families (the other one being Common Lisp).
+   Both have been around for more than 50 years (you read that well) and mostly differ from each other in deep philosophical questions about whether or not
+   we can implicitely introduce variables in scope without telling the user. This is known as "breaking hygiene" in Scheme, or as "anaphoric awesomeness" in Common Lisp
+   (note that the vocabulary difference says it all about what each community think of this practice).}
+
+@p{Scheme says no, you can't break hygiene (except maybe sometimes but don't tell my mom), Common Lisp says yes, of course you can, that's an awesome feature (it is).
+   That's about it. There are some other differences but really, unless you are deeply interested in lisp design, you don't care (for now).}
+
+@p{Racket says: With great power comes great responsibility. I'm Scheme-based, so let's not break hygiene by default. But let's allow breaking hygiene step by step,
+   by building a framework that prevents things from getting hairy, but still unlock the awesomeness of anaphoric macros.}
+
+@p{If I'm writing about Racket today, that's (among other reasons) because I think that's the right approach. The only drawback is that it makes learning Racket
+   macros a bit difficult for beginners. But in the long time, it really pays off.}]
+
+@section["Lists and atoms"
+
+@p{Coming back to what lisp looks like. There is no exact definition of what a lisp is or is not, but you can usually recognize them at their famous @inline-code{((((parentheses))))}.}
+
+@p{The format in which one writes lisp is called "s-expressions" or "s-exp" and is the basic skeleton from which you write a program. It's a list of lists of lists of lists...etc}
+
+@p{It looks like this:}
+
+@code["lisp"]{
+  (always (walk (forest (random-trees)))
+    (let mushroom (fetch (forest-ground))
+      (when (comestible? mushroom)
+        (put mushroom -> basket))))
+}
+
+@p{You can nearly smell the spicy scent of pine in that piece of code. Half code, half poem, I'd dare say.}
+
+@p{A list is a pair of parentheses @inline-code{(...)} and everything that is not
+   blank spaces nor parentheses is called an "atom":
+   @inline-code{always}, @inline-code{comestible?}, @inline-code{->}, @inline-code{forest}, @inline-code{basket}, @inline-code{mushroom}...}
+
+@p{Atoms can contain any characters in Racket, even symbols like @inline-code{%}, @inline-code{_}, @inline-code{-}, @inline-code{+}, @inline-code{~}, @inline-code{&}, @inline-code{@"@"}, @inline-code{=}, whatever you like.}
+
+@p{This is because lists and atoms are the @strong{only} piece of syntax hardcoded in the language.
+   Everything else is defined by programmers. The @inline-code{if} clause, variable definitions, classes if you want classes, structs if you want structs...}
+
+@p{The language can be object oriented if you want. Functional if you want. It can be your own language. You are the one defining the rules and the syntax.}
+
+@p{This is why the first example I gave is written in a language which is not Racket, nor Scheme, nor Common Lisp.
+   It's just one kind of lisp I just made up to best express my desire of fetching mushrooms in the forest.}
+
+@p{This lack of formal syntax allows two things:}
+
+@dotted-list[
+  "The language can be whatever you like"
+  "The language can parse itself as data"]
+
+@p{The second point is the most important thing to understand. Instead of using some kind of file format for your data, you can actually write your data as code.
+   Because there is no fundamental difference between a piece of code like @inline-code{(send love letters)} and a listing of data like @inline-code{(banana apple pear)}.
+   Both are lists holding three atoms. As a programmer, you are the one defining their meaning.}
+
+@p{Therefore, you can write JSON as lisp, HTML as lisp, even Javascript as lisp:}
+
+@code["JSON-lisp"]{
+  (users [
+    (
+      (name "Jane")
+      (surname "Doe")
+      (inventory [
+        ((name "Life potion") (effect "HP_INC") (amount 10))
+      ])
+    )
+    (
+      (name "Hanako")
+      (surname "Yamada")
+      (inventory [
+        ((name "Magic staff") (type "weapon") (damage 4))
+      ])
+    )
+  ])
+}
+
+@p{NB: I indented it like JSON for the sake of the example, but usually lisp
+   programmers care about their parentheses and don't like leaving them alone on their lines.}
+
+@code["HTML-lisp"]{
+  (html ([lang "en"])
+    (head
+      (title "My awesome blog about ponies"))
+    (body
+      (article ([class "first"])
+        (p "I like all ponies.")
+        (p "But my favorite one is: ")
+        (a ([href "/favorite"]
+            [class "rainbow-link"])
+          "Click here to discover my favorite pony!!"))))
+}
+
+@p{The blog you are reading right now is actually written in this kind of HTML-lisp language.}
+
+@code["Javascript-lisp"]{
+  (function print_percentage (a b)
+    (var result null)
+    (try
+     (set result (* (/ a b) 100))
+     (catch (e)
+       (console.log "Error: {}" e)
+       (return false)))
+    (console.log "Percentage is {}%" result)
+    (return true))
+}
+
+@p{My point is: you do whatever you like with lisp, and give it the shape you like, regardless of the type of data/code you are working with.
+   This makes it the perfect tool for glueing together different technologies, abstracting away different
+   implementations or formats, or designing new languages for your teams.}
+
+@p{For the more savvy of you, if you want the exact technical term that refers to
+   this property of lisp to be at the same time code and data:
+   it's called @link["Homoiconicity" "https://en.wikipedia.org/wiki/Homoiconicity"].}]
+
+@section["Making languages with Racket"
+
+@p{Remember the XML UI-language we wrote earlier so that our UI team can design interfaces? In lisp, it would look like this:}
+
+@code["ui-lang"]{
+  (ui
+    (menu ([id "title_menu"])
+      (button ([goto "campaign_menu"]) "Campaign")
+      (button ([goto "multiplayer_menu"]) "Multiplayer")
+      (button ([goto "credits_menu"]) "Credits")))
+}
+
+@p{Let's write a Racket module that can parse and display that!}
 
 ]
 
