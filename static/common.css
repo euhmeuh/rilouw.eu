@@ -128,6 +128,10 @@ figcaption .author {
   text-align: center;
 }
 
+.width-50 {
+  width: 50%;
+}
+
 .important-link:before {
   content: url("/right-pointing-hand.svg");
   margin-right: 7px;
@@ -218,5 +222,18 @@ code.inline {
 .console .title {
   background-color: #007d7d;
   text-align: right;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: solid 1px black;
+}
+
+th, td {
   padding: 5px;
 }

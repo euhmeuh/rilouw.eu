@@ -46,19 +46,19 @@
 
 @p{I need a custom file format. It needs to be simple, it needs to be adapted to the vocabulary of the teams.}
 
-@p{In fact, you could say that you need a kind of "universal translator". Not a translator for natural languages, say French, English, Japanese... But a translator for your teams' languages: 
+@p{In fact, you could say that you need a kind of "universal translator". Not a translator for natural languages, say French, English, Japanese... But a translator for your teams' languages:
    Gameplay-language, Artist-language, UI-language.}
 
-@p{So you start designing what the UI-language could be:}
+@p{You need to start somewhere. So let's say you design what the UI-language could be:}
 
 @code["XML"]{
-   <ui>
-     <menu id="title_menu">
-       <button goto="campaign_menu">Campaign</button>
-       <button goto="multiplayer_menu">Multiplayer</button>
-       <button goto="credits_menu">Credits</button>
-     </menu>
-   </ui>
+  <ui>
+    <menu id="title_menu">
+      <button goto="campaign_menu">Campaign</button>
+      <button goto="multiplayer_menu">Multiplayer</button>
+      <button goto="credits_menu">Credits</button>
+    </menu>
+  </ui>
 }
 
 @p{Then design a way to make your software behave depending on that file.}
@@ -68,34 +68,84 @@
 
 @p{Soon you'll start to realize that the more you add classes, the more complexe your software becomes, and more bloated the scope reveals itself.}
 
+@p{For example: One of your UI designers needs a way to declare variables for the size of elements,
+   so that some of them can be of a relative size compared to other elements. You start putting references to objects everywhere
+   and end up with a bowl of spaghetti code.}
+
+@p{In fact, the more you work on it, the more you are "mapping" software to a human craft, the less you see the end of the tunnel.
+   Obviously because there is no proper end to begin with.}
+
 @p{It may take years until you accept the sad truth that what you're trying to do is way out of your scope. You're making a software that permits non-technical users to express their
    specific needs in the vocabulary of their specific domain, while keeping everything together and doing the Right Thing™ every time, preferably in an automated fashion.}
 
-@p{You are making the @strong{Universal Translator}.}
+@p{You are making the @strong{Universal Translator}. The ultimate software that allows non-developers to develop. The ultimate machine that understands humans.
+   Microsoft tried it. Adobe tried it. Pretty much every big IT company tried to make the Universal Translator. All failed.}
 
-@p{The bad news is that most programming languages are not suited for programming that kind of software. Because actually, that's not a software you want to make, but a language.}
+@p{The bad news is that most programming languages are not suited for programming that kind of software.
+   Because actually, that's not a software you want to make, but a @strong{language}.}
 
-@p{The good news is that there is a family of languages that have been specifically designed to create languages. It's called @'|lisp|.}
+@p{The good news is that there is a name for such a language. It's called a DSL: Domain Specific Language.}
 
-@p{In the lisp family, there are a lot of different languages. Some designed for science, some designed for learning computer science, some general purposed, and some "language oriented".}
+@p{DSLs are not a Universal Translator. They are just a way of expressing a domain using the most adapted language.}
 
-@p{Racket is a language oriented language. It's my favorite lisp, and if you followed until now, you're now ready to discover some of the tricks that make this language incredibly powerful in creating domain specific languages, aka. DSL.}]
+@p{You will not provide your team software that handles programming for them (we saw this is impossible), you will provide them a language so that they
+   can program themselves, in the language that fits the best how they express their job.}
+
+@p{Luckily, there is a family of programming languages that have been specifically designed to create DSLs. It's called @'|lisp|.}
+
+@p{In the lisp family, there are a lot of different languages. Some designed for science, some
+   designed for learning computer science, some general purposed, and some "language oriented".}
+
+@p{Racket is a language oriented language. It's my favorite lisp, and if you followed until now, you're now ready to discover some of the
+   tricks that make this language incredibly powerful in creating domain specific languages.}
+
+]
 
 @section["Common Lisp vs Scheme"
 
 @p{Racket is an implementation of Scheme, which is one of the two major lisp families (the other one being Common Lisp).
-   Both have been around for more than 50 years (you read that well) and mostly differ from each other in deep philosophical questions about whether or not
-   we can implicitely introduce variables in scope without telling the user. This is known as "breaking hygiene" in Scheme, or as "anaphoric awesomeness" in Common Lisp
+   Both have been around for more than 60 years (you read that well) and mostly
+   differ from each other in deep philosophical questions about whether or not
+   we can implicitely introduce variables in scope without telling the user.
+   This is known as "breaking hygiene" in Scheme, or as "anaphoric awesomeness" in Common Lisp
    (note that the vocabulary difference says it all about what each community think of this practice).}
 
-@p{Scheme says no, you can't break hygiene (except maybe sometimes but don't tell my mom), Common Lisp says yes, of course you can, that's an awesome feature (it is).
+@p{Scheme says no, you can't break hygiene (except maybe sometimes but don't tell my mom),
+   Common Lisp says yes, of course you can, that's an awesome feature (it is).
    That's about it. There are some other differences but really, unless you are deeply interested in lisp design, you don't care (for now).}
 
-@p{Racket says: With great power comes great responsibility. I'm Scheme-based, so let's not break hygiene by default. But let's allow breaking hygiene step by step,
-   by building a framework that prevents things from getting hairy, but still unlock the awesomeness of anaphoric macros.}
+@p{Racket says: With great power comes great responsibility. I'm Scheme-based,
+   so let's not break hygiene by default. But let's allow breaking hygiene step by step,
+   by building a framework that prevents things from getting hairy,
+   but still unlock the awesomeness of anaphoric macros.}
 
-@p{If I'm writing about Racket today, that's (among other reasons) because I think that's the right approach. The only drawback is that it makes learning Racket
-   macros a bit difficult for beginners. But in the long time, it really pays off.}]
+@p{If I'm writing about Racket today, that's (among other reasons) because I think
+   that's the right approach. The only drawback is that it makes learning Racket
+   macros a bit difficult for beginners. But in the long time, it really pays off.}
+
+@p{The only thing you need to remember about this for now is that Racket is a Scheme, and that Scheme is a lisp:}
+
+@'(table
+    (tr
+      (th ([colspan "2"] [class "center"]) "Lisp family"))
+    (tr
+      (th ([class "center width-50"]) "Common Lisp")
+      (th ([class "center width-50"]) "Scheme"))
+    (tr
+      (td
+        (div "CLisp")
+        (div "CMU Common Lisp")
+        (div "GNU Common Lisp")
+        (div "Steel Bank Common Lisp")
+        (div "..."))
+      (td
+        (div (strong "Racket ←"))
+        (div "Chez Scheme")
+        (div "GNU Guile")
+        (div "Chicken Scheme")
+        (div "..."))))
+
+]
 
 @section["Lists and atoms"
 
