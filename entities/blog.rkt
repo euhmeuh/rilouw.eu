@@ -78,14 +78,16 @@
 (define-renderer inline-code (text)
   `(code ([class "inline"]) ,(inline-code-text inline-code)))
 
-(define-renderer code (language text)
+(define-renderer code (title language text)
   (local-require xml)
   `(div ([class "code"])
-     (div ([class "language"]) ,(code-language code))
+     (div ([class "header"])
+       (div ([class "width-50"]) ,(code-title code))
+       (div ([class "width-50 language"]) ,(code-language code)))
      (pre (code ,(code-text code)))))
 
-(define (make-code language . text)
-  (code language (string-join text "")))
+(define (make-code title language . text)
+  (code title language (string-join text "")))
 
 (define-renderer console (title text)
   (local-require xml)

@@ -74,7 +74,7 @@
 @p{You need to start somewhere. So let's say you design what the UI-language
    could be:}
 
-@code["XML"]{
+@code["" "XML"]{
   <ui>
     <menu id="title_menu">
       <button goto="campaign_menu">Campaign</button>
@@ -205,7 +205,7 @@
 
 @p{It looks like this:}
 
-@code["lisp"]{
+@code["" "lisp"]{
   (always (walk (muddy-forest (pine-trees)))
     (let mushroom (fetch (leafy-forest-ground))
       (when (comestible? mushroom)
@@ -215,11 +215,12 @@
 @p{You can nearly smell the spicy scent of pines in that piece of code.
    Half code, half poem, I'd dare say.}
 
-@p{A list is a pair of parentheses @inline-code{(...)} and everything that
-   is not blank spaces nor parentheses is called an "atom":
-   @inline-code{always}, @inline-code{comestible?}, @inline-code{->},
-   @inline-code{forest}, @inline-code{basket}, @inline-code{mushroom}
-   are all atoms.}
+@p{A list is a pair of parentheses @inline-code{()}
+   (square brackets @inline-code{[]} and curly braces @inline-code{{}} are
+   also accepted) and everything that is not blank spaces nor parentheses is
+   called an "atom": @inline-code{always}, @inline-code{comestible?},
+   @inline-code{->}, @inline-code{forest}, @inline-code{basket},
+   @inline-code{mushroom} are all atoms.}
 
 @p{Atoms can contain any characters in Racket, even symbols like
    @inline-code{%}, @inline-code{_}, @inline-code{-}, @inline-code{+},
@@ -255,7 +256,7 @@
 @p{Therefore, you can write JSON as lisp, HTML as lisp,
    even Javascript as lisp:}
 
-@code["JSON-lisp"]{
+@code["" "JSON-lisp"]{
   (users [
     (
       (name "Jane")
@@ -278,7 +279,7 @@
    programmers care about their parentheses and don't like leaving them
    alone on their lines.}
 
-@code["HTML-lisp"]{
+@code["" "HTML-lisp"]{
   (html ([lang "en"])
     (head
       (title "My awesome blog about ponies"))
@@ -294,7 +295,7 @@
 @p{The blog you are reading right now is actually written in this kind
    of HTML-lisp language.}
 
-@code["Javascript-lisp"]{
+@code["percentage.js" "Javascript-lisp"]{
   (function print_percentage (a b)
     (var result null)
     (try
@@ -350,17 +351,176 @@
 @section["Making languages with Racket"
 
 @p{Remember the XML UI-language we wrote earlier so that our UI team can
-   design interfaces? In lisp, it would look like this:}
+   design interfaces? In s-exp, it would look like this:}
 
-@code["ui-lang"]{
+@code["title-screen.ui" "ui-lang"]{
   (ui
-    (menu ([id "title_menu"])
-      (button ([goto "campaign_menu"]) "Campaign")
-      (button ([goto "multiplayer_menu"]) "Multiplayer")
-      (button ([goto "credits_menu"]) "Credits")))
+    (menu ([id "title-menu"])
+      (button ([goto "campaign-menu"]) "Campaign")
+      (button ([goto "multiplayer-menu"]) "Multiplayer")
+      (button ([goto "credits-menu"]) "Credits")))
 }
 
 @p{Let's write a Racket module that can parse and display that!}
+
+@p{The first thing to do is to write a new Racket module with the name of our
+   language: @inline-code{ui-lang.rkt}.}
+
+@p{The bare minimum for a language in Racket looks like this:}
+
+@code["ui-lang.rkt" "Racket"]{
+  #lang racket/base
+  (provide
+    (except-out (all-from-out racket/base) #%module-begin)
+    (rename-out [module-begin #%module-begin]))
+
+  (define-syntax-rule (module-begin expr ...)
+    (#%module-begin expr ...))
+}
+
+@p{It's a bit intimidating the first time you see it, but it's actually really
+   simple once you understand that everything shown here is just a smart
+   combination of basic Racket features.}
+
+@p{Let's take it line by line:}
+
+@code["Line 1" ""]{
+  #lang racket/base
+}
+
+@p{This first line means @inline-code{racket/base} is the language we are using
+   in the module. Racket provides a lot of different languages. For what we want
+   to do (make a language), the base racket library is enough.}
+
+@p{In Racket, a module must always start with a @inline-code{#lang} clause, so
+   that your file is recognized as a Racket module, and so that the Racket
+   compiler can know in which language it is written.}
+
+@code["Line 2" ""]{
+  (provide ...)
+}
+
+@p{The @inline-code{provide} clause is the way for modules to export their
+   functions. @inline-code{provide} takes a list of identifiers defined in
+   the module (or imported) and exposes them as a public interface, so that when
+   a programmer requires your module with
+   @inline-code{(require "my-module.rkt")}, they get the public functions,
+   structs and classes your module implements.}
+
+@code["Lines 2 to 4" ""]{
+  (provide
+    (except-out (all-from-out racket/base) #%module-begin)
+    (rename-out [module-begin #%module-begin]))
+}
+
+@p{This clause is the magic that makes your file not a simple Racket module, but
+   a language.}
+
+@p{It tells your module to provide all identifiers from
+   @inline-code{racket/base} with @inline-code{(all-from-out racket/base)} but
+   @inline-code{except-out} the @inline-code{#%module-begin} function.}
+
+@p{In fact, @inline-code{#%module-begin} is not really a function, it's a
+   syntax. It's the main wrapper that goes around a Racket module when Racket
+   interprets it. This is a bit like the @inline-code{__init__.py} file that
+   gets executed when you import a Python module.}
+
+@p{What we are doing here when we say @inline-code{except-out #%module-begin}
+   is that we disable the default Racket behavior to replace it with our own.}
+
+@p{You can see that replacement happening on line 4:
+   @inline-code{(rename-out [module-begin #%module-begin])}. We rename our own
+   @inline-code{module-begin} syntax to be the new @inline-code{#%module-begin}.}
+
+@code["Lines 6 and 7" ""]{
+  (define-syntax-rule (module-begin expr ...)
+    (#%module-begin expr ...))
+}
+
+@p{This last piece of code is the definition of our own
+   @inline-code{module-begin} syntax.}
+
+@p{Right now it does not do much. It accepts an undefined number of expressions
+   @inline-code{expr ...} and pass them unchanged to the genuine
+   @inline-code{#%module-begin} of Racket (the one we import from
+   @inline-code{racket/base} but don't provide back).}
+
+@p{We successfully created a language that does nothing but read the content
+   of our file and interpret it as Racket. Which will obviously fail because
+   most of our file has undefined elements: @inline-code{ui},
+   @inline-code{button}...etc}
+
+@p{But there is something happening nonetheless that is interesting:
+   We did not in any ways had to write parsing logic. We just reused the
+   reader from Racket.}
+
+@p{That's where things start to get interesting. We get the full power of Racket
+   at our disposal to implement a software that will manipulate the code,
+   without having to care about parsing it. All the hard work of reading streams
+   of characters, tokenize them, put them in data structures... has been done
+   for us.}
+
+@p{All we have to do is write the logic of what the language is supposed to do.}
+
+@p{The last step before we can try this is to actually use that language in our
+   ui file. We need to add a @inline-code{#lang} clause in our file:}
+
+@code["title-screen.ui" "ui-lang"]{
+  #lang s-exp "ui-lang.rkt"
+  (ui
+    (menu ([id "title-menu"])
+      (button ([goto "campaign-menu"]) "Campaign")
+      (button ([goto "multiplayer-menu"]) "Multiplayer")
+      (button ([goto "credits-menu"]) "Credits")))
+}
+
+@p{@inline-code{s-exp} is the default s-expression reader from Racket. It takes
+   a Racket module path as argument, reads the next lines as s-expressions, then
+   pass them to @inline-code{#%module-begin} inside our lang module.}
+
+@p{Let's try this now:}
+
+@console["Racket REPL"]{
+  > (require "title-screen.ui")
+  ; title-screen.ui:2:1: ui: unbound identifier in module
+  ;   in: ui
+  ; [,bt for context]
+}
+
+@p{It works! (developers are the only kind of person who can shout happily when
+   they see an error).}
+
+@p{Of course, Racket complains that @inline-code{ui} does not exist.
+   But this also means the file got read correctly!}
+
+@p{Interestingly, if we tweak a bit our ui-lang module, we can get our file to
+   render as a list by simply quoting it:}
+
+@code["Lines 6 and 7" ""]{
+  (define-syntax-rule (module-begin expr ...)
+    (#%module-begin 'expr ...)) ;; notice the simple quote
+}
+
+@console["Racket REPL"]{
+  > (require "title-screen.ui")
+  '(ui
+     (menu
+      ((id "title-menu"))
+      (button ((goto "campaign-menu")) "Campaign")
+      (button ((goto "multiplayer-menu")) "Multiplayer")
+      (button ((goto "credits-menu")) "Credits")))
+}
+
+]
+
+@section["Notes for second article"
+
+@code["title-screen.ui" "ui"]{
+  title-menu:
+    [Campaign] => campaign-menu
+    [Multiplayer] => multiplayer-menu
+    [Credits] => credits-menu
+}
 
 ]
 

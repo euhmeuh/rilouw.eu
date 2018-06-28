@@ -202,10 +202,17 @@ code.inline {
   background-color: #faebd7;
 }
 
-.code .language {
+.code .header {
   background-color: #ffdbac;
-  text-align: right;
   padding: 5px;
+}
+
+.code .header div {
+  display: inline-block;
+}
+
+.code .header .language {
+  text-align: right;
 }
 
 .code pre,
