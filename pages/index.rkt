@@ -6,10 +6,10 @@
 (require
   racket/list
   racket/class
-  "_base.rkt"
-  "../entities/blog.rkt"
-  "../entities/urls.rkt"
-  (only-in web-galaxy/translate tr))
+  (only-in web-galaxy/translate tr)
+  rilouw-website/pages/base
+  rilouw-website/entities/blog
+  rilouw-website/entities/urls)
 
 (define (render-important-link link)
   `(a ([href ,(link-url link)]
@@ -18,7 +18,7 @@
 
 (define (render-article-preview article)
   (define full-article-link
-    (paragraph (link (tr read-the-article) (make-article-url (article-id article)))))
+    (div (link (tr read-the-article) (make-article-url (article-id article)))))
   `(article
      (header
        (h2 ([id ,(article-id article)]) ,(article-title article))

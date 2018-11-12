@@ -8,11 +8,11 @@
 
 (require
   racket/string
-  "_footer.rkt"
-  "../entities/blog.rkt"
   (only-in web-galaxy/translate
            tr
-           current-language))
+           current-language)
+  rilouw-website/entities/blog
+  rilouw-website/pages/footer)
 
 (define (basic-links)
   (list

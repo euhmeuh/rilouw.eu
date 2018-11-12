@@ -3,14 +3,13 @@
 (provide (except-out (all-from-out racket/base)
                      #%module-begin
                      date)
-         (rename-out (module-begin #%module-begin))
-         (all-from-out "../entities/blog.rkt")
-         (rename-out (paragraph p))
-         (rename-out (newline n))
-         (rename-out (strong str)))
+         (rename-out [module-begin #%module-begin])
+         (all-from-out rilouw-website/entities/blog)
+         (rename-out [newline n])
+         (rename-out [strong str]))
 
 (require
-  "../entities/blog.rkt")
+  rilouw-website/entities/blog)
 
 (define-syntax-rule (module-begin expr)
   (#%module-begin

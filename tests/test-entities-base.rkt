@@ -4,7 +4,7 @@
 
 (require
   rackunit
-  "../entities/base.rkt")
+  web-galaxy/entities)
 
 (define test-entities-base
   (test-suite

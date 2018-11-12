@@ -5,16 +5,16 @@
 
 (require
   racket/list
-  "_base.rkt"
-  "../entities/blog.rkt"
-  (only-in web-galaxy/translate tr))
+  (only-in web-galaxy/translate tr)
+  rilouw-website/pages/base
+  rilouw-website/entities/blog)
 
 (define (article-page db article)
   (define back-home-link
-    (paragraph (link (tr back-home-link) "/")))
+    (div (link (tr back-home-link) "/")))
   (define tags-list
-    (apply paragraph (cons (tr tag-list)
-                           (add-between (article-tags article) ", "))))
+    (apply p (cons (tr tag-list)
+                   (add-between (article-tags article) ", "))))
   (base-page db (article-title article) '()
     (lambda ()
       `(main

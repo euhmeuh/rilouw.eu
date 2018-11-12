@@ -1,4 +1,4 @@
-#lang at-exp s-exp "../database/article-lang.rkt"
+#lang at-exp s-exp rilouw-website/database/article-lang
 
 @article["Hello world!" @pubdate[2018 2 15] '(english meta)
 

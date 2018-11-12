@@ -4,7 +4,7 @@
   not-found-page)
 
 (require
-  "_base.rkt"
+  rilouw-website/pages/base
   (only-in web-galaxy/translate tr))
 
 (define (not-found-page db)

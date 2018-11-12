@@ -8,8 +8,10 @@
   racket/class
   racket/contract
   anaphoric
-  "../entities/blog.rkt"
-  "../utils.rkt")
+  rilouw-website/entities/blog)
+
+(define (article-file? path)
+  (regexp-match? #rx"\\.art$" path))
 
 (define (load-article path)
   (dynamic-require path 'article))
@@ -62,6 +64,7 @@
 
     (define/private (load-articles)
       (set! articles
-        (for/list ([article-path (in-directory path racket-file?)])
+        (for/list ([article-path (in-directory path)]
+                   #:when (article-file? article-path))
           (load-article article-path))))
     ))

@@ -5,7 +5,7 @@
 (require
   racket/list
   rackunit
-  "../entities/blog.rkt")
+  rilouw-website/entities/blog)
 
 (define test-entities-blog
   (test-suite
@@ -26,12 +26,12 @@
 
         (define my-article
           (article "I like ponies" #f '(draft ponies)
-            (paragraph "Hey, did you know I liked ponies?")
-            (paragraph "They're so cool and fluffy.")
-            (paragraph "Want to know more? Check out after the fold!")
+            (p "Hey, did you know I liked ponies?")
+            (p "They're so cool and fluffy.")
+            (p "Want to know more? Check out after the fold!")
             (fold)
-            (paragraph "They have a rainbow mane.")
-            (paragraph "And they dash through the sky!")))
+            (p "They have a rainbow mane.")
+            (p "And they dash through the sky!")))
 
         (define found-elements (before-the-fold my-article))
         (check-equal? (length found-elements) 3))
@@ -39,11 +39,11 @@
       (test-case
         "Get the first element if there is no fold"
 
-        (define first-paragraph (paragraph "There's no fold here?"))
+        (define first-paragraph (p "There's no fold here?"))
         (define my-article
           (article "Hey" #f '()
             first-paragraph
-            (paragraph "Nope, I'm fine, thanks.")))
+            (p "Nope, I'm fine, thanks.")))
         (check-equal? (before-the-fold my-article)
                       (list first-paragraph)))
     )))

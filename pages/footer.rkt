@@ -6,11 +6,11 @@
 (require
   racket/list
   racket/class
-  "../entities/blog.rkt"
-  (only-in web-galaxy/translate tr))
+  (only-in web-galaxy/translate tr)
+  rilouw-website/entities/blog)
 
 (define (render-frequent-tags tags)
-  `(p ([class "center"]) ,@(add-between (map render-element tags) 'nbsp)))
+  `(div ([class "center"]) ,@(add-between (map render-element tags) " ")))
 
 (define (render-footer db)
   `(footer

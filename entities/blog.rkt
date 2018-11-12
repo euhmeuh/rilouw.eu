@@ -24,10 +24,6 @@
   (rename-out [make-console console])
   render-console
 
-  (rename-out [make-paragraph paragraph])
-  paragraph?
-  render-paragraph
-
   (except-out (struct-out section) section)
   (rename-out [make-section section])
   render-section
@@ -52,7 +48,7 @@
   anaphoric
   web-galaxy/renderer
   web-galaxy/entities
-  "urls.rkt")
+  rilouw-website/entities/urls)
 
 (define (render-tag symbol)
   (render-element (link (symbol->string symbol)
@@ -97,12 +93,6 @@
 
 (define (make-console title . text)
   (console title (string-join text "")))
-
-(define-renderer paragraph container ()
-  `(p ,@(render-elements paragraph)))
-
-(define (make-paragraph . text-or-links)
-  (paragraph text-or-links))
 
 (define-renderer section container ([id #:mutable] title)
   `(section (h3 ([id ,(section-id section)])

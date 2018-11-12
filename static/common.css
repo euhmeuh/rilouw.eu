@@ -85,6 +85,7 @@ p, ul {
 p {
   font-size: larger;
   text-align: justify;
+  hyphens: auto;
 }
 
 ul li {

@@ -1,8 +1,8 @@
-#lang at-exp s-exp "../database/article-lang.rkt"
+#lang at-exp s-exp rilouw-website/database/article-lang
 
 @article["The programming language of your dreams"
          @pubdate[2018 6 26]
-         '(draft english technology programming racket lisp)
+         '(english technology programming racket lisp)
 
 @p{For a long time, my favorite language was Python. It's fairly well designed
    and useful for any task, from web servers like Django to 3D software like
