@@ -1,0 +1,43 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["La masculinité"
+         @pubdate[2018 4 2]
+         '(french feminism privileges masculinity)
+
+@p{Si vous êtes un homme et que vous vous sentez, comme moi à une époque, agressé par les propos féministes, c'est que vous cachez peut-être en vous une gène,
+   un mal-être, une question que vous avez refusé de vous poser jusqu'à maintenant: «Qu'est-ce que ça signifie d'être un homme ?»}
+
+@p{Je vous invite à vous poser cette question, et je vous donne quelques pistes pour commencer :}
+
+@dotted-list[
+  "Le fait d'avoir un pénis ou des testicules fait-il de moi un homme ? Pourquoi ? Essayez d'énumérer les choses qui font de vous un homme."
+  "Dois-je obligatoirement être attiré par des femmes pour être un homme ? Comment les hommes homosexuels se sentent-ils hommes ?"
+  "Puis-je trouver un homme beau tout en étant hétéro ?"
+  "Avoir des muscles, des poils, la mâchoire ou les épaules carrées, être grand, sont-ils des critères indispensables pour être un homme ? Pensez à des hommes célèbres qui n'ont pas du tout eu besoin de ces critères pour être des hommes."
+  "Si je peux prendre du plaisir à aider et protéger ma famille ou mon foyer, puis-je prendre du plaisir à faire les taches ménagères, la cuisine, ou toute autre tâche arbitrairement considéré comme «féminine» ?"]
+
+@p{Se lancer dans ces réflexions est déjà un travail important qui vous permettra de mieux vous connaitre, et éventuellement comprendre
+   d'où vient ce sexisme que vous portez sans vous en rendre compte, et vous en libérer.}
+
+@p{Raphaël Liogier le dit d'ailleurs très bien dans son livre @inline-code{Descente au cœur du mâle} :}
+
+@lquote["Raphaël Liogier"
+        @pubdate[2018 3 7]
+        "Descente au cœur du mâle"
+  @p{Il faudrait pouvoir lâcher prise. Vraiment. Ne plus assigner et s'assigner l'autre et soi à un rôle préconçu. Ne plus assigner une identité préconçue.
+     Ni celle de la reproductrice. Ni celle de la poupée Barbie. Ni celle du héros. Ni celle de «celui qui sait».
+     Ni celle du tombeur. Ni rien d'autre de prédéterminé.
+     Parvenir à fluidifier les situations. Ne pas s'arc-bouter sur une image fixe de l'homme que nous devrions être, et surtout paraître.
+     Surmonter l'éventuelle honte ou l'embarras qui peut surgir lors d'une rencontre ou dans une relation avec une femme qui gagne plus d'argent,
+     qui a plus de succès, qui occupe une fonction hiérarchique plus élevée, qui a eu une vie sexuelle plus épanouie.
+     Ce qui n’empêche pas de séduire, de jouir du consentement de l'autre.
+     En quête de sexe épisodique ou du grand amour. Peu importe.
+     Ne plus voir en l'autre une cible à atteindre, un objet à saisir, l'occasion d'une démonstration de force, mais un sujet volontaire,
+     et désirable parce que volontaire, qui ne se dégrade nullement en se comportant aussi librement que «nous».
+     L'égalité est libératrice parce qu'elle révèle les artifices du théâtre social qui nous imposait, à l'un comme à l'autre, un rôle écrit d'avance.
+     S'ouvre alors un espace de confiance en soi et en l'autre, comme une terre inexplorée où quelque chose de nouveau et de commun peut se construire.}]
+
+@p{Pour aller plus loin, je vous invite à écouter les émissions audio de Victoire Tuaillon :
+   @link["Les couilles sur la table" "https://www.binge.audio/category/les-couilles-sur-la-table/"],
+   un podcast destiné aux femmes et aux hommes qui se posent des questions sur eux-mêmes.}
+]
