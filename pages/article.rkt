@@ -11,7 +11,7 @@
 
 (define (article-page db article)
   (define back-home-link
-    (div (link (tr back-home-link) "/")))
+    (div (link "/" (tr back-home-link))))
   (define tags-list
     (apply p (cons (tr tag-list)
                    (add-between (article-tags article) ", "))))

@@ -5,6 +5,7 @@
                      date)
          (rename-out [module-begin #%module-begin])
          (all-from-out rilouw-website/entities/blog)
+         (rename-out [inline-code ic])
          (rename-out [newline n])
          (rename-out [strong str]))
 

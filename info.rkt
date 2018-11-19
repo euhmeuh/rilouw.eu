@@ -1,5 +1,6 @@
 #lang info
 
+(define collection "rilouw-website")
 (define deps
   '("base"
     "anaphoric"

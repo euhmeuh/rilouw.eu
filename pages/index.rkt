@@ -18,7 +18,7 @@
 
 (define (render-article-preview article)
   (define full-article-link
-    (div (link (tr read-the-article) (make-article-url (article-id article)))))
+    (div (link (make-article-url (article-id article)) (tr read-the-article))))
   `(article
      (header
        (h2 ([id ,(article-id article)]) ,(article-title article))
@@ -33,10 +33,10 @@
   (add-between (map render-article-preview articles) separator))
 
 (define (article->link article)
-  (link (format "~a ~a"
+  (link (format "#~a" (article-id article))
+        (format "~a ~a"
                 (format-pubdate (article-date article) 'iso)
-                (article-title article))
-        (format "#~a" (article-id article))))
+                (article-title article))))
 
 (define (index-page db [title #f] [articles #f])
   (set! title (or title (tr home-title)))

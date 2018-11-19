@@ -25,9 +25,10 @@
 
  ;; FOOTER
  [about-title . "About this blog"]
- [about-presentation-01 . "Hey! I'm Jérôme, feminist hacker."]
- [about-presentation-02 . "I learn new things everyday, and I like to put up great and sometimes useless theories about the inner workings of the world, which you'll find here."]
+ [about-presentation-01 . "My name is Jérôme, and I'm a feminist hacker."]
+ [about-presentation-02 . "I like to put up great and sometimes useless theories about the inner workings of the world, which you'll find here."]
  [about-presentation-03 . "This blog is mostly about feminism, ecology and hacking. Please read and enjoy responsibly."]
+ [about-comments . "There is no way to post comments yet, but i'm working on it!"]
  [copyright . "Copyright © Jérôme Martin - All rights reserved."]
  [license-font-fira . "Fira Code © Mozilla, used under the OFL license."]
  [license-font-source . "Source Serif Pro © Adobe, used under the OFL license."]

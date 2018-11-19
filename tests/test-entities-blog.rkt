@@ -22,6 +22,12 @@
                       '(hr)))
 
       (test-case
+        "Symbols should render as links to the tag page"
+        (parameterize ([current-custom-renderers `([,symbol? . ,render-tag])])
+          (check-equal? (render-element 'ponies)
+                        '(a ([href "/tag/ponies"]) "ponies"))))
+
+      (test-case
         "Find elements before the fold"
 
         (define my-article

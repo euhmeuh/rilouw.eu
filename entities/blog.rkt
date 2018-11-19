@@ -51,8 +51,8 @@
   rilouw-website/entities/urls)
 
 (define (render-tag symbol)
-  (render-element (link (symbol->string symbol)
-                        (make-tag-url symbol))))
+  (render-element (link (make-tag-url symbol)
+                        (symbol->string symbol))))
 
 (struct article container (id title date tags))
 

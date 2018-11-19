@@ -1,8 +1,8 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-@article["The programming language of your dreams"
-         @pubdate[2018 6 26]
-         '(draft english technology programming racket lisp)
+(article "The programming language of your dreams (part 1)"
+         (pubdate 2018 11 19)
+         '(english technology programming racket lisp)
 
 @p{For a long time, my favorite language was Python. It's fairly well designed
    and useful for any task, from web servers like Django to 3D software like
@@ -30,13 +30,13 @@
 @p{Well, there's a lot of features that make Racket an awesome language to work
    with: parameters, continuations, contracts, syntax-parse...
    But the feature I want to write about today is by far the one I find really
-   transcendental: @inline-code{#lang} (pronounce "hash-lang").}
+   transcendental: @ic{#lang} (pronounce "hash-lang").}
 
-@p{@inline-code{#lang} allows writing your own languages. Let's dive into it!}
+@p{@ic{#lang} allows writing your own languages. Let's dive into it!}
 
-@(fold)
+(fold)
 
-@section["The myth of the universal translator"
+(section "The myth of the universal translator"
 
 @p{Sometimes comes a task in your daily job that looks like there's something
    deeper going on.}
@@ -71,8 +71,7 @@
    But a translator for your teams' languages:
    Gameplay-language, Artist-language, UI-language.}
 
-@p{You need to start somewhere. So let's say you design what the UI-language
-   could be:}
+@p{Let's see if we can design something like that together! We'll try an imaginary UI-language:}
 
 @code["" "XML"]{
   <ui>
@@ -84,11 +83,13 @@
   </ui>
 }
 
-@p{Then design a way to make your software behave depending on that file.}
+@p{Here, the words that bear meaning for your team are @ic{ui}, @ic{menu}, @ic{button}.}
+
+@p{But we need to write some software that understand and behave depending on that file.}
 
 @p{If you're using a typed language like C# or Java,
-   you're likely to make a @inline-code{UI} class, a @inline-code{Menu} class,
-   a @inline-code{Button} class...etc}
+   you're likely to make a @ic{UI} class, a @ic{Menu} class,
+   a @ic{Button} class...etc}
 
 @p{Soon you'll start to realize that the more you add classes, the more complexe
    your software becomes, and more bloated the scope reveals itself.}
@@ -139,9 +140,11 @@
    followed until now, you're now ready to discover some of the tricks that make
    this language incredibly powerful in creating domain specific languages.}
 
-]
+)
 
-@section["Common Lisp vs Scheme"
+(section "A bit of lisp history"
+
+@p{(You can skip this section if you want by clicking @link["#lists-and-atoms"]{here})}
 
 @p{Racket is an implementation of Scheme, which is one of the two major lisp
    families (the other one being Common Lisp).
@@ -153,7 +156,7 @@
    what each community think of this practice).}
 
 @p{Scheme says no, you can't break hygiene (except maybe sometimes but
-   don't tell my mom), Common Lisp says yes, of course you can, that's an
+   don't tell my parents please!), Common Lisp says yes, of course you can, that's an
    awesome feature (it is). That's about it. There are some other differences
    but really, unless you are deeply interested in lisp design,
    you don't care (for now).}
@@ -171,43 +174,50 @@
 @p{The only thing you need to remember about this for now is that Racket
    is a Scheme, and that Scheme is a lisp:}
 
-@'(table
-    (tr
-      (th ([colspan "2"] [class "center"]) "Lisp family"))
-    (tr
-      (th ([class "center width-50"]) "Common Lisp")
-      (th ([class "center width-50"]) "Scheme"))
-    (tr
-      (td
-        (div "CLisp")
-        (div "CMU Common Lisp")
-        (div "GNU Common Lisp")
-        (div "Steel Bank Common Lisp")
-        (div "..."))
-      (td
-        (div (strong "Racket ←"))
-        (div "Chez Scheme")
-        (div "GNU Guile")
-        (div "Chicken Scheme")
-        (div "..."))))
+'(table
+  (tr
+    (th ([colspan "2"] [class "center"]) "Lisp family"))
+  (tr
+    (th ([class "center width-50"]) "Common Lisp")
+    (th ([class "center width-50"]) "Scheme"))
+  (tr
+    (td
+      (div "CLisp")
+      (div "CMU Common Lisp")
+      (div "GNU Common Lisp")
+      (div "Steel Bank Common Lisp")
+      (div "..."))
+    (td
+      (div (strong "Racket ←"))
+      (div "Chez Scheme")
+      (div "GNU Guile")
+      (div "Chicken Scheme")
+      (div "..."))))
 
-]
+@p{This great diversity of languages and implementation is at the same time a benediction
+   (because you get to compare different approaches) and a curse (because it
+   usually needs work to port a library from one lisp to another). But what they all share
+   is an awesome syntax called @strong{s-expressions}. We'll see how it allows
+   a lot of expressivity and freedom in both programming (as a way to write code)
+   and language/format design (as a way to write data).}
 
-@section["Lists and atoms"
+)
 
-@p{Coming back to what lisp looks like. There is no exact definition of what a
+(section "Lists and atoms"
+
+@p{This is what people have been hearing about the most when talking about lisps:
+   @strong{The Dreaded Parentheses}. Indeed, there is no exact definition of what a
    lisp is or is not, but you can usually recognize them at their famous
-   @inline-code{((((parentheses))))}.}
+   @ic{((((parentheses everywhere))))}.}
 
-@p{The format in which one writes lisp is called "s-expressions" or "s-exp"
-   and is the basic skeleton from which you write a program. It's a list of
-   lists of lists of lists...etc}
+@p{They form s-expressions or "s-exp", which are the basic skeleton from which you write a
+   program in most lisps. They are a tree of lists of lists of lists of lists...etc}
 
 @p{It looks like this:}
 
 @code["" "lisp"]{
-  (always (walk (muddy-forest (pine-trees)))
-    (let mushroom (fetch (leafy-forest-ground))
+  (always (walk (muddy-forest pine-trees))
+    (let mushroom (fetch leafy-forest-ground)
       (when (comestible? mushroom)
         (put mushroom -> tiny-basket))))
 }
@@ -215,21 +225,45 @@
 @p{You can nearly smell the spicy scent of pines in that piece of code.
    Half code, half poem, I'd dare say.}
 
-@p{A list is a pair of parentheses @inline-code{()}
-   (square brackets @inline-code{[]} and curly braces @inline-code{{}} are
-   also accepted) and everything that is not blank spaces nor parentheses is
-   called an "atom": @inline-code{always}, @inline-code{comestible?},
-   @inline-code{->}, @inline-code{forest}, @inline-code{basket},
-   @inline-code{mushroom} are all atoms.}
+@p{I have a quick challenge for you. Read the previous piece of code multiple times.
+   Try to guess what is the meaning, the intention I'm conveying through it.
+   When you think you understand what I want to express with this code, read
+   the following paragraph, which is my English version of what I meant.}
+
+@code["" "Plain English"]{
+  Walk constantly through a muddy forest of pine trees.
+  Fetch mushrooms from the leafy ground.
+  When the mushroom is comestible, put it in your basket.
+}
+
+@p{If you guessed the same meaning from the lisp code, well, I suppose you're
+   starting to realize that parentheses and s-expressions are more than just
+   the syntax of a programming language, but a generic way of expressing anything.}
+
+@p{There is no special syntax for functions, variables nor anything you find in a
+   standard programming language. In fact, you just don't care about whether some
+   things are functions, or some variables. You just care about the @strong{meaning}.}
+
+@p{But if you really want a standard definition of the s-exp syntax,
+   it fits in pretty much three lines:}
+
+(dotted-list
+  "Rule #1 - A list is a pair of parentheses."
+  "Rule #2 - A list can contain atoms and lists separated by spaces."
+  "Rule #3 - Everything that is not blank spaces nor parentheses is an atom.")
+
+@p{In our example, @ic{always}, @ic{comestible?},
+   @ic{->}, @ic{forest}, @ic{basket},
+   @ic{mushroom} are all atoms.}
 
 @p{Atoms can contain any characters in Racket, even symbols like
-   @inline-code{%}, @inline-code{_}, @inline-code{-}, @inline-code{+},
-   @inline-code{~}, @inline-code{&}, @inline-code{@"@"}, @inline-code{=},
+   @ic{%}, @ic{_}, @ic{-}, @ic{+},
+   @ic{~}, @ic{&}, @ic{@"@"}, @ic{=},
    whatever you like.}
 
 @p{This is because lists and atoms are the @strong{only} piece of syntax
    hardcoded in the language. Everything else is defined by programmers.
-   The @inline-code{if} clause, variable definitions, classes if you want
+   The @ic{if} clause, variable definitions, classes if you want
    classes, structs if you want structs...}
 
 @p{The language can be object oriented if you want. Functional if you want.
@@ -242,15 +276,15 @@
 
 @p{This lack of formal syntax allows two things:}
 
-@dotted-list[
+(dotted-list
   "The language can be whatever you like"
-  "The language can parse itself as data"]
+  "The language can parse itself as data")
 
 @p{The second point is the most important thing to understand. Instead of
    using some kind of file format for your data, you can actually write your
    data as code. Because there is no fundamental difference between a piece of
-   code like @inline-code{(send love letters)} and a listing of data like
-   @inline-code{(banana apple pear)}. Both are lists holding three atoms.
+   code like @ic{(send love letters)} and a listing of data like
+   @ic{(banana apple pear)}. Both are lists holding three atoms.
    As a programmer, you are the one defining their meaning.}
 
 @p{Therefore, you can write JSON as lisp, HTML as lisp,
@@ -315,18 +349,19 @@
 
 @p{For the more savvy of you, if you want the exact technical term that
    refers to this property of lisp to be at the same time code and data:
-   it's called @link["Homoiconicity"
-                     "https://en.wikipedia.org/wiki/Homoiconicity"].}
+   it's called @link["https://en.wikipedia.org/wiki/Homoiconicity" "Homoiconicity"].}
 
 @p{I can already hear you ask: But what is the point? Javascript is good as it
    is, I don't need this weird parentheses-everywhere syntax!}
 
 @p{Well, the fact that this javascript code is also @strong{data} means you
    can edit and modify it on-the-fly. You can create new kinds of control
-   words like @inline-code{do..until}, a truly working @inline-code{for-each},
+   words like @ic{do..until}, a truly working @ic{for-each},
    some kind of integrated SQL query language
-   @inline-code{(select * from users)} that would work on JSON-lisp.
-   You name it.}
+   @ic{(select * from users)} that would work on JSON-lisp.
+   You name it. You can do exactly what Babel does, for example:
+   transforming new javascript syntax into old compatible one, making your
+   code more portable.}
 
 @p{You can do reflection on your own code:}
 
@@ -341,14 +376,14 @@
   > (find 'console.log code)
   '((console.log "Error: {}" e)
     (console.log "Percentage is {}%" result))
-}]
+}
 
 @p{All your code is editable as a list of atoms. It is normally very difficult
    to parse and modify Javascript because of its syntax (programmers of
    linters, minifiers or transpilers can testify), but with s-expressions,
-   everything becomes a lot simpler.}
+   everything becomes a lot simpler.})
 
-@section["Making languages with Racket"
+(section "Making languages with Racket"
 
 @p{Remember the XML UI-language we wrote earlier so that our UI team can
    design interfaces? In s-exp, it would look like this:}
@@ -364,7 +399,7 @@
 @p{Let's write a Racket module that can parse and display that!}
 
 @p{The first thing to do is to write a new Racket module with the name of our
-   language: @inline-code{ui-lang.rkt}.}
+   language: @ic{ui-lang.rkt}.}
 
 @p{The bare minimum for a language in Racket looks like this:}
 
@@ -388,11 +423,11 @@
   #lang racket/base
 }
 
-@p{This first line means @inline-code{racket/base} is the language we are using
+@p{This first line means @ic{racket/base} is the language we are using
    in the module. Racket provides a lot of different languages. For what we want
    to do (make a language), the base racket library is enough.}
 
-@p{In Racket, a module must always start with a @inline-code{#lang} clause, so
+@p{In Racket, a module must always start with a @ic{#lang} clause, so
    that your file is recognized as a Racket module, and so that the Racket
    compiler can know in which language it is written.}
 
@@ -400,11 +435,11 @@
   (provide ...)
 }
 
-@p{The @inline-code{provide} clause is the way for modules to export their
-   functions. @inline-code{provide} takes a list of identifiers defined in
+@p{The @ic{provide} clause is the way for modules to export their
+   functions. @ic{provide} takes a list of identifiers defined in
    the module (or imported) and exposes them as a public interface, so that when
    a programmer requires your module with
-   @inline-code{(require "my-module.rkt")}, they get the public functions,
+   @ic{(require "my-module.rkt")}, they get the public functions,
    structs and classes your module implements.}
 
 @code["Lines 2 to 4" ""]{
@@ -417,20 +452,26 @@
    a language.}
 
 @p{It tells your module to provide all identifiers from
-   @inline-code{racket/base} with @inline-code{(all-from-out racket/base)} but
-   @inline-code{except-out} the @inline-code{#%module-begin} function.}
+   @ic{racket/base} with @ic{(all-from-out racket/base)} but
+   @ic{except-out} the @ic{#%module-begin} function.}
 
-@p{In fact, @inline-code{#%module-begin} is not really a function, it's a
+@p{In fact, @ic{#%module-begin} is not really a function, it's a
    syntax. It's the main wrapper that goes around a Racket module when Racket
-   interprets it. This is a bit like the @inline-code{__init__.py} file that
+   interprets it. This is a bit like the @ic{__init__.py} file that
    gets executed when you import a Python module.}
 
-@p{What we are doing here when we say @inline-code{except-out #%module-begin}
+@p{What we are doing here when we say @ic{except-out #%module-begin}
    is that we disable the default Racket behavior to replace it with our own.}
 
 @p{You can see that replacement happening on line 4:
-   @inline-code{(rename-out [module-begin #%module-begin])}. We rename our own
-   @inline-code{module-begin} syntax to be the new @inline-code{#%module-begin}.}
+   @ic{(rename-out [module-begin #%module-begin])}. We rename our own
+   @ic{module-begin} syntax to be the new @ic{#%module-begin}.}
+
+@p{Note: @ic{#%} is a naming convention for all internal Racket systems. By providing
+  our own version of an internal identifier, we are effectively modifying the language!
+  But only in the context of the language we are building, of course.}
+
+@p{Finally come lines 6 and 7:}
 
 @code["Lines 6 and 7" ""]{
   (define-syntax-rule (module-begin expr ...)
@@ -438,17 +479,17 @@
 }
 
 @p{This last piece of code is the definition of our own
-   @inline-code{module-begin} syntax.}
+   @ic{module-begin} syntax.}
 
 @p{Right now it does not do much. It accepts an undefined number of expressions
-   @inline-code{expr ...} and pass them unchanged to the genuine
-   @inline-code{#%module-begin} of Racket (the one we import from
-   @inline-code{racket/base} but don't provide back).}
+   @ic{expr ...} and pass them unchanged to the genuine
+   @ic{#%module-begin} of Racket (the one we import from
+   @ic{racket/base} but don't provide back).}
 
 @p{We successfully created a language that does nothing but read the content
    of our file and interpret it as Racket. Which will obviously fail because
-   most of our file has undefined elements: @inline-code{ui},
-   @inline-code{button}...etc}
+   most of our file has undefined elements: @ic{ui},
+   @ic{button}...etc}
 
 @p{But there is something happening nonetheless that is interesting:
    We did not in any ways had to write parsing logic. We just reused the
@@ -463,7 +504,7 @@
 @p{All we have to do is write the logic of what the language is supposed to do.}
 
 @p{The last step before we can try this is to actually use that language in our
-   ui file. We need to add a @inline-code{#lang} clause in our file:}
+   ui file. We need to add a @ic{#lang} clause in our file:}
 
 @code["title-screen.ui" "ui-lang"]{
   #lang s-exp "ui-lang.rkt"
@@ -474,9 +515,9 @@
       (button ([goto "credits-menu"]) "Credits")))
 }
 
-@p{@inline-code{s-exp} is the default s-expression reader from Racket. It takes
+@p{@ic{s-exp} is the default s-expression reader from Racket. It takes
    a Racket module path as argument, reads the next lines as s-expressions, then
-   pass them to @inline-code{#%module-begin} inside our lang module.}
+   pass them to @ic{#%module-begin} inside our lang module.}
 
 @p{Let's try this now:}
 
@@ -490,7 +531,7 @@
 @p{It works! (developers are the only kind of person who can shout happily when
    they see an error).}
 
-@p{Of course, Racket complains that @inline-code{ui} does not exist.
+@p{Of course, Racket complains that @ic{ui} does not exist.
    But this also means the file got read correctly!}
 
 @p{Interestingly, if we tweak a bit our ui-lang module, we can get our file to
@@ -511,9 +552,18 @@
       (button ((goto "credits-menu")) "Credits")))
 }
 
-]
+)
 
-@section["Notes for second article"
+(section "In the next article..."
+
+@p{In this article, we saw what parentheses and s-expressions really are about in lisp languages,
+   and started to implement a custom language for our data, using Racket as the parser, interpreter and compiler.}
+
+@p{In the next article (part 2), we'll see how to convey actual meaning to the language,
+   and transform it into a compiler for an imaginary game console's binary format.}
+
+@p{And maybe, in a third part, we'll see how to even get rid of parentheses, and design a more specific syntax
+   for our language, that could look like this:}
 
 @code["title-screen.ui" "ui"]{
   title-menu:
@@ -522,6 +572,8 @@
     [Credits] => credits-menu
 }
 
-]
+@p{Stay tuned, and thanks for reading!}
 
-]
+)
+
+)

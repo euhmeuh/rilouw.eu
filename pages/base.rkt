@@ -16,8 +16,8 @@
 
 (define (basic-links)
   (list
-    (link (tr hot-topics-link) "#topics")
-    (link (tr about-link) "#about")))
+    (link "#topics" (tr hot-topics-link))
+    (link "#about" (tr about-link))))
 
 (define (page-description) (tr page-description))
 (define page-author (make-parameter "Jérôme Martin"))
@@ -64,7 +64,7 @@
        ,(render-title title))
      (body
        (header (h1 "Rilouw.eu"))
-       ,(render-navigation (cons (link (tr home-link) "/")
+       ,(render-navigation (cons (link "/" (tr home-link))
                                  (append links (basic-links))))
        ,(renderer)
        ,(render-footer db))))

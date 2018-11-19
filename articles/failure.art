@@ -37,6 +37,6 @@
 
 @section["Références"
   @dotted-list[
-    @link["Vision de l'erreur à travers le monde (France/Japon/USA/...)" "#"]
-    @link["Évolution des tribunaux" "#"]
-    @link["Évolution des établissements pénitentiers" "#"]]]]
+    @link["#"]{Vision de l'erreur à travers le monde (France/Japon/USA/...)}
+    @link["#"]{Évolution des tribunaux}
+    @link["#"]{Évolution des établissements pénitentiers}]]]

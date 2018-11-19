@@ -25,9 +25,10 @@
 
  ;; FOOTER
  [about-title . "À propos de ce blog"]
- [about-presentation-01 . "Salut ! Moi c'est Jérôme, hacker féministe."]
- [about-presentation-02 . "Je découvre de nouvelles choses tous les jours, et j'adore faire de grandiloquentes (et bien souvent inutiles) théories sur le fonctionnement du monde. Vous les trouverez ici."]
- [about-presentation-03 . "Ce blog parle surtout de féminisme, d'écologie et de hacking. À lire et apprécier avec modération."]
+ [about-presentation-01 . "Je m'appelle Jérôme, et je suis un hacker féministe."]
+ [about-presentation-02 . "J'adore faire de grandiloquentes et bien souvent inutiles théories sur le fonctionnement du monde, que vous trouverez sur ce blog."]
+ [about-presentation-03 . "Je parle surtout de féminisme, d'écologie et de hacking. À lire et apprécier avec modération."]
+ [about-comments . "Il n'y a pour le moment pas de moyen de laisser des commentaires. Mais j'y travaille !"]
  [copyright . "Copyright © Jérôme Martin - Tous droits réservés."]
  [license-font-fira . "Fira Code © Mozilla, utilisé sous les termes de la licence OFL."]
  [license-font-source . "Source Serif Pro © Adobe, utilisé sous les termes de la licence OFL."]
