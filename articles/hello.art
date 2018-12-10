@@ -7,7 +7,7 @@
 @p{This is my brand new blog where I talk about @'|slow-tech|, @'|programming|, @'|feminism|, @'|ecology|,
    and sometimes metaphysical aspects of life...}
 
-@p{Technically speaking, I wanted to make a blog from scratch using @'|Racket|, to see how simple
+@p{Technically speaking, I wanted to make a blog from scratch using @'|racket|, to see how simple
    and stupid you can make a web server when using a @'lisp language (Keep It Simple, Stupid).}
 
 @p{Most importantly, I wanted to write about things that please and displease me in this world, so that I can try out and sharpen my ideas.}
