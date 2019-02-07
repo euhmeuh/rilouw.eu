@@ -9,7 +9,7 @@
    Blender; from neural networks like TensorFlow to cloud computing platforms
    like OpenStack.}
 
-@p{Python offers so much libraries and tools for a developer to play with that
+@p{Python offers so many libraries and tools for a developer to play with that
    you feel you can achieve anything, given the right tool.}
 
 @p{What I really enjoyed above all was the community, and the feeling that
@@ -17,7 +17,7 @@
    always the case) and that you could somehow easily agree on what was
    "Pythonic" and what was not (spoiler alert: in fact, you cannot).}
 
-@p{Now that I shifted to using lisp languages (especially Racket), I see my
+@p{Now that I shifted to using Lisp languages (especially Racket), I see my
    past self as childish and primitive, but it has been a brease passing through
    Python as a part of my road to becoming a better developer, and alas I may
    never use Python again for personal projects, I have learned a lot and would
@@ -130,25 +130,25 @@
    their job.}
 
 @p{Luckily, there is a family of programming languages that have been
-   specifically designed to create DSLs. It's called @'|lisp|.}
+   specifically designed to create DSLs. It's called @'|Lisp|.}
 
-@p{In the lisp family, there are a lot of different languages. Some designed
+@p{In the Lisp family, there are a lot of different languages. Some designed
    for science, some designed for learning computer science, some general
    purposed, and some "language oriented".}
 
-@p{Racket is a language oriented language. It's my favorite lisp, and if you
+@p{Racket is a language oriented language. It's my favorite Lisp, and if you
    followed until now, you're now ready to discover some of the tricks that make
    this language incredibly powerful in creating domain specific languages.}
 
 )
 
-(section "A bit of lisp history"
+(section "A bit of Lisp history"
 
-@p{(You can skip this section if you want by clicking @link["#lists-and-atoms"]{here})}
+@p{(You can skip this section if you want by clicking @link["#lists-and-atoms"]{here}.)}
 
-@p{Racket is an implementation of Scheme, which is one of the two major lisp
+@p{Racket is an implementation of Scheme, which is one of the two major Lisp
    families (the other one being Common Lisp).
-   Both have been around for more than 60 years (you read that well) and mostly
+   Lisp has been around for more than 60 years (you read that well) and mostly
    differ from each other in deep philosophical questions about whether or not
    we can implicitely introduce variables in scope without telling the user.
    This is known as "breaking hygiene" in Scheme, or as "anaphoric awesomeness"
@@ -158,7 +158,7 @@
 @p{Scheme says no, you can't break hygiene (except maybe sometimes but
    don't tell my parents please!), Common Lisp says yes, of course you can, that's an
    awesome feature (it is). That's about it. There are some other differences
-   but really, unless you are deeply interested in lisp design,
+   but really, unless you are deeply interested in Lisp design,
    you don't care (for now).}
 
 @p{Racket says: With great power comes great responsibility. I'm Scheme-based,
@@ -172,7 +172,7 @@
    it really pays off.}
 
 @p{The only thing you need to remember about this for now is that Racket
-   is a Scheme, and that Scheme is a lisp:}
+   is a Scheme, and that Scheme is a Lisp:}
 
 '(table
   (tr
@@ -196,7 +196,7 @@
 
 @p{This great diversity of languages and implementation is at the same time a benediction
    (because you get to compare different approaches) and a curse (because it
-   usually needs work to port a library from one lisp to another). But what they all share
+   usually needs work to port a library from one Lisp to another). But what they all share
    is an awesome syntax called @strong{s-expressions}. We'll see how it allows
    a lot of expressivity and freedom in both programming (as a way to write code)
    and language/format design (as a way to write data).}
@@ -205,25 +205,25 @@
 
 (section "Lists and atoms"
 
-@p{This is what people have been hearing about the most when talking about lisps:
+@p{This is what people have been hearing about the most when talking about Lisps:
    @strong{The Dreaded Parentheses}. Indeed, there is no exact definition of what a
-   lisp is or is not, but you can usually recognize them at their famous
+   Lisp is or is not, but you can usually recognize them at their famous
    @ic{((((parentheses everywhere))))}.}
 
 @p{They form s-expressions or "s-exp", which are the basic skeleton from which you write a
-   program in most lisps. They are a tree of lists of lists of lists of lists...etc}
+   program in most Lisps. They are a tree of lists of lists of lists of lists...etc}
 
 @p{It looks like this:}
 
-@code["" "lisp"]{
+@code["" "Lisp"]{
   (always (walk (muddy-forest pine-trees))
-    (let mushroom (fetch leafy-forest-ground)
+    (let mushroom (pluck leafy-forest-ground)
       (when (comestible? mushroom)
         (put mushroom -> tiny-basket))))
 }
 
 @p{You can nearly smell the spicy scent of pines in that piece of code.
-   Half code, half poem, I'd dare say.}
+   Half code, half poem, I dare say.}
 
 @p{I have a quick challenge for you. Read the previous piece of code multiple times.
    Try to guess what is the meaning, the intention I'm conveying through it.
@@ -232,11 +232,11 @@
 
 @code["" "Plain English"]{
   Walk constantly through a muddy forest of pine trees.
-  Fetch mushrooms from the leafy ground.
+  Pluck mushrooms from the leafy ground.
   When the mushroom is comestible, put it in your basket.
 }
 
-@p{If you guessed the same meaning from the lisp code, well, I suppose you're
+@p{If you guessed the same meaning from the Lisp code, well, I suppose you're
    starting to realize that parentheses and s-expressions are more than just
    the syntax of a programming language, but a generic way of expressing anything.}
 
@@ -271,8 +271,8 @@
    syntax.}
 
 @p{This is why the first example I gave is written in a language which is not
-   Racket, nor Scheme, nor Common Lisp. It's just one kind of lisp I just
-   made up to best express my desire of fetching mushrooms in the forest.}
+   Racket, nor Scheme, nor Common Lisp. It's just one kind of Lisp I just
+   made up to best express my desire of plucking mushrooms in the forest.}
 
 @p{This lack of formal syntax allows two things:}
 
@@ -287,8 +287,8 @@
    @ic{(banana apple pear)}. Both are lists holding three atoms.
    As a programmer, you are the one defining their meaning.}
 
-@p{Therefore, you can write JSON as lisp, HTML as lisp,
-   even Javascript as lisp:}
+@p{Therefore, you can write JSON as Lisp, HTML as Lisp,
+   even Javascript as Lisp:}
 
 @code["" "JSON-lisp"]{
   (users [
@@ -309,7 +309,7 @@
   ])
 }
 
-@p{NB: I indented it like JSON for the sake of the example, but usually lisp
+@p{NB: I indented it like JSON for the sake of the example, but usually Lisp
    programmers care about their parentheses and don't like leaving them
    alone on their lines.}
 
@@ -341,15 +341,15 @@
     (return true))
 }
 
-@p{My point is: you do whatever you like with lisp, and give it the shape you
+@p{My point is: you do whatever you like with Lisp, and give it the shape you
    like, regardless of the type of data/code you are working with.
    This makes it the perfect tool for glueing together different
    technologies, abstracting away different implementations or formats, or
    designing new languages for your teams.}
 
-@p{For the more savvy of you, if you want the exact technical term that
-   refers to this property of lisp to be at the same time code and data:
-   it's called @link["https://en.wikipedia.org/wiki/Homoiconicity" "Homoiconicity"].}
+@p{For the more savvy among you, if you want the exact technical term that
+   refers to this property of Lisp to be at the same time code and data:
+   it's called @link["https://en.wikipedia.org/wiki/Homoiconicity" "homoiconicity"].}
 
 @p{I can already hear you ask: But what is the point? Javascript is good as it
    is, I don't need this weird parentheses-everywhere syntax!}
@@ -528,8 +528,8 @@
   ; [,bt for context]
 }
 
-@p{It works! (developers are the only kind of person who can shout happily when
-   they see an error).}
+@p{It works! (Developers are the only kind of people who can shout happily when
+   they see an error.)}
 
 @p{Of course, Racket complains that @ic{ui} does not exist.
    But this also means the file got read correctly!}
@@ -556,7 +556,7 @@
 
 (section "In the next article..."
 
-@p{In this article, we saw what parentheses and s-expressions really are about in lisp languages,
+@p{In this article, we saw what parentheses and s-expressions really are about in Lisp languages,
    and started to implement a custom language for our data, using Racket as the parser, interpreter and compiler.}
 
 @p{In the next article (part 2), we'll see how to convey actual meaning to the language,
