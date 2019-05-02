@@ -74,7 +74,13 @@
         (raise-user-error 'wrong-port "Port should be an integer between 1 and 65535 (given: ~a)" port-arg)))]
   [("-a" "--address") address
    "Listen on a specific IP address"
-   (current-server-listen-ip address)])
+   (current-server-listen-ip address)]
+  [("-c" "--cert") cert
+   "Specify the SSL server certificate"
+   (current-server-cert cert)]
+  [("-k" "--key") key
+   "Specify the SSL server key"
+   (current-server-key key)])
 
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)
