@@ -8,6 +8,10 @@
   web-galaxy/response
   web-galaxy/serve
   (only-in web-galaxy/renderer current-custom-renderers)
+  rilouw-website/pages/index
+  rilouw-website/pages/article
+  rilouw-website/pages/404
+  rilouw-website/pages/500
   rilouw-website/database/article-db
   (only-in rilouw-website/entities/blog render-tag))
 
@@ -23,18 +27,15 @@
 (load-translations!)
 
 (define-response (index)
-  (local-require rilouw-website/pages/index)
   (response/page (index-page article-db)))
 
 (define-response (article article-id)
-  (local-require rilouw-website/pages/article)
   (define article (send article-db find-article-by-id article-id))
   (if article
       (response/page (article-page article-db article))
       (response-not-found req)))
 
 (define-response (tag a-tag)
-  (local-require rilouw-website/pages/index)
   (define found-articles
     (send article-db find-articles-tagged a-tag))
   (if found-articles
@@ -44,7 +45,6 @@
       (response-not-found req)))
 
 (define-response (not-found)
-  (local-require rilouw-website/pages/404)
   (response/xexpr
     #:code 404
     #:message #"Not found"
@@ -52,7 +52,6 @@
     (not-found-page article-db)))
 
 (define (response-error url exception)
-  (local-require rilouw-website/pages/500)
   (log-error "~s" `((exn ,(exn-message exception))
                     (uri ,(url->string url))
                     (time ,(current-seconds))))

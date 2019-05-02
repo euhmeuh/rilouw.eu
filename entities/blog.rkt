@@ -75,7 +75,6 @@
   `(code ([class "inline"]) ,(inline-code-text inline-code)))
 
 (define-renderer code (title language text)
-  (local-require xml)
   `(div ([class "code"])
      (div ([class "header"])
        (div ([class "width-50"]) ,(code-title code))
@@ -86,7 +85,6 @@
   (code title language (string-join text "")))
 
 (define-renderer console (title text)
-  (local-require xml)
   `(div ([class "console"])
      (div ([class "title"]) ,(console-title console))
      (pre (code ,(console-text console)))))
