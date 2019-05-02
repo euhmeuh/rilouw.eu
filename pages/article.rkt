@@ -20,7 +20,7 @@
       `(main
          (article
            (header
-             (h2 ([id ,(article-id article)]) ,(article-title article))
+             (h2 ([id ,(symbol->string (article-id article))]) ,(article-title article))
              (small ,(tr published) ,(render-element (article-date article))))
            ,@(render-elements article)
            ,(render-element tags-list)

@@ -148,7 +148,7 @@
 
 @p{Racket is an implementation of Scheme, which is one of the two major Lisp
    families (the other one being Common Lisp).
-   Lisp has been around for more than 60 years (you read that well) and mostly
+   Lisps have been around for more than 50 years (you read that well) and mostly
    differ from each other in deep philosophical questions about whether or not
    we can implicitely introduce variables in scope without telling the user.
    This is known as "breaking hygiene" in Scheme, or as "anaphoric awesomeness"

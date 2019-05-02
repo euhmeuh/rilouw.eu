@@ -21,7 +21,7 @@
     (div (link (make-article-url (article-id article)) (tr read-the-article))))
   `(article
      (header
-       (h2 ([id ,(article-id article)]) ,(article-title article))
+       (h2 ([id ,(symbol->string (article-id article))]) ,(article-title article))
        (small ,(tr published) ,(render-element (article-date article))))
      ,@(map render-element (before-the-fold article))
      ,(parameterize ([render-link render-important-link])

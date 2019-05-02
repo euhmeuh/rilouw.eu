@@ -8,9 +8,9 @@
 
 @p{In fact, I always wanted sustainable phones. The first one was a sturdy Nokia that followed me everywhere for 10 years (and once waited faithfully for me in a mud pool for hours). The second one was a ZTE Open with Firefox OS installed, because I wanted something customizable, tinkerable, and as much free and open source as possible. Unfortunately, as you may know, the project was canceled and all I was left with was an incomplete, outdated and buggy OS written in Javascript. The only alternatives for a somewhat sustainable and open phone were projects like Fairphone, which seems to go in the right direction.}
 
-@p{But I don't want an expensive 500€ smartphone. I don't want an easily breakable touchscreen, and I'm convinced there's a way to refurbish all the cheap Chinese "feature-phones" to make something usable and fast without all the fuss of a multiple Gigabytes operating system on it. I'm not planning to watch Youtube videos on my phone, only send good old SMS, so the idea of buying a cheap feature phone, and see what I could do about it started to sprout in my mind.}
+@p{But I don't want an expensive 500€ smartphone. I don't want an easily breakable touchscreen, and I'm convinced there's a way to refurbish all the cheap "feature-phones" to make something usable and fast without all the fuss of a multiple Gigabytes operating system on it. I'm not planning to watch Youtube videos on my phone, only send good old SMS, so the idea of buying a cheap feature phone, and see what I could do about it started to sprout in my mind.}
 
-@p{I bought a cheap 10€ phone with a digit keyboard, and kept it in a drawer as an emergency tool for about two years. Then the emergency came in: the screen of my Firefox OS phone broke, and typing on it became an exhausting experience, to say the least. So I switched to the Chinese phone, and although it has a decent hardware, the software stack is completely out of place. What can we do about it?}
+@p{I bought a cheap 10€ phone with a digit keyboard, and kept it in a drawer as an emergency tool for about two years. Then the emergency came in: the screen of my Firefox OS phone broke, and typing on it became an exhausting experience, to say the least. So I switched to the cheap feature phone, and although it has a decent hardware, the software stack is completely out of place. What can we do about it?}
 
 @p{Maybe we can live in a world where phones are used to place calls and send messages? Maybe we can live in a world where landfills are not stuffed with computer systems thousand times more powerful than what made us go to the moon, but still considered "old" because they cannot run the latest version of Snapchat? I'd like to live in that world, so I started a journey of retro-engineering to discover if I could make this dumb phone @strong{my} phone.}
 
@@ -32,7 +32,7 @@
 
 @p{In China, intellectual property is not considered the same way as in the Western world. There's a concept called @strong{gōngkāi} (simp. 公开, trad. 公開) which means "open" or "to make public". It's not the same openness as in the western open source framework. It's more of an agreement that copying copyrighted content is good for all parties if you somewhat also agree to give back some of your work under the table, possibly from mouth to ear.}
 
-@p{It has allowed companies to exchange knowledge, innovate and grow exponentially compared to western companies. This means we are, as engineers, researchers and entrepreneurs, being far outpaced by Chinese companies, and are starting to lose all control over the hardware computer industry. When Chinese companies can develop thousands of different phones and play with custom and powerful hardware directly ordered from the factory, western startups are stuck with doing kickstarter campains for shitty accessories for smartphones. They get to build phones, we get to build applications and accessories.}
+@p{It has allowed companies to exchange knowledge, innovate and grow exponentially compared to western companies. This means we are, as engineers, researchers and entrepreneurs, being far outpaced by eastern companies, and are starting to lose all control over the hardware computer industry. When eastern companies can develop thousands of different phones and play with custom and powerful hardware directly ordered from the factory, western startups are stuck with doing kickstarter campains for shitty accessories for smartphones. They get to build phones, we get to build applications and accessories.}
 
 @p{Slowly but steadily, the door to hardware knowledge is closing. Each year, we know less how to build phones and computers. Soon, we won't be able to know how phones work anymore, and it'll be too late for anyone to take back control.}
 
@@ -60,7 +60,7 @@
 
 @p{With this article, I want to call out for hackers, all around the world, to unite and fight back our rights to possess and dispose of our data. In Europe, a big step has been done with GDPR, but we need more initiatives from citizens and experts in computer science.}
 
-@p{Phones are becoming the new computer, and the new medium from which information is consumed, produced and exchanged. We need to retro-engineer those Chinese phones, and build a completely Free and Open Source operating system for them.}
+@p{Phones are becoming the new computer, and the new medium from which information is consumed, produced and exchanged. We need to retro-engineer phones, and build a completely Free and Open Source operating system for them.}
 
 @p{Some groups have already started working on this, and I encourage curious developers to join them:}
 
@@ -73,7 +73,7 @@
 
 @p{All those projects share a same goal: finally have free and open source software, and hardware, for the phone industry. We fought a lot to get linux and free software in the desktop world, but the trend is shifting toward mobile phones, and we are losing this industry to fake open source like Android, which are closed plateforms pretending to be open source, but are just using linux as a way to spy on people and force them into throwing away their phones for a brand new one because "the latest update made my phone sluggish".}
 
-@p{We are even more losing it in the hardware side, where phones are only to be made by Chinese factories, keeping the so called "open hardware" restricted to gadgets.}
+@p{We are even more losing it in the hardware side, where phones are only to be made by Asian factories, keeping the so called "open hardware" restricted to gadgets.}
 
 @p{If you are a developer eager to discover more about "low-level" programming, eager to share some of your skills to build a world in which anybody can update one's phone to one's own operating system, then join some of those projects and try your hands at something new!}
 

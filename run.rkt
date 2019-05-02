@@ -36,7 +36,7 @@
 (define-response (tag a-tag)
   (local-require rilouw-website/pages/index)
   (define found-articles
-    (send article-db find-articles-tagged (string->symbol a-tag)))
+    (send article-db find-articles-tagged a-tag))
   (if found-articles
       (response/page (index-page article-db
                                  (tr articles-tagged-title a-tag)
@@ -84,6 +84,6 @@
                [current-error-responder response-error]
                [current-custom-renderers `([,symbol? . ,render-tag])])
   (serve/all
-    [("") response-index]
-    [("article" (string-arg)) response-article]
-    [("tag" (string-arg)) response-tag]))
+    [GET ("") response-index]
+    [GET ("article" (symbol-arg)) response-article]
+    [GET ("tag" (symbol-arg)) response-tag]))

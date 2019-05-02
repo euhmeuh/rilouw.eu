@@ -57,7 +57,7 @@
 (struct article container (id title date tags))
 
 (define (make-article title date tags . body)
-  (article body (normalize title) title date tags))
+  (article body (string->symbol (normalize title)) title date tags))
 
 (define (draft? article)
   (memq 'draft (article-tags article)))
