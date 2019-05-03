@@ -61,25 +61,7 @@
     #:preamble #"<!DOCTYPE html>"
     (error-page article-db)))
 
-(command-line
-  #:once-each
-  [("-p" "--port") port-arg
-   "Open the server on a specific port"
-   (let ([port (string->number port-arg)])
-     (if (and port
-              (exact-positive-integer? port)
-              (port . <= . 65535))
-        (current-server-port port)
-        (raise-user-error 'wrong-port "Port should be an integer between 1 and 65535 (given: ~a)" port-arg)))]
-  [("-a" "--address") address
-   "Listen on a specific IP address"
-   (current-server-listen-ip address)]
-  [("-c" "--cert") cert
-   "Specify the SSL server certificate"
-   (current-server-cert cert)]
-  [("-k" "--key") key
-   "Specify the SSL server key"
-   (current-server-key key)])
+(server-command-line)
 
 (define article-db (new article-db% [path article-root-path]))
 (send article-db start)
