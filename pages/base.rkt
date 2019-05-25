@@ -14,8 +14,10 @@
   rilouw-website/entities/blog
   rilouw-website/pages/footer)
 
-(define (basic-links)
+(define (menu-links)
   (list
+    (link "/" (tr home-link))
+    (link "/projects" (tr projects-link))
     (link "#topics" (tr hot-topics-link))
     (link "#about" (tr about-link))))
 
@@ -41,10 +43,13 @@
         "blog")
       ", ")))
 
-(define (render-navigation links)
-  `(nav (ul ,@(map (lambda (link)
-                     `(li ,(render-element link)))
-                   links))))
+(define (render-navigation . links-lists)
+  `(nav ,@(map (lambda (links)
+                 `(ul ,@(map (lambda (link)
+                               `(li ([class "big"])
+                                    ,(render-element link)))
+                             links)))
+               links-lists)))
 
 (define (render-title title)
   `(title ,(string-append title " | Rilouw.eu")))
@@ -63,8 +68,10 @@
        (link ([rel "stylesheet"] [type "text/css"] [href "/common.css"]))
        ,(render-title title))
      (body
-       (header (h1 "Rilouw.eu"))
-       ,(render-navigation (cons (link "/" (tr home-link))
-                                 (append links (basic-links))))
+       (header ([class "flex"])
+         (h1 ([class "flex-1"]) ,(tr main-title))
+         (aside ([class "flex-1"]) ,(tr main-subtitle)))
+       ,(render-navigation (menu-links) links)
+       (hr ([class "fancy"]))
        ,(renderer)
        ,(render-footer db))))

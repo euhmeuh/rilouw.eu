@@ -1,14 +1,16 @@
 (
  ;; MENU
  [home-link . "Accueil"]
- [hot-topics-link . "Thèmes clefs"]
+ [hot-topics-link . "Mots clefs"]
  [about-link . "À propos"]
 
  ;; HEAD
  [page-description . "Le blog de Jérôme à propos de technologie lente, de féminisme et d'écologie."]
+ [main-title . "Rilouw.eu"]
+ [main-subtitle . "Féminisme, Hacking & Écologie"]
 
  ;; INDEX
- [home-title . "Féminisme, Hacking & Écologie"]
+ [home-title . "Articles récents"]
  [published . "Publié le "]
  [read-the-article . "Lire l'article"]
 
@@ -19,14 +21,20 @@
  [back-home-link . "Retour à l'accueil"]
  [tag-list . "Tags: "]
 
+ ;; PROJECTS
+ [projects-link . "Projets"]
+ [projects-title . "Projets personnels"]
+ [project-date . "Démarré en "]
+ [project-discontinued . " (abandonné)"]
+
  ;; ERROR PAGES
  [error-404 . "404 Not found - La page que vous recherchez est introuvable. Désolé :("]
  [error-500 . "500 Internal server error - La requête a échoué. Seriez-vous un pirate ?"]
 
  ;; FOOTER
  [about-title . "À propos de ce blog"]
- [about-presentation-01 . "Je m'appelle Jérôme, et je suis un hacker féministe."]
- [about-presentation-02 . "J'adore faire de grandiloquentes et bien souvent inutiles théories sur le fonctionnement du monde, que vous trouverez sur ce blog."]
+ [about-presentation-01 . "Je m'appelle Jérôme. Je suis un hacker féministe."]
+ [about-presentation-02 . "J'aime faire de grandiloquentes et inutiles théories sur le fonctionnement du monde, que vous trouverez sur ce blog."]
  [about-presentation-03 . "Je parle surtout de féminisme, d'écologie et de hacking. À lire et apprécier avec modération."]
  [about-comments . "Il n'y a pour le moment pas de moyen de laisser des commentaires. Mais j'y travaille !"]
  [copyright . "Copyright © Jérôme Martin - Tous droits réservés."]

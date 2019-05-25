@@ -6,9 +6,11 @@
 
  ;; HEAD
  [page-description . "Jérôme's blog about slow-tech, feminism & ecology."]
+ [main-title . "Rilouw.eu"]
+ [main-subtitle . "Feminism, Hacking & Ecology"]
 
  ;; INDEX
- [home-title . "Feminism, Hacking & Ecology"]
+ [home-title . "Recent articles"]
  [published . "Published "]
  [read-the-article . "Read the article"]
 
@@ -19,14 +21,20 @@
  [back-home-link . "Back home"]
  [tag-list . "Tags: "]
 
+ ;; PROJECTS
+ [projects-link . "Projects"]
+ [projects-title . "Personal projects"]
+ [project-date . "Started "]
+ [project-discontinued . " (discontinued)"]
+
  ;; ERROR PAGES
  [error-404 . "404 Not found - The page you are looking for does not exist. Sorry :("]
  [error-500 . "500 Internal server error - The request you made failed. Are you a pirate?"]
 
  ;; FOOTER
  [about-title . "About this blog"]
- [about-presentation-01 . "My name is Jérôme, and I'm a feminist hacker."]
- [about-presentation-02 . "I like to put up great and sometimes useless theories about the inner workings of the world, which you'll find here."]
+ [about-presentation-01 . "My name is Jérôme. I'm a feminist hacker."]
+ [about-presentation-02 . "I like to put up great and useless theories about the inner workings of the world, which you'll find here."]
  [about-presentation-03 . "This blog is mostly about feminism, ecology and hacking. Please read and enjoy responsibly."]
  [about-comments . "There is no way to post comments yet, but i'm working on it!"]
  [copyright . "Copyright © Jérôme Martin - All rights reserved."]

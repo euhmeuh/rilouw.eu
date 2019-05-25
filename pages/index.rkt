@@ -1,7 +1,8 @@
 #lang racket/base
 
 (provide
-  index-page)
+  index-page
+  tag-page)
 
 (require
   racket/list
@@ -38,13 +39,17 @@
                 (format-pubdate (article-date article) 'iso)
                 (article-title article))))
 
-(define (index-page db [title #f] [articles #f])
-  (set! title (or title (tr home-title)))
-  (when (not articles)
-    (set! articles (send db get-recent-articles)))
+(define (index-page db articles)
+  (base-page db (tr main-subtitle) (map article->link articles)
+    (lambda ()
+      `(main
+         (h2 ,(tr home-title))
+         ,@(render-articles articles)))))
+
+(define (tag-page db tag articles)
+  (define title (tr articles-tagged-title tag))
   (base-page db title (map article->link articles)
     (lambda ()
       `(main
          (h2 ,title)
-         ,separator
          ,@(render-articles articles)))))

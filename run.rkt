@@ -10,9 +10,12 @@
   (only-in web-galaxy/renderer current-custom-renderers)
   rilouw-website/pages/index
   rilouw-website/pages/article
+  rilouw-website/pages/projects
   rilouw-website/pages/404
   rilouw-website/pages/500
   rilouw-website/database/article-db
+  rilouw-website/database/projects
+  ;; rilouw-website/database/talks
   (only-in rilouw-website/entities/blog render-tag))
 
 (define static-root-path
@@ -27,7 +30,8 @@
 (load-translations!)
 
 (define-response (index)
-  (response/page (index-page article-db)))
+  (define articles (send article-db get-recent-articles))
+  (response/page (index-page article-db articles)))
 
 (define-response (article article-id)
   (define article (send article-db find-article-by-id article-id))
@@ -35,13 +39,16 @@
       (response/page (article-page article-db article))
       (response-not-found req)))
 
-(define-response (tag a-tag)
+(define-response (projects)
+  (response/page (projects-page article-db projects)))
+
+(define-response (tag the-tag)
   (define found-articles
-    (send article-db find-articles-tagged a-tag))
+    (send article-db find-articles-tagged the-tag))
   (if found-articles
-      (response/page (index-page article-db
-                                 (tr articles-tagged-title a-tag)
-                                 found-articles))
+      (response/page (tag-page article-db
+                               the-tag
+                               found-articles))
       (response-not-found req)))
 
 (define-response (not-found)
@@ -72,5 +79,7 @@
                [current-custom-renderers `([,symbol? . ,render-tag])])
   (serve/all
     [GET ("") response-index]
+    [GET ("projects") response-projects]
+    ;[("talks") response-talks]
     [GET ("article" (symbol-arg)) response-article]
     [GET ("tag" (symbol-arg)) response-tag]))
