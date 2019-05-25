@@ -11,11 +11,12 @@
   rilouw-website/pages/index
   rilouw-website/pages/article
   rilouw-website/pages/projects
+  rilouw-website/pages/talks
   rilouw-website/pages/404
   rilouw-website/pages/500
   rilouw-website/database/article-db
   rilouw-website/database/projects
-  ;; rilouw-website/database/talks
+  rilouw-website/database/talks
   (only-in rilouw-website/entities/blog render-tag))
 
 (define static-root-path
@@ -41,6 +42,9 @@
 
 (define-response (projects)
   (response/page (projects-page article-db projects)))
+
+(define-response (talks)
+  (response/page (talks-page article-db talks)))
 
 (define-response (tag the-tag)
   (define found-articles
@@ -80,6 +84,6 @@
   (serve/all
     [GET ("") response-index]
     [GET ("projects") response-projects]
-    ;[("talks") response-talks]
+    [GET ("talks") response-talks]
     [GET ("article" (symbol-arg)) response-article]
     [GET ("tag" (symbol-arg)) response-tag]))

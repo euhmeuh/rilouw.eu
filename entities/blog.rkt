@@ -124,13 +124,17 @@
                     #:dates dates)
   (event name (car dates) (cdr dates)))
 
-(struct talk (name desc event links))
+(struct talk (id name desc event links))
 
 (define (make-talk #:name name
                    #:desc desc
                    #:event event
                    #:links links)
-  (talk name desc event links))
+  (talk (string->symbol (normalize name))
+        name
+        desc
+        event
+        links))
 
 ;; --- misc ---
 

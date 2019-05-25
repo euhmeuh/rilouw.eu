@@ -18,6 +18,7 @@
   (list
     (link "/" (tr home-link))
     (link "/projects" (tr projects-link))
+    (link "/talks" (tr talks-link))
     (link "#topics" (tr hot-topics-link))
     (link "#about" (tr about-link))))
 

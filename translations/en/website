@@ -27,6 +27,11 @@
  [project-date . "Started "]
  [project-discontinued . " (discontinued)"]
 
+ ;; TALKS
+ [talks-link . "Talks"]
+ [talks-title . "Talks I gave"]
+ [talk-event . "Event: "]
+
  ;; ERROR PAGES
  [error-404 . "404 Not found - The page you are looking for does not exist. Sorry :("]
  [error-500 . "500 Internal server error - The request you made failed. Are you a pirate?"]

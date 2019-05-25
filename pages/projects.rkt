@@ -28,6 +28,7 @@
          ,(render-element (project-date project))
          ,@(if discontinued? (list (tr project-discontinued)) '())))
      (p ,(project-desc project))
+     ,@(render-elements project)
      ,(render-project-links (project-links project))))
 
 (define (projects-page db projects)
