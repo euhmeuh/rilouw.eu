@@ -21,7 +21,10 @@
      (p ,(tr about-presentation-01))
      (p ,(tr about-presentation-02))
      (p ,(tr about-presentation-03))
-     (p ,(tr about-comments))
+     (p ,(tr about-comments) " "
+        ,(tr about-mastodon)
+        (a ([rel "me"] [href "https://mamot.fr/@euhmeuh"])
+          "@euhmeuh@mamot.fr"))
      (hr)
      (p ([class "small center"])
         ,(tr copyright) (br)
