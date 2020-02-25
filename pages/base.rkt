@@ -64,6 +64,7 @@
        (meta ([name "description"] [content ,(page-description)]))
        (meta ([name "keywords"] [content ,(page-keywords)]))
        (meta ([name "author"] [content ,(page-author)]))
+       (meta ([property "og:image"] [content "/icon.png"]))
        (link ([rel "icon"] [href "/favicon.ico"]))
        (link ([rel "shortcut icon"] [href "/favicon.ico"]))
        (link ([rel "stylesheet"] [type "text/css"] [href "/common.css"]))
