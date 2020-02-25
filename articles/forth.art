@@ -1,0 +1,176 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Forth, the compiler-oriented language"
+         @pubdate[2020 2 25]
+         '(english programming forth low-level)
+
+@p{Racket is my language of choice for pretty much everything now. It's the Lisp I've been always dreaming of: simple at its core while having all the batteries included to work on complex tasks like web development, servers, or games.}
+
+@p{It is often described as a "Language-oriented programming language" for its ability to create languages on the fly.}
+
+@p{I happen to have another wonderful language in my toolbox, that I reserve for most of the "down to the metal" activities. I would describe that language as a "Compiler-oriented language". It's called Forth.}
+
+@p{@link["https://en.wikipedia.org/wiki/Forth_(programming_language)"]{Forth} was created in the 70s by @link["https://en.wikipedia.org/wiki/Charles_H._Moore"]{Charles H. Moore}, which makes it, in the minds of today's young and fashion-victim devs, a language for dinosaurs.}
+
+@p{I've been recently asked to explain (thanks @link["https://framapiaf.org/@ambrevar" "@ambrevar"]) why I would use this, instead of Racket. So, without further ado, let's dive into the old, dusty and undocumented world of Forth, the language of the dinosaurs. Maybe there's still a place for it in our crazy cyber world (stay if you want dino-cyborgs).}
+
+@(fold)
+
+@p{Let's start with a bit of dino-themed code to get in the mood.}
+
+@code["" "Forth"]{
+  : dino-feed  ( dino food -- )
+    over herbivore? if
+      dup meat? if
+        abort" Trying to feed an herbivore dino with meat!"
+      then
+    else
+      dup meat? 0= if
+        ." Trying to feed a carnivore dino with vegetables!"
+        ." Oh, wait.. It's okay, they should support it."
+        \ Vegetables for everyone!
+      then
+    then
+    dino-eat
+  ;
+}
+
+@p{There lies most of the basic words you might encounter in a Forth program. Oh, yes, by the way, functions are called "words" and they are saved in a "dictionary". Multiple words together are of course, a "phrase".}
+
+@p{There's a lot of things going on in this example for people not used to Forth, and you might think it's pretty much impossible to read. It looks terse, and there's no clue what's happening except maybe some help from the string messages. Just, forget the classical brackety C-like syntax of most modern languages, and give it a second read. You might start to understand what the program does.}
+
+@p{The following table might help you:}
+
+`(table
+  (tr (td ,(render-element (ic ": dino-feed")) nbsp "…" nbsp ,(render-element (ic ";")))
+      (td "Create a new word named \"dino-feed\""))
+  (tr (td ,(render-element (ic "( dino food -- )")))
+      (td "This is a comment saying the word should consume two numbers (dino and food) from the stack, and put none back (the dashes separate between the states before and after the execution of the word)"))
+  (tr (td ,(render-element (ic "dup")))
+      (td "Copy the first element on the stack (food)"))
+  (tr (td ,(render-element (ic "over")))
+      (td "Copy the second element on the stack (dino)"))
+  (tr (td ,(render-element (ic "if")) nbsp "…" nbsp ,(render-element (ic "else")) nbsp "…" nbsp ,(render-element (ic "then")))
+      (td "Consume an element on the stack and execute either the part before or after the next "
+          ,(render-element (ic "else")) " clause (or directly jump to " ,(render-element (ic "then"))
+          " if there's no else clause)"))
+  (tr (td ,(render-element (ic "0=")))
+      (td "Consume an element on the stack and return whether it's equal or not to zero"))
+)
+
+(section "A linear Lisp"
+
+@p{The thing is, Forth is exactly like Lisp languages: every word in the language is a function you can call, but also change. You can create new words and make yourself a specific language that looks nothing like Forth. The only rule is: Words, separated by spaces.}
+
+@p{If you tried Lisp before, you know s-expressions are pretty much the same, words separated by spaces, except there are also the iconic parentheses to create some form of tree-like structure. Well, Forth is a kind of linear Lisp: you work on a unique stack of objects, pushing and poping elements from the stack, reading new words, one by one.}
+
+@p{This means in our example, @ic{over}, @ic{dup}, @ic{if}, @ic{else}, @ic{then}, @ic{herbivore?} are all words doing one thing on the stack, then moving the interpreter to the next word. Actually, even @ic{:} (define), @ic{;} (end definition), @ic{(} (start of comment), @ic{)} (end of comment), @ic{\} (line comment), @ic{."} (start of string display) are words, executed one by one.}
+
+@p{This means this code is also correct Forth:}
+
+@code["" "Forth"]{
+  i should stay away from the dinos when they are hungry
+}
+
+@p{Given a set of definitions for those words, this program could do anything. As long as it does it one word after the other. That's the only limit: @ic{stay} has no way to know it goes before @ic{away}, and wouldn't be able to have a different meaning if written before, say, @ic{still}. Forth has no syntax, no compiler reading source files and applying rules on the code. Forth @strong{is} the compiler.}
+
+@p{This makes Forth a really bad language for anything contextual (understanding something based on some other part of the sentence) but a really good language for anything low level and sequencial (adding numbers together and putting pixels on the screen).}
+
+)
+
+(section "Forth is its own compiler"
+
+@p{This is a classical example of a program in which Forth excels: washing machine automation.}
+
+@code["" "Forth"]{
+  : washer  wash spin rinse spin ;
+}
+
+@p{We can easily imagine this code running as the main program for an embedded computer system in a washing machine.}
+
+@p{The thing is, the washing machine firmware only understands good old binary. So how come this works?}
+
+@p{Because Forth is a compiler at its heart. Even more than that, it's the most universal, customizable, configurable, expandable compiler ever written.}
+
+@p{Forth has a word, @ic{,} (compile), that actually compiles the current value on the top of the stack, to the current place in memory (that would, at the end of the execution, become an executable file).}
+
+@p{This universal word means you can write in Forth programs such as: a PNG to JPG converter, a web-assembly compiler, a [insert-your-favorite-architecture] compiler, anything that would 1) take files as input 2) spit out a file as output.}
+
+@p{Forth is designed in its core to be a make-your-own-compiler-as-a-DSL language.}
+
+)
+
+(section "Time for an example!"
+
+@p{That washing machine program is great, but I'm convinced we can make it more dino, and more cyber. How about the firmware for a robot dinosaur?}
+
+@code["" "Forth"]{
+  : hunt  run grab chew digest ;
+}
+
+@p{There, better! Now lets imagine the hardware for our dino's electronic brain is an hypothetical architecture called DINO32. DINO32 uses 32 bits codes as instructions. The optable is:}
+
+'(table
+  (tr (th "Operation") (th "Binary"))
+  (tr (td "Run")    (td "0x52 0x41 0x52 0x49"))
+  (tr (td "Grab")   (td "0x54 0x59 0x49 0x53"))
+  (tr (td "Chew")   (td "0x42 0x45 0x53 0x54"))
+  (tr (td "Digest") (td "0x50 0x4F 0x4E 0x59")))
+
+@p{It translates directly to Forth as:}
+
+@code["" "Forth"]{
+  hex  \ interpret numbers in hexadecimal
+
+  : run     52 , 41 , 52 , 49 , ;
+  : grab    54 , 59 , 49 , 53 , ;
+  : chew    42 , 45 , 53 , 54 , ;
+  : digest  50 , 4F , 4E , 59 , ;
+
+  \ Final program:
+  : hunt  run grab chew digest ;
+}
+
+@p{Remember the comma @ic{,} is the "compile here" word. It just drops the number (which is DINO32 assembly) right there in the function's body (as you would do in C by opening an asm block).}
+
+@p{Once executed, that code creates a binary firmware for our DINO32 machine. We just have to flash it, and voila, our cute dino is free to go roaming and eating @'(strike "humans") other dinos.}
+
+@p{To go forther (ah ah), we could map more operations to more Forth words, and create a maintainable, easy to understand firmware code that would read like plain English.}
+
+@p{Still feels like dinosaur to you? Personally, mapping English words to binary firmware feels like the future for me. An old, dusty, perfectly working future. I take for granted that this code would still compile and run a hundred years from now. Now if we could just find a way to revive dinosaurs...}
+
+)
+
+(section "Conclusion"
+
+@p{In summary, where Racket comes as a configurable interpreter (you can invent you own language), Forth comes as a configurable compiler (you can invent your own assembly language).}
+
+@p{This makes both languages complementary, and that's why I love working with both: On one hand, with Racket I'm free to create the most expressive language for a given situation, on the other, with Forth I can make firmware compilers, languages for strange binary formats, tools to work on unknown architectures, or drivers for home-made computers.}
+
+@p{While Racket has replaced Python for me, Forth has replaced C.}
+
+)
+
+(section "Forth projects to follow"
+
+@p{If you're interested in Forth, the following projects are worth looking into:}
+
+(dotted-list
+  (link "https://gbforth.org/" "gbforth — Gameboy development framework")
+  (link "https://github.com/MitchBradley/openfirmware" "OpenFirmware — The first try at a plateform independent bootloader")
+  (link "https://github.com/nornagon/jonesforth/blob/master/jonesforth.S" "Jones Forth — A tutorial on how to write your own Forth system in a few lines of assembly")
+  )
+
+@p{Also, you can checkout my modest Forth projects:}
+
+(dotted-list
+  (link "https://github.com/euhmeuh/rilouwos" "RilouwOS — A collection of minimalist smartphone apps")
+  (link "https://github.com/euhmeuh/rilouwshell" "RilouwShell — A minimalist graphical library with native Wayland support")
+  (link "https://github.com/euhmeuh/primal-rites" "Primal Rites — A gameboy strategy game based on gbforth")
+  )
+
+@p{If you made something interesting in Forth, don't hesitate to share it! You can contact me on Mastodon @link["https://mamot.fr/@euhmeuh" "@euhmeuh@mamot.fr"].}
+
+)
+
+]
