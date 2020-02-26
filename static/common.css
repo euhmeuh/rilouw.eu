@@ -43,6 +43,8 @@ a:focus {
 html {
   font-family: "Fira Code";
   background-color: #008a8a;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 body {
@@ -51,13 +53,16 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: #fff7e6;
+  box-shadow: 6px 6px #006262;
 }
 
 @media (orientation: landscape) {
   body {
     padding: 60px;
-    border-left: dotted 15px #008a8a;
-    border-right: dotted 15px #008a8a;
+    padding-left: 96px;
+    background-image: url('/border.svg');
+    background-position: top left;
+    background-repeat: repeat-y;
   }
 }
 
@@ -98,8 +103,13 @@ header > aside {
   text-align: right;
 }
 
+nav {
+  margin: 2em 0;
+}
+
 nav ul:first-child {
   margin: 0;
+  margin-bottom: 2em;
   padding: 0;
 }
 
@@ -114,7 +124,7 @@ nav ul:first-child li::before {
 }
 
 .quote {
-  border-left: solid 5px #008a8a;
+  border-left: solid 5px #D88551;
 }
 
 blockquote {
@@ -159,14 +169,15 @@ figcaption .author {
 
 hr {
   border: none;
-  border-top: 1px solid #333;
+  border-top: 1px solid #33333380;
+  margin: 2em 0;
 }
 
 hr.fancy {
   padding: 0;
-  margin: 1.5em 0 -1.5em 0;
-  border-top: medium double #333;
-  color: #333;
+  margin: 48px 0 -24px 0;
+  border-top: medium double #33333380;
+  color: #333333;
   text-align: center;
   overflow: visible;
 }
@@ -179,6 +190,10 @@ hr.fancy:after {
   font-size: 1.5em;
   padding: 0 .25em;
   background: #fff7e6;
+}
+
+h2, h3 {
+  margin: 2em 0 1em 0;
 }
 
 h2:target,
@@ -197,11 +212,11 @@ article h3::after {
 }
 
 article h2::before {
-  content: '(article ';
+  content: '(art ';
 }
 
 article h3::before {
-  content: '(section ';
+  content: '(sec ';
 }
 
 article h2::after,
