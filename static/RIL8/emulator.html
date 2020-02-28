@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RIL8 Virtual Machine</title>
+  <style type="text/css">
+    @font-face {
+      font-family: 'Cozette Vector';
+      src: url('../fonts/CozetteVector.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    html, body {
+      font-family: sans-serif;
+    }
+
+    table { font-family: monospace; border: 1px solid black; margin: 1em; }
+    table th { padding: 1em; }
+    table td { border: 1px solid black; padding: 1em; }
+
+    .switch {
+      display: flex;
+      flex-direction: row;
+      width: 48px;
+      height: 24px;
+      border: none;
+      padding: 0;
+    }
+
+    .switch .switch-off, .switch .switch-on {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      transition: 250ms flex;
+    }
+    .switch .switch-off { background-color: #c44a4a; flex: 5; }
+    .switch .switch-on { background-color: #9ec174; flex: 5; }
+    .switch .switch-handle { background-color: #242424; flex: 2; }
+
+    .switch[data-mode="off"] .switch-off { flex: 10; }
+    .switch[data-mode="off"] .switch-on { flex: 0; }
+    .switch[data-mode="on"] .switch-on { flex: 10; }
+    .switch[data-mode="on"] .switch-off { flex: 0; }
+
+    .emulator {
+      display: flex;
+      flex-direction: column;
+      background-color: #242424;
+    }
+    .emulator .header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      background-color: #c49768;
+    }
+    .emulator .content {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .emulator pre {
+      font-family: 'Cozette Vector';
+      background-color: black;
+      color: orange;
+      margin: 0;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="emulator">
+    <div class="header">
+      <span>RIL8 Emulator</span>
+      <button class="switch" data-mode="off" type="button">
+        <div class="switch-on">ON</div>
+        <div class="switch-handle"></div>
+        <div class="switch-off">OFF</div>
+      </button>
+    </div>
+    <div class="content">
+      <pre></pre>
+    </div>
+  </div>
+  <img src="card.png">
+  <table>
+    <tr><th>Instruction</th><th>Mnemonic</th><th>Description</th></tr>
+    <tr><td>001N</td> <td>EXT N</td> <td>Exit with code N</td></tr>
+    <tr><td>00E0</td> <td>CLS</td> <td>Clear the screen</td></tr>
+    <tr><td>00EE</td> <td>RET</td> <td>Return from call</td></tr>
+    <tr><td>1NNN</td> <td>JMP NNN</td> <td>Jump to address NNN</td></tr>
+    <tr><td>2NNN</td> <td>CAL NNN</td> <td>Call address NNN</td></tr>
+    <tr><td>3XNN</td> <td>SEI X,NN</td> <td>Skip if X = NN</td></tr>
+    <tr><td>4XNN</td> <td>SNI X,NN</td> <td>Skip if X ≠ NN</td></tr>
+    <tr><td>5XY0</td> <td>SEV X,Y</td> <td>Skip if X = Y</td></tr>
+    <tr><td>6XNN</td> <td>LDI X,NN</td> <td>Load NN in X</td></tr>
+    <tr><td>7XNN</td> <td>ADI X,NN</td> <td>Add NN to X</td></tr>
+    <tr><td>8XY0</td> <td>LDV X,Y</td> <td>Set X = Y</td></tr>
+    <tr><td>8XY1</td> <td>IOR X,Y</td> <td>Set X = X OR Y</td></tr>
+    <tr><td>8XY2</td> <td>AND X,Y</td> <td>Set X = X AND Y</td></tr>
+    <tr><td>8XY3</td> <td>XOR X,Y</td> <td>Set X = X XOR Y</td></tr>
+    <tr><td>8XY4</td> <td>ADD X,Y</td> <td>Set X = X + Y (and set flag F)</td></tr>
+    <tr><td>8XY5</td> <td>SUB X,Y</td> <td>Set X = X - Y (and set flag F)</td></tr>
+    <tr><td>8X06</td> <td>SHR X</td> <td>Shift X right (through flag F)</td></tr>
+    <tr><td>8XY7</td> <td>DIF X,Y</td> <td>Set X = Y - X (and set flaf F)</td></tr>
+    <tr><td>8X0E</td> <td>SHL X</td> <td>Shift X left (through flag F)</td></tr>
+    <tr><td>9XY0</td> <td>SNV X,Y</td> <td>Skip if X ≠ Y</td></tr>
+    <tr><td>ANNN</td> <td>MEM NNN</td> <td>Set I = NNN</td></tr>
+    <tr><td>BNNN</td> <td>JMA NNN</td> <td>Jump to address NNN + V0</td></tr>
+    <tr><td>CXNN</td> <td>RND X,NN</td> <td>Set X to a random value</td></tr>
+    <tr><td>DXYZ</td> <td>OUT X,Y,Z</td> <td>Display characters from I to I+Z at position X,Y</td></tr>
+    <tr><td>E0NN</td> <td>SKP NN</td> <td>Skip if key NN is pressed</td></tr>
+    <tr><td>E1NN</td> <td>SKN NN</td> <td>Skip if key NN is not pressed</td></tr>
+    <tr><td>FX00</td> <td>LDK X</td> <td>Wait for a key to be pressed and put it in X</td></tr>
+    <tr><td>FX01</td> <td>MEA X</td> <td>Add X to I (set flag F on overflow)</td></tr>
+    <tr><td>FX02</td> <td>BCD X</td> <td>Put BCD representation of X in I,I+1,I+2</td></tr>
+    <tr><td>FXY3</td> <td>DMP X,Y</td> <td>Dump registers X to X+Y at I</td></tr>
+    <tr><td>FXY4</td> <td>RST X,Y</td> <td>Restore registers X to X+Y from I</td></tr>
+  </table>
+  <script type="text/javascript">
+    class Emulator {
+      constructor(output) {
+        this.WIDTH = 64;
+        this.HEIGHT = 24;
+        this.SIZE = this.WIDTH*this.HEIGHT;
+        this.output = output;
+        this.reset();
+      }
+
+      reset() {
+        this.memory = new Uint8Array(new ArrayBuffer(0x1000));
+        this.pc = 0x000;
+        this.i = 0x000;
+        this.v = new Array(16).fill(0);
+        this.stack = new Array(16).fill(0);
+        this.sp = 0;
+        this.screen = new Array(this.SIZE).fill(0);
+        this.key = 0;
+        this.waitKey = null;
+      }
+
+      load(program) {
+        for (let i = 0; i < program.length; i++) {
+          this.memory[i] = program[i];
+        }
+      }
+
+      start() {
+        this.drawScreen();
+        this.thread = setInterval(() => {
+          this.cycle();
+          if(this.shouldRefresh) {
+            this.drawScreen();
+            this.shouldRefresh = false;
+          }
+        }, 100);
+      }
+
+      stop() {
+        clearInterval(this.thread);
+      }
+
+      write(chars, x, y) {
+        x = x % this.WIDTH;
+        y = y % this.HEIGHT;
+        for(let i = 0; i<chars.length; i++) {
+          let pos = ((y * this.WIDTH) + x + i) % this.SIZE;
+          this.screen[pos] = chars[i];
+        }
+        this.shouldRefresh = true;
+      }
+
+      cycle() {
+        const self = this;
+        function push() { self.stack[self.sp] = self.pc; self.sp++; }
+        function pop() { return self.stack[--self.sp]; }
+        function jump(addr) { self.pc = addr; }
+        function flag(bool) { self.v[0xF] = bool ? 0x1 : 0x0; }
+        function smem(addr, val) { self.memory[addr%0x1000] = val; }
+        function gmem(addr) { return self.memory[addr%0x1000]; }
+        function unknown(instr) { console.log("Unknown instruction: ", instr.toString(16)); }
+
+        const instr = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
+
+        console.log(`pc: ${this.pc} instr: ${instr.toString(16)}`);
+        console.log(this.v.map((v, i) => `V${i.toString(16)}: ${v}`).join(' '));
+
+        const i = (instr & 0xF000) >> 12;
+        const x = (instr & 0x0F00) >> 8;
+        const y = (instr & 0x00F0) >> 4;
+        const z = (instr & 0x000F);
+        const n = (instr & 0x00FF);
+        const a = (instr & 0x0FFF);
+        let r = 0; // temp var
+        let j = 0; // loop var
+        this.pc += 2;
+
+        switch(i) {
+          case 0x0:
+            if (x == 0 && y == 1) /* EXT */ {
+              console.log("Exited with code: ", d);
+              this.stop();
+              return;
+            }
+            switch(instr) {
+              case 0x00E0: /* CLS */ this.clearScreen(); break;
+              case 0x00EE: /* RET */ jump(pop()); break;
+              default: unknown(instr); break;
+            }
+          break;
+          case 0x1: /* JMP */ jump(a); break;
+          case 0x2: /* CAL */ push(); jump(a); break;
+          case 0x3: /* SEI */ if (this.v[x] == n) { this.pc += 2; } break;
+          case 0x4: /* SNI */ if (this.v[x] != n) { this.pc += 2; } break;
+          case 0x5: /* SEV */ if (this.v[x] == this.v[y]) { this.pc += 2; } break;
+          case 0x6: /* LDI */ this.v[x] = n; break;
+          case 0x7: /* ADI */ this.v[x] = (this.v[x] + n) % 256; break;
+          case 0x8:
+            switch(z) {
+              case 0x0: /* LDV */ this.v[x] = this.v[y]; break;
+              case 0x1: /* IOR */ this.v[x] |= this.v[y]; break;
+              case 0x2: /* AND */ this.v[x] &= this.v[y]; break;
+              case 0x3: /* XOR */ this.v[x] ^= this.v[y]; break;
+              case 0x4: /* ADD */ r = this.v[x] + this.v[y]; flag(r > 255); this.v[x] = r % 256; break;
+              case 0x5: /* SUB */ r = this.v[x] - this.v[y]; flag(r > 0); this.v[x] = r < 0 ? r+256 : r; break;
+              case 0x6: /* SHR */ flag(this.v[x] & 0x1); this.v[x] >>= 1; break;
+              case 0x7: /* DIF */ r = this.v[y] - this.v[x]; flag(r > 0); this.v[x] = r < 0 ? r+256 : r; break;
+              case 0xE: /* SHL */ flag(this.v[x] & 0x80); this.v[x] = (this.v[x] << 1) % 256; break;
+              default: unknown(instr); break;
+            }
+          break;
+          case 0x9: /* SNV */ if (this.v[x] != this.v[y]) { this.pc += 2; } break;
+          case 0xA: /* MEM */ this.i = a; break;
+          case 0xB: /* JMA */ this.jump(a + this.v[0]); break;
+          case 0xC: /* RND */ this.v[x] = Math.floor(Math.random() * 255) & n; break;
+          case 0xD: /* OUT */ this.write(this.memory.slice(this.i, this.i+z), x, y); break;
+          case 0xE:
+            switch(x) {
+              case 0x0: /* SKP */ if (this.key == n) { this.pc += 2 } break;
+              case 0x1: /* SKN */ if (this.key != n) { this.pc += 2 } break;
+              default: unknown(instr); break;
+            }
+          break;
+          case 0xF:
+            switch(z) {
+              case 0x0: /* LDK */ this.waitKey = x; break;
+              case 0x1: /* MEA */ r = this.i + this.v[x]; flag(r > 0xFFF); this.i = r % 0x1000; break;
+              case 0x2: /* BCD */ r = this.v[x]; for(j=2;j>=0;j--){ smem(this.i+j, Math.floor(r%10)+0x30); r/=10; }; break;
+              case 0x3: /* DMP */ for(j=0;j<(x+y)%16;j++){ smem(this.i+j, this.v[x+j]); } break;
+              case 0x4: /* RST */ for(j=0;j<(x+y)%16;j++){ this.v[x+j] = gmem(this.i+j); } break;
+              default: unknown(instr); break;
+            }
+          break;
+
+          default: unknown(instr); break;
+        }
+      }
+
+      clearScreen() {
+        this.screen.fill(0);
+      }
+
+      drawScreen() {
+        let buffer = "";
+        for (let i = 0; i < this.WIDTH*this.HEIGHT; i++) {
+          if(i>0 && i%this.WIDTH==0) {
+            buffer += "\n";
+          }
+          buffer += this.screen[i] ? String.fromCharCode(this.screen[i]) : ' ';
+        }
+        this.output.innerHTML = buffer;
+      }
+    }
+
+    const element = document.querySelector('.emulator pre');
+    const emulator = new Emulator(element);
+
+    const button = document.querySelector('.switch');
+    button.addEventListener('click', () => {
+      button.dataset.mode = button.dataset.mode == 'on' ? 'off' : 'on';
+      if(button.dataset.mode == 'on') {
+        emulator.reset();
+        emulator.load([
+          0xA2, 0x00, // MEM 200
+          0x70, 0x05, // ADI 0,05
+          0xF0, 0x02, // BCD 0
+          0xD1, 0x13, // OUT 1,1,3
+          0x10, 0x02, // JMP 002
+        ]);
+        emulator.start();
+      } else {
+        emulator.stop();
+      }
+    });
+  </script>
+</body>
+</html>
