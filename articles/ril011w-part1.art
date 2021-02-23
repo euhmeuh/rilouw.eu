@@ -1,0 +1,241 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Construisons une console de jeu inspirée des années 80 - RIL011W Partie 1"
+         @pubdate[2021 2 23]
+         '(french electronics diy technology slow-tech low-level hardware RIL011W)
+
+@p{Cela fait très longtemps que je suis en recherche d'une réponse concrète
+à la question “Comment fonctionne physiquement un ordinateur ?” qui ne soit
+pas la réponse classique : “Il se passe un truc dans le processeur qui manipule
+les données et ça s'affiche sur l'écran” ou encore “C'est magique”.}
+
+@p{Je me suis donc lancé il y a quelque années dans la conception et la création
+d'un ordinateur entièrement “sur-mesure”, dont le processeur serait inventé de zéro,
+ainsi que la carte graphique, le clavier, le système, et j'en passe…
+Tout ça, uniquement à partir de composants électroniques de base.}
+
+@p{Je me suis fixé les objectifs suivants :}
+
+@dotted-list[
+  "Utiliser exclusivement des composants électroniques standards (pas d'Arduino, pas de Raspberry Pi, pas de FPGA ou de microcontrolleurs comme Microchip ou ATMega)"
+  "Être intégralement explicable et reproduisible (pas de matériel, logiciel ou outil propriétaires)"
+  "Pouvoir être un appareil utile au quotidien avec des logiciels de tableur, un agenda, et toute une suite logicielle de bureautique (très simplifiée)"
+  "Pouvoir être une console de jeu avec les capacités de la NES"
+  "Stocker les programmes sur des cartouches, pour les rendre tangibles"
+  "Que le processus de création et le fonctionnement de la machine soit intégralement documenté dans un livre-manuel"
+  "Apprendre un maximum de trucs"
+  "Partager ce savoir aux autres"
+  ]
+
+@p{J'ai baptisé ce projet RIL011W (prononcez “RILOUW”).}
+
+@p{À travers cette série d'articles, j'ai donc envie de partager cette aventure avec vous,
+et peut-être au passage récolter de précieux conseils. }
+
+@(fold)
+
+@p{Mais avant tout, un peu de contexte. Il y a plusieurs raisons qui me poussent à me lancer dans ce projet.
+L'une, c'est que j'ai envie de participer à réduire mon impact écologique, et travaillant dans le monde de l'informatique,
+je vous avoue que c'est un domaine dans lequel l'écologie, c'est pas gagné…
+C'est même plutôt le contraire. On produit une énorme quantité de déchet électroniques non-recyclables,
+on creuse des mines immenses pour se fournir en métaux (cuivres, aluminium, or, zinc, indium, et j'en passe…),
+et on consomme l'énergie de centaines de centrales nucléaires pour faire tourner Internet.}
+
+@p{Autant vous dire que dans l'idée d'une société plus équilibré et moins accro au pétrole,
+les ordinateurs passent un peu à la trappe. Mais ça serait dommage de jeter le bébé avec l'eau du bain, non ?}
+
+@p{Il y a peut-être un moyen de proposer une informatique décroissante et qui conserverait
+cet aspect communautaire et universel si pratique pour l'émancipation collective ?}
+
+@p{Bref, j'essaie de retrouver une pratique de l'informatique saine, qui représenterait un futur
+acceptable pour ce secteur, et participerait à une décroissance volontaire et une sobriété énergétique,
+tout en permettant toujours aux gens de se rencontrer, d'interagir et d'échanger leurs cultures.}
+
+@p{Et fabriquer des ordinateurs à l'échelle locale, réparables, résilients, avec des capacités
+réduites et des savoirs communs, ça me semble être un des meilleurs moyen de redonner du contrôle
+au citoyen·nes et leur partager les clefs du savoir de construction et de fonctionnement de ces machines,
+aujourd'hui accaparées par de grosses multinationales (le reste du monde pensant que ça fonctionne “par magie”).}
+
+@p{Je ne veux pas d'un monde où quelques élites instruits dirigent à l'aide de la magie informatique le reste des incultes.}
+
+@p{Une autre des raisons est plus personnelle, et c'est tout simplement mon appétit sans fin
+pour le savoir et la compréhension de ce qui m'entoure.}
+
+@p{C'est peut-être d'ailleurs cette même curiosité qui m'a fait devenir développeur à la base :
+j'ai toujours voulu savoir comment ces machines incroyables, qui ont bercé mon enfance, pouvait bien marcher à l'intérieur.}
+
+@p{Dans les paragraphes qui suivent, je vous raconte un peu ma life, mais vous pouvez passer si ça vous barbe.}
+
+@p{J'ai commencé mon exploration de l'informatique enfant, par ce que j'avais sous la main et que
+l'ordinateur me proposait pour l'explorer : le système et les logiciels. C'est en creusant dans les
+entrailles de ceux-ci que j'ai découvert ce qui allait me faire aimer l'informatique :
+je pouvais créer un nouveau fichier texte, me mettre à taper ce fameux “code” à l’intérieur,
+et comme par magie, un site internet de ma création s'ouvrait alors dans mon navigateur.
+C'est aussi simple que ça. Un simple fichier m'ouvrait des possibilités d'expression infinies.
+Il y avait, à porté de clavier, un outil de création qui me permettait, du haut de mes 11 ans,
+de raconter des histoires, faire des montages photo, créer un univers vivant et interactif.}
+
+@p{J'étais jeune mais j'avais déjà compris ce qui rendait cette technique différente.
+Plutôt que d'utiliser un logiciel tout fait, conçu pour réaliser une seule tâche,
+comme une logiciel de comptabilité, ou un logiciel de création de site internet, par le biais du code,
+j'avais accès à un tout autre niveau de détail.}
+
+@p{Utiliser un logiciel conçu pour un tâche précise, c'est bien, mais cela limite l'utilisateur à ce que
+le concepteur du logiciel a prévu. Cela reviendrait, pour un peintre, à utiliser des morceaux de dessins pré-faits,
+et à les coller ensemble pour produire une toile (ce qui est en soi une technique, je ne crache pas dessus non plus).
+Mais dans le cas du code que j'avais découvert, c'est bien différent : aucune restriction, sinon une page blanche
+que l'on remplit de notre imaginaire.}
+
+@p{Ça m'a bouleversé et je me suis naturellement retrouvé à programmer très tôt, et par le truchement des rebondissements
+de la vie, à faire une école d'informatique.}
+
+@p{Mais des années de pratique de la programmation plus tard… Je sais comment une grande partie des
+logiciels les plus utilisés sont conçus, j'en ai moi même conçu des dizaines, mais je ne sais toujours pas,
+au fond, comment le code que j'écris devient réalité. Comment l'ordinateur le comprend et le met en mouvement.}
+
+@p{Du haut des piles de technologies logicielles, il est possible de regarder en bas et de creuser.
+Comment fonctionne la librairie de code que j'utilise au quotidien ? Plus bas.
+Comment fonctionne les fenêtres, les dossiers, le bureau ? Encore plus bas.
+Comment fonctionne un système d'exploitation ? Comment fonctionne un langage de programmation ?
+Comment fonctionne le pilote d'un lecteur de disque ?}
+
+@p{On peut répondre à la plus part de ces questions par du code. On montre le code, on le lit, on finit par comprendre.
+Mais il faut bien l'exécuter à un moment, ce code.}
+
+@p{C'est ainsi que l'explication termine toujours sa course au même endroit : le processeur, qui exécute le code.
+C'est une sorte de boîte noire. Tout le monde se demande ce qui se trame vraiment là dedans.
+Il y a des brevets, des secrets industriels, il y a Intel et Motorola et AMD et ces usines en Chine…
+D'un coup, on change de monde. Ce n'est plus le paradis des bisounours de l'échange de code entre développeurs.
+Ce n'est plus l'entraide et la solidarité. C'est la dure loi de la concurrence, des machinations,
+des techniques secrètes et du pognon en masse investit dans des grosses machines. Ça fait peur.}
+
+@p{Bref, les gens qui comprennent comment fonctionne un processeur ne font pas légion. D'abord parce
+que tout le monde s'en fout. On se contente de se dire que c'est magique et ça suffit à vivre
+le rêve technologique, mais aussi parce que c'est pas si simple.}
+
+@p{En vrai, vous allez le voir par la suite, un processeur dans son concept, c'est plutôt abordable.
+Ça date des années 1950 et on a pas trop changé le design depuis.
+Par contre, améliorer toujours plus la vitesse d'un processeur en passant par des raccourcis chelous
+dont le fonctionnement est jalousement gardé par les grands ayant droits du milieu, de sorte
+qu'il est aujourd'hui impossible de construire un processeur moderne sans payer des bakchichs par dizaine,
+ça le système capitaliste sait bien faire, et ça ne va pas arranger nos affaires pour étudier le bazar.}
+
+@p{Je me suis donc mis en quête d'un point de départ accessible pour comprendre le processeur,
+organe si central dans le fonctionnement des ordinateurs. Et il se trouve que la meilleure ressource,
+inégalée à ce jour se trouve… dans les années 80 !}
+
+@p{En effet, les années 80 peuvent paraître pour beaucoup comme une sorte d'age d'or de l'informatique : c'est le moment où tout le monde
+avait les outils accessibles pour fabriquer son propre ordinateur, pour peu de rejoindre les bons clubs étudiants.
+Les puces électroniques de cette époque sont tellement faciles à manipuler,
+tellement versatiles, qu'on fabrique encore certains modèles aujourd'hui !}
+
+@p{C'est un moment charnière, où la miniaturisation avait atteint un stade suffisant pour
+rendre les ordinateurs assez petits pour tenir sur un bureau, mais pas encore suffisamment
+petits pour être à nouveau hors de portée des amateurs qui n'ont pas des microscopes
+à la place des yeux (et des mains).}
+
+@p{Aujourd'hui, les ordinateurs embarqués dans les fameux “téléphones intelligents” sont si petits
+et si complexes qu'il est absolument impossible de les réparer (on se contente de les enfouir dans des décharges immenses).}
+
+@p{Mais dans les années 80, on pouvais encore prendre un fer à souder,
+et donner une seconde jeunesse à un appareil, ou même, encore plus drôle : le customiser comme on améliore une bécane.}
+
+@p{Saupoudrez le tout d'une dose de nostalgie, et c'est tout naturellement
+que cette période est devenue la référence pour les hobbyistes et bricolos
+amateurs (surtout les Californiens qui se rappellent avec émotion la belle
+époque de la contre-culture de la Silicon Valley, aujourd'hui bien largement
+remplacée par une endogamie malsaine des startups “bullshit” qui brassent du vent).}
+
+@p{Anecdote : C'est justement dans un de ces “Homebrew Computer Clubs” que Steve Wozniak présente le Apple I,
+prototype de ce qui deviendra ensuite le produit phare de Apple.}
+
+@p{Bref, les années 80, et les outils qu'il nous reste de cette époque sont aujourd'hui
+utilisés par des bricoleurs du dimanche. Les pièces sont faciles à trouver,
+souvent provenant d'anciens stocks jamais consommés, abandonnées dans un entrepôt au Texas.}
+
+@p{C'est pour cette raison que je ne vais pas utiliser de processeurs ou de micro-controlleurs
+modernes, comme le Raspberry Pi ou l'Arduino. Ils ont beau être accessibles aux
+bricoleurs, leur conception est infiniment complexe et restreinte par les décisions des concepteurs
+de ces machines (et des fabricants Chinois). Raspberry Pi pourrait très bien disparaître du
+jour au lendemain, faire faillite, et tout mon travail deviendrait obsolète, là où
+je vise la création de biens communs et évolutifs qui accompagnent la société.}
+
+@p{Note : Bien entendu, je vous invite tout de même à essayer ces petits appareils, qui sont de formidables supports d'apprentissages.
+Mais ils ont leurs limites.}
+
+@p{À mon grand désarroi, je ne peux pas non plus utiliser de déchets électroniques modernes :
+les composants sont trop petits, ne peuvent pas être dessoudés, et leur fonctionnement est parfois
+peu documenté (pour protéger les secrets industriels).}
+
+@p{Restent donc ces puces des années 80. Si vous voulez prendre une pause, d'ailleurs,
+c'est maintenant, car on va enfin rentrer dans le vif du sujet, donc prenez vos aises.}
+
+@p{Avant de se lancer dans la création de cet ordinateur fait-maison, il me faut d'abord vous présenter les pièces qui vont le composer.}
+
+@p{La famille de puce électronique la plus versatile de ces fameuses années 80 s'appelle la “Série 74”.
+C'est un ensemble complet de circuits électroniques simples, standards,
+sur lesquels tous les constructeurs mondiaux se sont mis d'accord.
+C'est très certainement la seule fois que c'est arrivé,
+donc on est toutes et tous très content de pouvoir utiliser cette série.}
+
+@p{Certains éléments deviennent plus rares, mais au moment où je vous parle (2021), une grande majorité de ces puces sont toujours fabriquées !}
+@p{En voila un court exemple :}
+
+'(table
+  (tr (th "Code")    (th "Contenu de la puce"))
+  (tr (td "74LS00")  (td "4 portes logiques NAND"))
+  (tr (td "74LS02")  (td "4 portes logiques NOR"))
+  (tr (td "74LS08")  (td "6 inverseurs NOT"))
+  (tr (td "74LS74")  (td "2 bascules de type D"))
+  (tr (td "74LS107") (td "2 bascules de type JK"))
+  (tr (td "74LS138") (td "1 démultiplexeur 3-8"))
+  (tr (td "74LS163") (td "1 compteur 4 bits "))
+  )
+
+@p{Original comme liste de course, vous ne trouvez pas ? Vous vous y ferez ;)}
+
+@p{Et voila à quoi ressemble une puce en vrai :}
+
+'(img ([src "/images/74LS-chip.jpg"]))
+
+@p{Cela ne doit pas vraiment vous parler pour le moment, mais en gros,
+ces éléments sont les pièces de base qui permettent de réaliser n'importe quel machine numérique.}
+
+@p{Un assemblage de quelques unes de ces puces permet de créer un clavier, une souris, une carte graphique, un processeur…etc}
+
+@p{Au fur et à mesure de ces articles, je parlerais des puces 74 que j'ai utilisé, et pourquoi.
+Au bout d'un moment de pratique, on finit par connaître les numéros par cœur : 00 pour NAND, 08 pour NOT…etc}
+
+@p{Vous verrez, en pratiquant, ces puces deviendront bientôt pour vous comme des acteurs
+dans une pièce de théatre : chacun à son rôle à jouer.}
+
+@p{Les quelques autres composants qui les accompagneront seront des résistances,
+des condensateurs, des boutons, des LEDs, des diodes… Mais dans l'ensemble,
+ce sont surtout ces puces, composées de transistors, qui font le plus gros du boulot.}
+
+@p{Ça fait déjà beaucoup d'info d'un coup, alors je pense que je vais vous laisser digérer ça pour le moment.
+Mais pour vous faire une petite idée du voyage qui nous attend, voila en résumé les grandes étapes :}
+
+@dotted-list[
+  "Tic-tac, nous allons voir que les ordinateurs sont simplement des horloges"
+  "Notre premier circuit : compter en binaire"
+  "Les portes logiques, où mènent-elles ?"
+  "Le premier composant de notre ordinateur : la carte graphique"
+  "Super Mario, nous voila : les tiles et les sprites"
+  "Appel à un ami : le vénérable 6502"
+  "Notre propre processeur, le RIL01"
+  "??? (suite à déterminer)"
+  ]
+
+@p{Annexes :}
+
+@dotted-list[
+  "Les outils de l'électronicien·ne du dimanche"
+  "Les ressources indispensables mais surtout en anglais (sorry)"
+  ]
+
+@p{Éventuellement, à la fin de tous ces articles, nous devrions avoir construit un ordinateur !
+D'ici là, portez-vous bien, et si vous avez des commentaires, des suggestions ou des questions,
+n'hésitez pas : laisser un petit pouet sur Mastodon.}
+
+]
