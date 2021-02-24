@@ -199,7 +199,7 @@ donc on est toutes et tous très content de pouvoir utiliser cette série.}
 
 @p{Et voila à quoi ressemble une puce en vrai :}
 
-'(img ([width "576px"] [src "/images/74LS-chip.jpg"]))
+'(img ([class "illus"] [src "/images/74LS-chip.jpg"]))
 
 @p{Cela ne doit pas vraiment vous parler pour le moment, mais en gros,
 ces éléments sont les pièces de base qui permettent de réaliser n'importe quel machine numérique.}
