@@ -109,7 +109,7 @@
     <tr><td>8X0E</td> <td>SHL X</td> <td>Shift X left (through flag F)</td></tr>
     <tr><td>9XY0</td> <td>SNV X,Y</td> <td>Skip if X ≠ Y</td></tr>
     <tr><td>ANNN</td> <td>MEM NNN</td> <td>Set I = NNN</td></tr>
-    <tr><td>BNNN</td> <td>JMA NNN</td> <td>Jump to address NNN + V0</td></tr>
+    <tr><td>BNNN</td> <td>JMR NNN</td> <td>Indirect jump to address at NNN (highest nibble) and NNN+1 (two low nibbles)</td></tr>
     <tr><td>CXNN</td> <td>RND X,NN</td> <td>Set X to a random value</td></tr>
     <tr><td>DXYZ</td> <td>OUT X,Y,Z</td> <td>Display characters from I to I+Z at position X,Y</td></tr>
     <tr><td>E0NN</td> <td>SKP NN</td> <td>Skip if key NN is pressed</td></tr>
@@ -135,8 +135,7 @@
         this.pc = 0x000;
         this.i = 0x000;
         this.v = new Array(16).fill(0);
-        this.stack = new Array(16).fill(0);
-        this.sp = 0;
+        this.sp = 0xFFF;
         this.screen = new Array(this.SIZE).fill(0);
         this.key = 0;
         this.waitKey = null;
@@ -175,8 +174,8 @@
 
       cycle() {
         const self = this;
-        function push() { self.stack[self.sp] = self.pc; self.sp++; }
-        function pop() { return self.stack[--self.sp]; }
+        function push() { self.stack[self.sp] = self.pc; self.sp = (self.sp-1)%0x1000; }
+        function pop() { self.sp = (self.sp+1)%0x1000; return self.stack[self.stack]; }
         function jump(addr) { self.pc = addr; }
         function flag(bool) { self.v[0xF] = bool ? 0x1 : 0x0; }
         function smem(addr, val) { self.memory[addr%0x1000] = val; }
@@ -234,7 +233,7 @@
           break;
           case 0x9: /* SNV */ if (this.v[x] != this.v[y]) { this.pc += 2; } break;
           case 0xA: /* MEM */ this.i = a; break;
-          case 0xB: /* JMA */ this.jump(a + this.v[0]); break;
+          case 0xB: /* JMR */ this.jump((this.memory[a] << 8) | this.memory[a+1]); break;
           case 0xC: /* RND */ this.v[x] = Math.floor(Math.random() * 255) & n; break;
           case 0xD: /* OUT */ this.write(this.memory.slice(this.i, this.i+z), x, y); break;
           case 0xE:
@@ -298,3 +297,15 @@
   </script>
 </body>
 </html>
+
+<!--
+
+xxx        flags
+    xxxxx  name-size
+000 00011
+DUP
+0x000      prev-addr
+0x000      code-addr
+[...]      args
+
+-->
