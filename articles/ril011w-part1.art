@@ -18,10 +18,11 @@ Tout ça, uniquement à partir de composants électroniques de base.}
 
 @dotted-list[
   "Utiliser exclusivement des composants électroniques standards (pas d'Arduino, pas de Raspberry Pi, pas de FPGA ou de microcontrolleurs comme Microchip ou ATMega)"
-  "Être intégralement explicable et reproduisible (pas de matériel, logiciel ou outil propriétaires)"
+  "Être intégralement explicable, reproduisible, et réparable (pas de matériel, logiciel ou outil propriétaires)"
   "Pouvoir être un appareil utile au quotidien avec des logiciels de tableur, un agenda, et toute une suite logicielle de bureautique (très simplifiée)"
   "Pouvoir être une console de jeu avec les capacités de la NES"
   "Stocker les programmes sur des cartouches, pour les rendre tangibles"
+  "Être de conception durable, écologique et résiliente"
   "Que le processus de création et le fonctionnement de la machine soit intégralement documenté dans un livre-manuel"
   "Apprendre un maximum de trucs"
   "Partager ce savoir aux autres"
@@ -38,13 +39,13 @@ et peut-être au passage récolter de précieux conseils. }
 L'une, c'est que j'ai envie de participer à réduire mon impact écologique, et travaillant dans le monde de l'informatique,
 je vous avoue que c'est un domaine dans lequel l'écologie, c'est pas gagné…
 C'est même plutôt le contraire. On produit une énorme quantité de déchet électroniques non-recyclables,
-on creuse des mines immenses pour se fournir en métaux (cuivres, aluminium, or, zinc, indium, et j'en passe…),
+on creuse des mines immenses pour se fournir en métaux (cuivre, aluminium, or, zinc, indium, et j'en passe…),
 et on consomme l'énergie de centaines de centrales nucléaires pour faire tourner Internet.}
 
 @p{Autant vous dire que si l'on évolue vers une société plus équilibré et moins accro au pétrole,
 les ordinateurs risquent de passer à la trappe. Mais ça serait dommage de jeter le bébé avec l'eau du bain, non ?}
 
-@p{Les ordinateurs sont tout de même utiles pour la société. On pense à Wikipedia, aux sites de partage et d'entraide, aux communautées d'artistes...}
+@p{Les ordinateurs sont tout de même utiles pour la société. On pense à Wikipedia, aux sites de partage et d'entraide, aux communautés d'artistes...}
 
 @p{Il y a peut-être un moyen de proposer une informatique décroissante et qui conserverait
 cet aspect communautaire et universel si pratique pour l'émancipation collective ?}
