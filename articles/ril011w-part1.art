@@ -41,8 +41,10 @@ C'est même plutôt le contraire. On produit une énorme quantité de déchet é
 on creuse des mines immenses pour se fournir en métaux (cuivres, aluminium, or, zinc, indium, et j'en passe…),
 et on consomme l'énergie de centaines de centrales nucléaires pour faire tourner Internet.}
 
-@p{Autant vous dire que dans l'idée d'une société plus équilibré et moins accro au pétrole,
-les ordinateurs passent un peu à la trappe. Mais ça serait dommage de jeter le bébé avec l'eau du bain, non ?}
+@p{Autant vous dire que si l'on évolue vers une société plus équilibré et moins accro au pétrole,
+les ordinateurs risquent de passer à la trappe. Mais ça serait dommage de jeter le bébé avec l'eau du bain, non ?}
+
+@p{Les ordinateurs sont tout de même utiles pour la société. On pense à Wikipedia, aux sites de partage et d'entraide, aux communautées d'artistes...}
 
 @p{Il y a peut-être un moyen de proposer une informatique décroissante et qui conserverait
 cet aspect communautaire et universel si pratique pour l'émancipation collective ?}
@@ -196,7 +198,7 @@ donc on est toutes et tous très content de pouvoir utiliser cette série.}
 
 @p{Et voila à quoi ressemble une puce en vrai :}
 
-'(img ([src "/images/74LS-chip.jpg"]))
+'(img ([width "576px"] [src "/images/74LS-chip.jpg"]))
 
 @p{Cela ne doit pas vraiment vous parler pour le moment, mais en gros,
 ces éléments sont les pièces de base qui permettent de réaliser n'importe quel machine numérique.}
@@ -236,6 +238,6 @@ Mais pour vous faire une petite idée du voyage qui nous attend, voila en résum
 
 @p{Éventuellement, à la fin de tous ces articles, nous devrions avoir construit un ordinateur !
 D'ici là, portez-vous bien, et si vous avez des commentaires, des suggestions ou des questions,
-n'hésitez pas : laisser un petit pouet sur Mastodon.}
+n'hésitez pas : laissez un petit pouet sur @'(a ([href "https://mamot.fr/@euhmeuh"]) "Mastodon") avec le mot-clef @ic{#ril011w}.}
 
 ]
