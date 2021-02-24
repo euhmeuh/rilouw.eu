@@ -12,7 +12,7 @@
 
 @p{@link["https://en.wikipedia.org/wiki/Forth_(programming_language)"]{Forth} was created in the 70s by @link["https://en.wikipedia.org/wiki/Charles_H._Moore"]{Charles H. Moore}, which makes it, in the minds of today's young and fashion-victim devs, a language for dinosaurs.}
 
-@p{I've been recently asked to explain (thanks @link["https://framapiaf.org/@ambrevar" "@ambrevar"]) why I would use this, instead of Racket. So, without further ado, let's dive into the old, dusty and undocumented world of Forth, the language of the dinosaurs. Maybe there's still a place for it in our crazy cyber world (stay if you want dino-cyborgs).}
+@p{I've been recently asked to explain (thanks @link["https://ambrevar.xyz" "@ambrevar"]) why I would use this, instead of Racket. So, without further ado, let's dive into the old, dusty and undocumented world of Forth, the language of the dinosaurs. Maybe there's still a place for it in our crazy cyber world (stay if you want dino-cyborgs).}
 
 @(fold)
 
@@ -156,8 +156,10 @@
 @p{If you're interested in Forth, the following projects are worth looking into:}
 
 (dotted-list
+  (link "https://www.forth.com/starting-forth/" "The official beginner's guide to Forth")
+  (link "https://gforth.org/" "GNU Forth — One of the most active and popular Forth implementations")
   (link "https://gbforth.org/" "gbforth — Gameboy development framework")
-  (link "https://github.com/MitchBradley/openfirmware" "OpenFirmware — The first try at a plateform independent bootloader")
+  (link "https://github.com/MitchBradley/openfirmware" "OpenFirmware — The first try at a plateform independent bootloader (circa 1990)")
   (link "https://github.com/nornagon/jonesforth/blob/master/jonesforth.S" "Jones Forth — A tutorial on how to write your own Forth system in a few lines of assembly")
   )
 
