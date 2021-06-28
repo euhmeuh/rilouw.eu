@@ -1,0 +1,39 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Le monde est en transition" @pubdate[2021 4 26] '(french anti-capitalism ecology workplace)
+
+@p{Peut-être qu'on va finir par s'en débarrasser, de cet étau capitaliste qui nous broie.}
+
+@p{Peut-être qu'on va laisser les techniques de management, les injonctions de performance et de rentabilité, qu'on va tout mettre dans un grand sac et tout enterrer.}
+
+@(fold)
+
+@p{Qu'on va raconter aux générations suivantes “Vous voyez, ça s'était le temps où l'humanité était en découverte d'elle même. On est passé par des stades horribles, on a fait des guerres, on a écrasé des populations entières, on les a réduites au travail forcé, on a failli détruire la planète sur laquelle on vit. Mais maintenant on a grandit, et on continue de grandir vers une spiritualité plus en harmonie avec notre monde.”}
+
+@p{J'aimerai qu'on puisse raconter ça aux enfants. Comment on demandait aux gens de vendre leur temps tous les jours dans un bureau, une usine ou un champ, en échange de monnaie virtuelle, dont la valeur n'était déterminé par aucune règle logique ou compréhensible à part la magie des “lois du marché”.}
+
+@p{Qu'on puisse raconter au passé toutes ces heures volées, tout ce travail emmagasinées par une poignée de riches bourgeois qui, eux, ne travaillaient pas, mais n'avaient qu'à signer leur nom sur un bout de papier pour “mériter” la possession et le fruit de la sueur des pauvres.}
+
+@p{Comment les riches décidaient et parlaient pour les autres, sur les chaines de télévision, à la radio, dans les journaux, sur internet. Comment ces gens faisaient voter des lois, sans demander l'avis de la population qui allait les subir. Comment ces gens envoyaient la police sur ceux qui osaient dire que le système était injuste.}
+
+@p{J'aimerais que tout cela ne soit qu'une transition. La plus belle des transitions. Celle qui nous ferait passer du monde des monstres, du monde des virus qui détruisent sans savoir, qui envahissent et coulent du béton sur la Terre, à celui des animaux, des vivants, des êtres sensibles, qui vivent avec le rythme du soleil, la danse de ceux qui mangent et ceux qui sont mangés, l'acceptation de la mort et de la vie qui va avec. L'équilibre de notre place au monde.}
+
+@p{J'aimerais qu'on puisse de nouveau se dire qu'on a bien vécu. Qu'on a pris le temps de vivre. Même s'il s'agit de mourir d'une maladie ou dévoré par un ours : cette mort elle est là pour nous rappeler que nous sommes mortels, et que chaque seconde de souffle est précieuse et doit être passée à apprécier le cadeau du monde, et pas tenter de “gagner sa vie”.}
+
+@p{L'immense majorité d'entre nous vit aujourd'hui dans la peur du lendemain. Même les riches se trouvent des peurs et des projets idiots alors qu'ils ont déjà trop : aller sur la Lune, sur Mars, construire des iles artificielles... Tout est prétexte pour justifier l'esclavage.}
+
+@p{On devrait pouvoir vivre sans se soucier de notre patron, de nos performances du jour, de notre image ou de notre accès à la nourriture. On devrait arrêter d'aller au travail. On devrait arrêter d'être un employé, quand on est un créateur, un faiseur, un aidant, un soignant, un enseignant, un nourrisseur.}
+
+@p{Une telle activité ne mérite pas d'être appelée par le sale nom de “travail”. Il ne devrait plus y avoir de travailleurs, dévoués à vendre leur santé à un patron, qui revend à son tour la sienne pour le bénéfice du sacro-saint marché.}
+
+@p{On devrait arrêter d'aller au travail, pour enfin pouvoir pratiquer notre métier, notre art : ce qui nous donne envie de nous lever le matin, ce qui nous donne l'impression d'être utile à la société. D'avoir notre place.}
+
+@p{Et si avoir sa place, pour certains, c'est juste se dorer la pilule dans un hamac, hey bien qu'il en soit ainsi, cette personne sera bien rare, mais le salaire à vie qu'on lui versera sera toujours bien inférieur aux milliards détournés par les plus grandes fortunes qui sont aujourd'hui un poids insoutenable pour la société.}
+
+@p{Nous ne sommes pas des machines à produire, nous sommes des êtres à sentir, à vivre, à danser. Nous prenons plus de bonheur dans le vent chaud qui caresse notre peau que dans le remplissage d'un formulaire administratif. Plus de bonheur dans la sculpture d'un manche de couteau que dans l'import/export de marchandise. Plus de bonheur dans le sourire d'une personne malade que dans le calcul de rentabilité d'un hopital. }
+
+@p{Nous sommes en transition vers un monde plus sensible.}
+
+@p{Je souhaite faire partie de cette transition, pour un jour peut-être, pouvoir dire que je ne travailles plus, mais que je pratique mon métier.}
+
+]

@@ -5,7 +5,7 @@
  [about-link . "About"]
 
  ;; HEAD
- [page-description . "Jérôme's blog about slow-tech, feminism & ecology."]
+ [page-description . "Zoé's blog about slow-tech, feminism & ecology."]
  [main-title . "Rilouw.eu"]
  [main-subtitle . "Feminism, Hacking & Ecology"]
 
@@ -38,12 +38,12 @@
 
  ;; FOOTER
  [about-title . "About this blog"]
- [about-presentation-01 . "My name is Jérôme. I'm a feminist hacker."]
- [about-presentation-02 . "I like to put up great and useless theories about the inner workings of the world, which you'll find here."]
+ [about-presentation-01 . "My name is Zoé. I'm a feminist hacker and artist, and also a trans woman."]
+ [about-presentation-02 . "I like to put up great (and useless?) theories about the inner workings of the world, which you'll find here."]
  [about-presentation-03 . "This blog is mostly about feminism, ecology and hacking. Please read and enjoy responsibly."]
  [about-comments . "There is no way to post comments yet, but i'm working on it!"]
  [about-mastodon . "In the mean time, you can contact me on Mastodon: "]
- [copyright . "Copyright © Jérôme Martin - All rights reserved."]
+ [copyright . "Copyright © Zoé Martin - All rights reserved."]
  [license-font-fira . "Fira Code © Mozilla, used under the OFL license."]
  [license-font-source . "Source Serif Pro © Adobe, used under the OFL license."]
  )
