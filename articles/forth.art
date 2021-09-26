@@ -2,7 +2,7 @@
 
 @article["Forth, the compiler-oriented language"
          @pubdate[2020 2 25]
-         '(english programming forth low-level)
+         '(english programming forth low-level technology slow-tech)
 
 @p{Racket is my language of choice for pretty much everything now. It's the Lisp I've been always dreaming of: simple at its core while having all the batteries included to work on complex tasks like web development, servers, or games.}
 

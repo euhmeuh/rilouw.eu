@@ -1,0 +1,53 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Vous êtes vraiment écolo ? Arrêtez de trier vos déchets." @pubdate[2021 9 26] '(french anti-capitalism ecology stop-recycling)
+
+@p{Aujourd'hui, j'ai jeté mes cartouches d'imprimante à la poubelle, sous les regards ébahis, choqués et incompréhensifs de mes amis.}
+
+@p{Je l'ai fait par conviction écologique profonde, et parce que je considère ce geste comme juste, moral, et en accord avec mes valeurs sociales.}
+
+@p{Je souhaite savoir brûlés ces quelques bouts de plastique et de puce électronique, ajoutant ainsi une négligeable quantité de dyoxide de carbone dans l'atmosphère,
+à peu près autant que quelques expirations de mon souffle, mais retirant surtout un grand morceau de culpabilité de mon esprit.}
+
+@(fold)
+
+@p{En effet, je préfère que ces idiotes recharges payées un bras pour trois gouttes d'encre soit brûlées,
+comme le mérite tout produit capitaliste, plutôt qu'il ne coupe le doigt d'un immigré sans papiers payé moins
+que le salaire minimum légal pour trier ce bout de plastique, et ainsi contribuer à me déculpabiliser d'acheter un produit qui ne devrait pas exister.}
+
+@p{Je refuse d'être tenue responsable de l'utilisation d'un produit qui n'existe que pour satisfaire le business model d'une entreprise pleine aux as, qui, pendant que
+je me pose des questions existentielle sur le tri, continue de polluer allègrement plus en une seule heure que moi durant toute ma vie.}
+
+@p{Je me contrefiche de savoir qu'une industrie a été mise en place pour gérer ce déchet, car non seulement cette industrie pollue
+plus en recyclant que si le produit était seulement détruit, mais elle a également pour objectif de faire du bénéfice sur son recyclage, et le verse à des actionnaires !}
+
+@p{Ça me dégoute. L'industrie du recyclage est une des pires inventions du capitalisme. Non seulement elle pollue, mais elle justifie l'existence de produits
+qui ne devrait pas exister, et elle redirige la culpabilité sur les acheteurs d'un produit plutôt que sur les producteurs de celui-ci.}
+
+@p{Nous pourrions vivre dans un monde où il est possible de remplir son imprimante en versant de l'encre dans un petit trou. Je veux dire, on a des putains d'ingénieurs
+qui bossent tous les jours pour faire des machines toujours plus sophistiquées, mais ils ne sont pas foutu de permettre aux imprimantes de se recharger avec une bouteille d'encre ?}
+
+@p{La raison est plus pernicieuse : nous sommes parfaitement capable de fabriquer ce genre de machine, mais nous ne le faisons pas, car la vente des cartouches minuscules et très chères
+est le point clef du modèle économique d'un vendeur d'imprimante aujourd'hui. On remerciera la main invisible du libéralisme de nous avoir pondu cette "innovation".}
+
+@p{Pas de cartouches jetables → pas de dépendance du client à notre format spécifique → moins de chiffre d'affaire → moins de dividendes aux actionnaires.}
+
+@p{Donc on fait des cartouches électroniques, avec des puces dedans qui trichent et disent qu'elles sont vides même quand il reste de l'encre. Voilà où passe le salaire des ingénieurs.}
+
+'(hr)
+
+@p{Bien sûr, toute forme de recyclage n'est pas à jeter. Il existe des pratiques ancestrales qui feraient toujours parfaitement sens aujourd'hui, si on daignait les mettre en place : le chiffonier passait
+dans le village ramasser tous les tissus usagés pour en faire du papier (on ne peux plus aujourd'hui à causes des textiles plastiques). Le compost permet de transformer tous les déchets
+alimentaires en engrais (on ne peux plus aujourd'hui car les gens n'ont pas accès à un jardin potager). En fait, avant que la civilisation ne parte vraiment à la dérive, on avait pas tant de déchèts que ça... 
+Un peu comme... les animaux, par exemple. Ils n'ont pas besoin de recycler, eux. Il sont totalement biodégradables, et peuvent même chier sur les plantes pour les faire pousser (là où du caca d'humain
+est tellement pollué qu'il ne ferait que tuer le sol).}
+
+@p{Bref, par conviction écologique et sociale, je refuse de cautionner l'industrie capitaliste et esclavagiste qu'est le recyclage moderne, je souhaite que le tri sélectif soit abolit, qu'on arrête
+de remplir la tête de nos enfants de "petits gestes simples pour sauver la planète", et qu'on brûle tous les capitalistes, leurs usines de brun, et toutes les imprimantes à cartouche.}
+
+@p{Après ça, on devrait pouvoir commencer à discuter de notre vivre ensemble. Mais si vous êtes vraiment écolo jusqu'au bout des ongles, alors par pitié, arrêtez de trier vos déchèts, vous faites
+du mal aux autres, à la planète, et à vous même, tout ça pour faire rentrer un peu plus d'argent dans les poches de quelques actionnaires.}
+
+@p{Et si vous tenez vraiment à trier nos déchets, commencez par les capitalistes.}
+
+]
