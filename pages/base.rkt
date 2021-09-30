@@ -85,9 +85,11 @@
        ,(render-title title))
      (body
        ,@(render-svg-filters)
-       (header ([class "flex"])
-         (h1 ([class "flex-1"]) ,(tr main-title))
-         (aside ([class "flex-1"]) ,(tr main-subtitle)))
+       (header
+         (img ([src "/witch-small.jpg"] [width "200px"]))
+         (div ([class "flex-1"])
+           (h1 ,(tr main-title))
+           (aside ,(tr main-subtitle))))
        ,(render-navigation (menu-links) links)
        (hr ([class "fancy"]))
        ,(renderer)

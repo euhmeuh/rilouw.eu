@@ -91,18 +91,37 @@ ul li {
   margin-bottom: 4px;
 }
 
-header.flex {
+body > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
 }
 
-.flex-1 {
-  flex: 1;
+body > header img {
+  width: 100%;
+  max-width: 316px;
 }
 
-header > aside {
-  text-align: right;
+body > header h1,
+body > header aside {
+  text-align: center;
+}
+
+@media (orientation: landscape) {
+  body > header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  body > header img {
+    width: 200px;
+  }
+
+  body > header h1,
+  body > header aside {
+    text-align: left;
+  }
 }
 
 nav {
@@ -123,6 +142,16 @@ nav ul:first-child li {
 nav ul:first-child li::before {
   content: '/';
   padding-right: .5em;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+header.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .quote {
@@ -206,7 +235,9 @@ hr.fancy:after {
   background: #fff7e6;
 }
 
-body > header, .fancy {
+body > header h1,
+body > header aside,
+.fancy {
   filter: url("#jitter-filter");
 }
 
@@ -317,4 +348,9 @@ img.illus {
   width: 552px;
   border: 12px solid white;
   box-shadow: 4px 4px 4px #c4c4c4;
+}
+
+footer img {
+  width: 100%;
+  max-width: 574px;
 }

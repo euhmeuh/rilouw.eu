@@ -29,4 +29,7 @@
      (p ([class "small center"])
         ,(tr copyright) (br)
         ,(tr license-font-fira) (br)
-        ,(tr license-font-source))))
+        ,(tr license-font-source))
+     (img ([src "/witch.jpg"]))
+     (p ([class "small center"])
+       ,(tr footer-quote))))
