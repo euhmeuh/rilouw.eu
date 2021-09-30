@@ -10,7 +10,8 @@
 
 @font-face {
   font-family: 'Source Serif Pro';
-  src: url('/fonts/SourceSerifPro-Regular.otf') format('opentype');
+  src: url('/fonts/SourceSerifPro-Regular.woff2') format('woff2'),
+       url('/fonts/SourceSerifPro-Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
