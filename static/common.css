@@ -238,6 +238,7 @@ hr.fancy:after {
 
 body > header h1,
 body > header aside,
+hr,
 .fancy {
   filter: url("#jitter-filter");
 }
