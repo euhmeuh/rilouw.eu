@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px">
+  <filter id="jagged-filter" width="1.2" height="1.2" x="-0.1" y="-0.1">
+    <feTurbulence baseFrequency="0.4" numOctaves="3" type="turbulence" result="r0" />
+    <feDisplacementMap scale="1" xChannelSelector="R" in="SourceGraphic" in2="r0" result="r1" />
+    <feComposite operator="atop" in="SourceGraphic" in2="r1" />
+  </filter>
+  <rect width="90%" height="90%" fill="#fff7e6" filter="url(#jagged-filter)" />
+</svg>

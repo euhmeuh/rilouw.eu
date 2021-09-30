@@ -43,7 +43,6 @@
   (base-page db (tr main-subtitle) (map article->link articles)
     (lambda ()
       `(main
-         (h2 ,(tr home-title))
          ,@(render-articles articles)))))
 
 (define (tag-page db tag articles)

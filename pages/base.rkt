@@ -23,7 +23,7 @@
     (link "#about" (tr about-link))))
 
 (define (page-description) (tr page-description))
-(define page-author (make-parameter "Jérôme Martin"))
+(define page-author (make-parameter "Zoé Martin"))
 (define page-keywords
   (make-parameter
     (string-join
@@ -32,8 +32,8 @@
         "ecology"
         "hacking"
         "slow tech"
-        "jerome martin"
-        "jérôme martin"
+        "zoe martin"
+        "zoé martin"
         "information technology"
         "technology"
         "lisp"
@@ -55,6 +55,19 @@
 (define (render-title title)
   `(title ,(string-append title " | Rilouw.eu")))
 
+(define (render-svg-filters)
+  '(
+    (svg ([xmlns "http://www.w3.org/2000/svg"] [class "hidden"])
+      (filter ([id "jitter-filter"])
+        (feTurbulence ([baseFrequency "0.01 0.02"] [numOctaves "2"] [result "t0"]))
+        (feDisplacementMap ([in "SourceGraphic"] [in2 "t0"] [scale "4"] [result "d0"]))
+        (feComposite ([in "SourceGraphic"] [in2 "d0"] [operator "atop"] [result "0"]))
+        (feTurbulence ([baseFrequency "1"] [numOctaves "2"] [result "t1"]))
+        (feDisplacementMap ([in "0"] [in2 "t1"] [scale "1"] [result "d1"]))
+        (feComposite ([in "0"] [in2 "d1"] [operator "atop"] [result "1"]))
+        (feOffset ([in "1"] [dx "-3"] [dy "-3"]))))
+   ))
+
 (define (base-page db title links renderer)
   `(html ([lang ,(symbol->string (current-language))])
      (head
@@ -71,6 +84,7 @@
        (link ([rel "stylesheet"] [type "text/css"] [href "/common.css"]))
        ,(render-title title))
      (body
+       ,@(render-svg-filters)
        (header ([class "flex"])
          (h1 ([class "flex-1"]) ,(tr main-title))
          (aside ([class "flex-1"]) ,(tr main-subtitle)))

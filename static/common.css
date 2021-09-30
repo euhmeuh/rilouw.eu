@@ -43,6 +43,7 @@ a:focus {
 html {
   font-family: "Fira Code";
   background-color: #008a8a;
+  background-image: url("/bg.png");
   padding-top: 24px;
   padding-bottom: 24px;
 }
@@ -53,7 +54,7 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: #fff7e6;
-  box-shadow: 6px 6px #006262;
+  box-shadow: 8px 8px #006262;
 }
 
 @media (orientation: landscape) {
@@ -63,6 +64,7 @@ body {
     background-image: url('/border.svg');
     background-position: top left;
     background-repeat: repeat-y;
+    border-image:  url("/edge.svg") 2 / 10px / 10px round;
   }
 }
 
@@ -145,6 +147,18 @@ figcaption .author {
   font-weight: bold;
 }
 
+.hidden {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events:none
+}
+
 .small {
   font-size: small;
 }
@@ -190,6 +204,10 @@ hr.fancy:after {
   font-size: 1.5em;
   padding: 0 .25em;
   background: #fff7e6;
+}
+
+body > header, .fancy {
+  filter: url("#jitter-filter");
 }
 
 h2, h3 {
