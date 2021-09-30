@@ -3,3 +3,4 @@ image/png      png
 image/svg+xml  svg
 text/x-racket  rkt
 text/javascript js
+application/json json

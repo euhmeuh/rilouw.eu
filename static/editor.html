@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Éditeur Saff Imshij</title>
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #008a8a;
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    let SVGNS = "http://www.w3.org/2000/svg";
+    let FONTSIZES = { "0": 6, "1": 5, "2": 4, "3": 3 };
+    function loadJSON(url, onsuccess, onerror)
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              if (onsuccess) {
+                onsuccess(JSON.parse(xhr.responseText));
+              }
+            } else {
+              if (error) {
+                onerror(xhr);
+              }
+            }
+          }
+        };
+        xhr.open("GET", url, true);
+        xhr.send();
+    }
+
+    function createSvg(page) {
+      let svg = document.createElementNS(SVGNS, "svg");
+      svg.setAttribute("width", page.w + page.unit)
+      svg.setAttribute("height", page.h + page.unit)
+      svg.setAttribute("viewBox", `0 0 ${page.w} ${page.h}`)
+      return svg;
+    }
+
+    function createPage(page) {
+      let pg = document.createElementNS(SVGNS, "g");
+      let r = document.createElementNS(SVGNS, "rect");
+      r.setAttribute("width", page.w);
+      r.setAttribute("height", page.h);
+      r.setAttribute("fill", "#fff7e6");
+      pg.appendChild(r);
+      return pg;
+    }
+
+    function createLinkIcon() {
+      let icon = document.createElementNS(SVGNS, "path");
+      icon.setAttribute("stroke", "#204a87");
+      icon.setAttribute("stroke-linecap", "round");
+      icon.setAttribute("stroke-linejoin", "round");
+      icon.setAttribute("stroke-width", ".6");
+      icon.setAttribute("fill", "none");
+      icon.setAttribute("d", "M 0 0 c -0.137777,-0.08652 0.01779,-0.260196 0.117378,-0.28913 0.252613,-0.07322 0.46367,0.173518 0.483648,0.40482 0.0333,0.38721 -0.328019,0.677003 -0.692255,0.678166 -0.518914,0.0017 -0.893365,-0.483474 -0.872819,-0.979519 0.02695,-0.650186 0.639223,-1.111055 1.266956,-1.067341 0.781382,0.05436 1.329456,0.795076 1.261979,1.554272 -0.08112,0.912554 -0.951005,1.548222 -1.841663,1.456539 -1.036692,-0.106745 -1.759403,-1.094594 -1.653066,-2.111116");
+      return icon;
+    }
+
+    function createRune(x, y) {
+      let r = document.createElementNS(SVGNS, "rect");
+      r.setAttribute("x", x*8+x);
+      r.setAttribute("y", y*8+y);
+      r.setAttribute("rx", .2);
+      r.setAttribute("width", 8);
+      r.setAttribute("height", 8);
+      r.setAttribute("stroke", "black");
+      r.setAttribute("stroke-width", ".6");
+      r.setAttribute("fill", "none");
+      return r;
+    }
+
+    function createGroup(x, y) {
+      let g = document.createElementNS(SVGNS, "g");
+      g.setAttribute("transform", `translate(${x}, ${y})`);
+      return g;
+    }
+
+    window.onload = function() {
+      loadJSON("/database.json", function(db) {
+        let book = db[0];
+        let body = document.querySelector("body");
+        book.pages.forEach((page) => {
+          let svg = createSvg(page);
+          let pg = createPage(page);
+          svg.appendChild(pg);
+          body.appendChild(svg);
+          page.content.forEach((element) => {
+            let e;
+            switch(element.type) {
+              case "script":
+                e = document.createElementNS(SVGNS, "text");
+                e.setAttribute("x", element.x);
+                e.setAttribute("y", element.y);
+                e.setAttribute("font-family", "'Saff Imshij Regular'");
+                e.setAttribute("style", `font-size: ${FONTSIZES[element.s]}pt;`)
+                e.innerHTML = element.text;
+                break;
+
+              case "runes":
+                let runes = [
+                  createRune(0, 0),
+                  createRune(1, 0),
+                  createRune(2, 0),
+                  createRune(1, 1),
+                  createRune(2, 1),
+                  createRune(3, 1),
+                  createRune(3, 2),
+                ];
+                e = createGroup(element.x, element.y);
+                runes.forEach((rune) => e.appendChild(rune));
+                break;
+
+              case "anchor":
+                e = document.createElementNS(SVGNS, "circle");
+                e.setAttribute("cx", element.x);
+                e.setAttribute("cy", element.y);
+                e.setAttribute("r", 1);
+                e.setAttribute("stroke", "#204a87");
+                e.setAttribute("stroke-width", ".6");
+                e.setAttribute("fill", "none");
+                break;
+
+              case "link":
+                e = createGroup(element.x, element.y);
+                let icon = createLinkIcon();
+                t = document.createElementNS(SVGNS, "text");
+                t.setAttribute("fill", "#204a87");
+                t.setAttribute("x", "3");
+                t.setAttribute("y", "1");
+                t.setAttribute("font-family", "'Saff Imshij Regular'");
+                t.setAttribute("style", `font-size: ${FONTSIZES[element.s]}pt;`)
+                t.innerHTML = element.text;
+                e.appendChild(icon);
+                e.appendChild(t);
+                break;
+
+              case "drawing":
+                e = createGroup(element.x, element.y);
+                element.strokes.forEach((stroke) => {
+                  let p = document.createElementNS(SVGNS, "path");
+                  p.setAttribute("stroke", "black");
+                  p.setAttribute("stroke-linecap", "round");
+                  p.setAttribute("stroke-linejoin", "round");
+                  p.setAttribute("fill", stroke.type == "fill" ? "black" : "none");
+                  p.setAttribute("stroke-width", stroke.s ? stroke.s : ".25");
+                  p.setAttribute("d", `M 0 0 ${stroke.path} ${stroke.type == "close" ? "z" : ""}`)
+                  e.appendChild(p);
+                });
+                break;
+            }
+            if(e) {
+              pg.appendChild(e);
+            }
+          });
+        });
+      });
+    };
+  </script>
+</body>
+</html>
