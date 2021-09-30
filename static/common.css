@@ -238,9 +238,12 @@ hr.fancy:after {
 
 body > header h1,
 body > header aside,
-hr,
-.fancy {
-  filter: url("#jitter-filter");
+hr.fancy {
+  filter: url("#f-jitter-large") url("#f-jitter-small");
+}
+
+hr {
+  filter: url("#f-jitter-small");
 }
 
 h2, h3 {
