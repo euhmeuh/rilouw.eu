@@ -96,13 +96,13 @@
 
 ;; --- project ---
 
-(struct project container (id name date desc logo discontinued? links))
+(struct project container (id name date desc logo status links))
 
 (define (make-project #:name name
                       #:date date
                       #:desc desc
                       #:logo [logo #f]
-                      #:discontinued? [discontinued? #f]
+                      #:status [status #f]
                       #:links [links '()]
                       . body)
   (project body
@@ -111,7 +111,7 @@
            date
            desc
            logo
-           discontinued?
+           status
            links))
 
 (define-renderer fold () `(hr))

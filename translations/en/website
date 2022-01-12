@@ -26,6 +26,7 @@
  [projects-title . "Personal projects"]
  [project-date . "Started "]
  [project-discontinued . " (discontinued)"]
+ [project-on-hold . " (on hold)"]
 
  ;; TALKS
  [talks-link . "Talks"]

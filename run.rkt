@@ -8,9 +8,10 @@
   web-galaxy/response
   web-galaxy/serve
   (only-in web-galaxy/renderer current-custom-renderers)
+  racket-poetry/server
   rilouw-website/pages/index
   rilouw-website/pages/article
-  rilouw-website/pages/projects
+  rilouw-website/pages/projects/main
   rilouw-website/pages/talks
   rilouw-website/pages/404
   rilouw-website/pages/500
@@ -42,6 +43,15 @@
 
 (define-response (projects)
   (response/page (projects-page article-db projects)))
+
+(define-response (racket-poetry)
+  (response/page (racket-poetry-page article-db)))
+
+(define-response (ril011w)
+  (response/page (ril011w-page article-db)))
+
+(define-response (saffimshij)
+  (response/page (saffimshij-page article-db)))
 
 (define-response (talks)
   (response/page (talks-page article-db talks)))
@@ -83,7 +93,11 @@
                [current-custom-renderers `([,symbol? . ,render-tag])])
   (serve/all
     [GET ("") response-index]
+    [POST ("poem") response-poem]
     [GET ("projects") response-projects]
+    [GET ("projects" "racket-poetry") response-racket-poetry]
+    [GET ("projects" "ril011w") response-ril011w]
+    [GET ("projects" "saffimshij") response-saffimshij]
     [GET ("talks") response-talks]
     [GET ("article" (symbol-arg)) response-article]
     [GET ("tag" (symbol-arg)) response-tag]))

@@ -26,6 +26,7 @@
  [projects-title . "Projets personnels"]
  [project-date . "Démarré en "]
  [project-discontinued . " (abandonné)"]
+ [project-on-hold . " (en pause)"]
 
  ;; TALKS
  [talks-link . "Conférences"]
