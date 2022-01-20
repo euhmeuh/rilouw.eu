@@ -6,7 +6,7 @@
 
  ;; HEAD
  [page-description . "Zoé's blog about slow-tech, feminism & ecology."]
- [main-title . "Rilouw.eu"]
+ [main-title . "Ferale.art"]
  [main-subtitle . "Feminism, Hacking & Ecology"]
 
  ;; INDEX
@@ -28,6 +28,11 @@
  [project-discontinued . " (discontinued)"]
  [project-on-hold . " (on hold)"]
 
+ ;; PROJECTS PAGES
+ [racket-poetry-title . "Racket Poetry"]
+ [ril011w-title . "RIL011W Computer"]
+ [saffimshij-title . "Saff Imshij"]
+
  ;; TALKS
  [talks-link . "Talks"]
  [talks-title . "Talks I gave"]
@@ -40,10 +45,10 @@
  ;; FOOTER
  [about-title . "About this blog"]
  [about-presentation-01 . "My name is Zoé. I'm a feminist hacker and artist, and also a trans woman."]
- [about-presentation-02 . "I like to put up great (and useless?) theories about the inner workings of the world, which you'll find here."]
- [about-presentation-03 . "This blog is mostly about feminism, ecology and hacking. Please read and enjoy responsibly."]
- [about-comments . "There is no way to post comments yet, but i'm working on it!"]
- [about-mastodon . "In the mean time, you can contact me on Mastodon: "]
+ [about-presentation-02 . "This blog is about animals destroying capitalism, and how to help them."]
+ [about-presentation-03 . "I mostly write about feminism, ecology and hacking."]
+ [about-mastodon . "To leave a comment, you can contact me on Mastodon: "]
+ [about-contact . "You can also find me on the following social networks: "]
  [copyright . "Copyright © Zoé Martin - All rights reserved."]
  [license-font-fira . "Fira Code © Mozilla, used under the OFL license."]
  [license-font-source . "Source Serif Pro © Adobe, used under the OFL license."]

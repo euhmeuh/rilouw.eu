@@ -21,10 +21,16 @@
      (p ,(tr about-presentation-01))
      (p ,(tr about-presentation-02))
      (p ,(tr about-presentation-03))
-     (p ,(tr about-comments) " "
-        ,(tr about-mastodon)
+     (p ,(tr about-mastodon)
         (a ([rel "me"] [href "https://mamot.fr/@euhmeuh"])
           "@euhmeuh@mamot.fr"))
+     (p ,(tr about-contact))
+     (ul
+       (li "Pixelfed ─ " (a ([href "https://pixelfed.de/zoebourdon"]) "@zoebourdon@pixelfed.de"))
+       (li "Mastodon ─ " (a ([href "https://mamot.fr/@euhmeuh"]) "@euhmeuh@mamot.fr"))
+       (li "Sourcehut ─ " (a ([href "https://sr.ht/~euhmeuh"]) "~euhmeuh"))
+       (li "Tumblr ─ " (a ([href "https://zoebourdon.fr"]) "zoebourdon.fr"))
+       )
      (hr)
      (p ([class "small center"])
         ,(tr copyright) (br)

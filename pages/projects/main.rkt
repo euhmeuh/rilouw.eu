@@ -51,7 +51,10 @@
     (lambda ()
       `(main
          (h2 ,(tr racket-poetry-title))
-         (p "Racket Poetry")))))
+         (p "Racket Poetry is a way to express programs, games, demos... as poetry. Also, it's written in Racket, hence the name.")
+         (p "Every line in your poem is an instruction for the computer, which is an old model from the 70s called CHIP-8. The system only detects some specific words as having meaning, and everything else in your sentence will be ignored, which allows for some creativity as you hide meaningful instructions into a lyrical sentence.")
+         (p "You can try this here:")
+         (a ([href "/poem"]) "ferale.art/poem")))))
 
 (define (ril011w-page db)
   (base-page db (tr ril011w-title) '()

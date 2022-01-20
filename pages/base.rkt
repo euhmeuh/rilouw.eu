@@ -53,7 +53,7 @@
                links-lists)))
 
 (define (render-title title)
-  `(title ,(string-append title " | Rilouw.eu")))
+  `(title ,(string-append title " | Ferale.art")))
 
 (define (render-svg-filters)
   '(
