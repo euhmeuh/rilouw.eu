@@ -63,17 +63,29 @@
          (h2 ,(tr ferale-title))
          (p "Ferale is a 16 bits homebrew computer made from standard logic gates. It has a custom processor architecture called Louve, a Forth-like operating system (more like a collection of programs) called Mésange, a graphics card called Alosa that can output 320x240 VGA in 64 colors, and an assembler called Bourdon.")
          (p "Ferale is currently being constructed (slowly).")
+         (p "You can check out the project on Sourcehut:")
+         (a ([href "https://git.sr.ht/~euhmeuh/ferale"]) "git.sr.ht/~euhmeuh/ferale")
+
          (h3 "Construction status")
          (ul
            (li "Louve - Architecture is defined, emulator works, electrically simulated implementation is starting, physical implementation is not started.")
            (li "Alosa - Architecture is not completely defined, emulator is wacky, electrically simulated implementation is well advanced, physical implementation is started (VGA output works !).")
            (li "Bourdon - Racket emulator works but I'm not satisfied. Racket assembler works but has rough corners. Forth emulator is getting there and is way quicker than the Racket version. Forth assembler is not started yet.")
            (li "Mésange - There's only an Hello world ASCII output demo for now (no graphics)."))
-         (p "You can check out the project on Sourcehut:")
-         (a ([href "https://git.sr.ht/~euhmeuh/ferale"]) "git.sr.ht/~euhmeuh/ferale")
+
+         (h3 "Goals")
+         (p "With Ferale, I want to create a computer from the ground up, document everything on my way, and hopefully end up with the complete, human readable description of a working, low-tech, sustainable and cute little computer.")
+         (p "More than a computer, I want to create a collection of knowledge that describes how to build such a machine and how it works, down to each and every logic gate.")
+         (p "I also want to share this knowledge with everyone, so that people can learn how computers are made.")
+         (p "Then maybe, they can realize how impossibily difficult modern ones are to make. How crazy expensive they are in terms of resources, and eventually decide to make and use smaller, more affordable ones.")
+         (p "In a way, I'm trying to save some knowledge of computing, at least the parts I like, before everything crumbles (or before we get enslaved by rich people controlling the remaining machines).")
+         (p "I'm also trying to make computing a thing people can take back the control of.")
+         (p "And finally, I kinda like the personal journey this involves.")
+
          (h3 "Note about the license")
          (p "The project is licensed under the Anarchist Revolutionary License, which is a license I wrote because I don't give a fuck about licenses, because they have no freakin' legal value in most countries, including mine. The values I injected in this license are similar to the GNU Affero GPL, but I added a lot of stuff about protecting the environment, not hurting humans and stuff, so it's technically not open source nor free software. I don't care, it's the end of our civilisation anyways, people will eat each other, who fuckin' cares about licenses?")
-         (p "Just go build this computer in your garage, I'll be glad.")))))
+         (p "The intended usage is for punks to build it in their anarchist communities, so, just go build this computer in your garage, I'll be glad.")
+         (p "On the other hand, if you are a capitalist or an entrepreneur, you shall not use that project, and I count on my peers to get you beheaded in time.")))))
 
 (define (saffimshij-page db)
   (base-page db (tr saffimshij-title) '()

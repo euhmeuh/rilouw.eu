@@ -53,4 +53,5 @@
  [license-font-fira . "Fira Code © Mozilla, utilisé sous les termes de la licence OFL."]
  [license-font-source . "Source Serif Pro © Adobe, utilisé sous les termes de la licence OFL."]
  [footer-quote . "Brûle un capitaliste, sauve une sorcière."]
+ [footer-webring . "Ce site fait partie du cercle web XXIIVV."]
  )

@@ -31,6 +31,14 @@
        (li "Sourcehut ─ " (a ([href "https://sr.ht/~euhmeuh"]) "~euhmeuh"))
        (li "Tumblr ─ " (a ([href "https://zoebourdon.fr"]) "zoebourdon.fr"))
        )
+     (p ([class "small center"])
+       (a ([href "https://webring.xxiivv.com/#ferale"] [target "_blank"])
+        (img ([width "50px"]
+              [height "50px"]
+              [src "https://webring.xxiivv.com/icon.black.svg"]
+              [alt "XXIIVV webring"])))
+       (br)
+       ,(tr footer-webring))
      (hr)
      (p ([class "small center"])
         ,(tr copyright) (br)

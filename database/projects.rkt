@@ -10,6 +10,13 @@
     ;; --- Dedicated projects ---
 
     (project
+      #:name "Ferale"
+      #:date (pubdate 2018 5)
+      #:desc "16-bit homebrew micro-computer for artistic purposes. It's my attempt at making a computer from logic gates, build it, and use it."
+      #:logo "ferale-logo.svg"
+      #:links '(("/projects/ferale" . "Details")))
+
+    (project
       #:name "Racket poetry"
       #:date (pubdate 2020 2)
       #:desc "Poetry that compiles to CHIP-8 assembly so that you can make fun and artsy demos and games."
@@ -22,13 +29,6 @@
       #:desc "The language of witches and the world around them. It's a constructed language packed with natural elements, religions, ceremonies, rituals.. Even some animals use it and you can cast spells and stuff."
       #:logo "saffimshij-logo.svg"
       #:links '(("/projects/saffimshij" . "Details")))
-
-    (project
-      #:name "Ferale"
-      #:date (pubdate 2018 5)
-      #:desc "16-bit homebrew micro-computer for artistic purposes. It's my attempt at making a computer from logic gates, build it, and use it."
-      #:logo "ferale-logo.svg"
-      #:links '(("/projects/ferale" . "Details")))
 
     ;; --- Projects ---
 
