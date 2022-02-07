@@ -47,8 +47,8 @@
 (define-response (racket-poetry)
   (response/page (racket-poetry-page article-db)))
 
-(define-response (ril011w)
-  (response/page (ril011w-page article-db)))
+(define-response (ferale)
+  (response/page (ferale-page article-db)))
 
 (define-response (saffimshij)
   (response/page (saffimshij-page article-db)))
@@ -96,7 +96,7 @@
     [POST ("poem") response-poem]
     [GET ("projects") response-projects]
     [GET ("projects" "racket-poetry") response-racket-poetry]
-    [GET ("projects" "ril011w") response-ril011w]
+    [GET ("projects" "ferale") response-ferale]
     [GET ("projects" "saffimshij") response-saffimshij]
     [GET ("talks") response-talks]
     [GET ("article" (symbol-arg)) response-article]

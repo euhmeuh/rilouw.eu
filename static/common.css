@@ -355,7 +355,7 @@ img.illus {
   box-shadow: 4px 4px 4px #c4c4c4;
 }
 
-footer img {
+footer img.decor {
   width: 100%;
   max-width: 574px;
 }

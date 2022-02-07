@@ -30,7 +30,7 @@
 
  ;; PROJECTS PAGES
  [racket-poetry-title . "Racket Poetry"]
- [ril011w-title . "L'ordinateur RIL011W"]
+ [ferale-title . "L'ordinateur Ferale"]
  [saffimshij-title . "Saff Imshij"]
 
  ;; TALKS

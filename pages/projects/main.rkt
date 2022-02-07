@@ -3,7 +3,7 @@
 (provide
   projects-page
   racket-poetry-page
-  ril011w-page
+  ferale-page
   saffimshij-page)
 
 (require
@@ -56,16 +56,28 @@
          (p "You can try this here:")
          (a ([href "/poem"]) "ferale.art/poem")))))
 
-(define (ril011w-page db)
-  (base-page db (tr ril011w-title) '()
+(define (ferale-page db)
+  (base-page db (tr ferale-title) '()
     (lambda ()
       `(main
-         (h2 ,(tr ril011w-title))
-         (p "RIL011W")))))
+         (h2 ,(tr ferale-title))
+         (p "Ferale is a 16 bits homebrew computer made from standard logic gates. It has a custom processor architecture called Louve, a Forth-like operating system (more like a collection of programs) called Mésange, a graphics card called Alosa that can output 320x240 VGA in 64 colors, and an assembler called Bourdon.")
+         (p "Ferale is currently being constructed (slowly).")
+         (h3 "Construction status")
+         (ul
+           (li "Louve - Architecture is defined, emulator works, electrically simulated implementation is starting, physical implementation is not started.")
+           (li "Alosa - Architecture is not completely defined, emulator is wacky, electrically simulated implementation is well advanced, physical implementation is started (VGA output works !).")
+           (li "Bourdon - Racket emulator works but I'm not satisfied. Racket assembler works but has rough corners. Forth emulator is getting there and is way quicker than the Racket version. Forth assembler is not started yet.")
+           (li "Mésange - There's only an Hello world ASCII output demo for now (no graphics)."))
+         (p "You can check out the project on Sourcehut:")
+         (a ([href "https://git.sr.ht/~euhmeuh/ferale"]) "git.sr.ht/~euhmeuh/ferale")
+         (h3 "Note about the license")
+         (p "The project is licensed under the Anarchist Revolutionary License, which is a license I wrote because I don't give a fuck about licenses, because they have no freakin' legal value in most countries, including mine. The values I injected in this license are similar to the GNU Affero GPL, but I added a lot of stuff about protecting the environment, not hurting humans and stuff, so it's technically not open source nor free software. I don't care, it's the end of our civilisation anyways, people will eat each other, who fuckin' cares about licenses?")
+         (p "Just go build this computer in your garage, I'll be glad.")))))
 
 (define (saffimshij-page db)
   (base-page db (tr saffimshij-title) '()
     (lambda ()
       `(main
          (h2 ,(tr saffimshij-title))
-         (p "Saff Imshij")))))
+         (p "Saff Imshij is a constructed language for witches. I'm currently documenting and gathering information about it, so there's more to come.")))))

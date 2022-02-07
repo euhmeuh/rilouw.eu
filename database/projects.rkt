@@ -13,22 +13,22 @@
       #:name "Racket poetry"
       #:date (pubdate 2020 2)
       #:desc "Poetry that compiles to CHIP-8 assembly so that you can make fun and artsy demos and games."
-      #:links '(("/projects/racket-poetry" . "Dedicated project page")
-                ("/poem" . "Try some poems")))
+      #:links '(("/projects/racket-poetry" . "Details")
+                ("/poem" . "Try it")))
 
     (project
       #:name "Saff Imshij"
       #:date (pubdate 2019 12)
       #:desc "The language of witches and the world around them. It's a constructed language packed with natural elements, religions, ceremonies, rituals.. Even some animals use it and you can cast spells and stuff."
       #:logo "saffimshij-logo.svg"
-      #:links '(("/projects/saffimshij" . "Dedicated project page")))
+      #:links '(("/projects/saffimshij" . "Details")))
 
     (project
-      #:name "RIL011W"
+      #:name "Ferale"
       #:date (pubdate 2018 5)
       #:desc "16-bit homebrew micro-computer for artistic purposes. It's my attempt at making a computer from logic gates, build it, and use it."
-      #:logo "ril011w-logo.svg"
-      #:links '(("/projects/ril011w" . "Dedicated project page")))
+      #:logo "ferale-logo.svg"
+      #:links '(("/projects/ferale" . "Details")))
 
     ;; --- Projects ---
 
