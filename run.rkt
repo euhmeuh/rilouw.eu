@@ -10,6 +10,7 @@
   (only-in web-galaxy/renderer current-custom-renderers)
   racket-poetry/server
   rilouw-website/pages/index
+  rilouw-website/pages/feed
   rilouw-website/pages/article
   rilouw-website/pages/projects/main
   rilouw-website/pages/talks
@@ -34,6 +35,10 @@
 (define-response (index)
   (define articles (send article-db get-recent-articles))
   (response/page (index-page article-db articles)))
+
+(define-response (feed)
+  (define articles (send article-db get-recent-articles))
+  (response/xml (feed-page article-db articles)))
 
 (define-response (article article-id)
   (define article (send article-db find-article-by-id article-id))
@@ -93,6 +98,7 @@
                [current-custom-renderers `([,symbol? . ,render-tag])])
   (serve/all
     [GET ("") response-index]
+    [GET ("feed") response-feed]
     [POST ("poem") response-poem]
     [GET ("projects") response-projects]
     [GET ("projects" "racket-poetry") response-racket-poetry]

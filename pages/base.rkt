@@ -81,6 +81,7 @@
        (meta ([property "twitter:image"] [content "/icon.png"]))
        (link ([rel "icon"] [href "/favicon.ico"]))
        (link ([rel "shortcut icon"] [href "/favicon.ico"]))
+       (link ([rel "alternate"] [type "application/atom+xml"] [title "Ferale.art Atom feed"] [href "/feed"]))
        (link ([rel "stylesheet"] [type "text/css"] [href "/common.css"]))
        ,(render-title title))
      (body
