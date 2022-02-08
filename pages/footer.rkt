@@ -31,6 +31,9 @@
        (li "Sourcehut ─ " (a ([href "https://sr.ht/~euhmeuh"]) "~euhmeuh"))
        (li "Tumblr ─ " (a ([href "https://zoebourdon.fr"]) "zoebourdon.fr"))
        )
+     (p "You can also stay up to date by following "
+        (a ([href "/feed"]) "the publication feed")
+        ".")
      (p ([class "small center"])
        (a ([href "https://webring.xxiivv.com/#ferale"] [target "_blank"])
         (img ([width "50px"]
