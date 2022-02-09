@@ -1,0 +1,53 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Effondrement et plaisir"
+         @pubdate[2022 2 9]
+         '(french happy-collapsing pleasure sustainability anarcho-primitivism anarchism slow-tech list-of-things)
+
+@p{C'est toujours délicat de parler d'effondrement, parce qu'on passe pour un·e pessimiste.}
+@p{Bon, je ne prétends pas que tout sera joyeux, effectivement, ça va bien être la merde par chez nous (c'est déjà la merde chez les autres, mais ils sont plus pauvres que nous alors on s'en tape).}
+@p{Mais l'effondrement, c'est aussi un grand moment de libération, et je souhaite y mettre le plus de bonheur possible. Alors j'ai fait une liste des choses qui me feraient plaisir dans le monde d'après. Histoire de compenser les moments où on va se taper sur la gueule, par des moments où on se fera des calins.}
+
+@(fold)
+
+@p{Je me prépare tranquillement à la chute de notre civilisation.}
+@p{Pas comme ces « preppers » qui achètent des armes et creusent des abris dans lesquels ils vont mourir de solitude, non, ça c'est un peu con.}
+@p{Je me prépare mentalement à une société différente (parce que, je sais pas si vous savez, mais on vit vraiment dans une société quoi, lol).}
+
+@p{Et surtout, j'espère pouvoir faire des trucs qu'on s'est interdit de faire pendant des siècles. Goûter de nouveau aux fruits de la liberté. Le chute du capitalisme quoi. C'est pas tous les jours, il faut en profiter !}
+
+@p{Du coup, j'ai décidé de faire une petite liste des choses qui me feraient plaisir, qui me mettraient en joie, qui me donneraient cette pulsion animale d'être vivante, quand tout va s'effondrer, quand tout va se libérer et qu'on va enfin pouvoir danser à nouveau sous le soleil.}
+
+@p{Quand tout va s'effondrer, j'aimerai pouvoir :}
+
+@dotted-list[
+"planter des légumes dans un espace libre et anarchiste"
+"préparer à manger pour une cinquantaine de réfugiés climatiques, et partager ce repas avec elleux"
+"dessiner les animaux qui reprennent leurs espaces de vie"
+"danser autour du feu"
+"casser la gueule à des fascistes"
+"faire cuire à la broche et goûter au moins un riche (de préférence pas trop drogué, un riche bio quoi)"
+"faire une sieste au soleil en pensant aux métiers de bureau qui ne sont plus utiles"
+"tresser des paniers"
+"prendre le temps de fabriquer un objet en bois magnifique sans lui donner de valeur marchande"
+"travailler sans jamais avoir à compter et rentabiliser le temps que ça me prend"
+"ne pas travailler, sans jamais avoir à compter le temps de congés qu'il me reste"
+"apprendre à improviser de la musique en groupe, de préférence avec des instruments désaccordés"
+"faire caca dans la foret et m'essuyer les fesses avec des feuilles"
+"brûler des livres de management"
+"inventer des rituels payens"
+"fabriquer du tissu moi même et en faire une robe"
+"construire des maisons en terre et des toits en chaume"
+"me laver dans la rivière"
+"faire l'amour sous la pluie"
+"distribuer l'eau et le pain dans tout le campement"
+"pétrir la pate et la laisser lever toute la journée"
+"brasser de la bière et du vin"
+"danser et chanter des paroles anti-capitalistes pour se foutre de la gueule de nos ancètres idiots qui ont mis tout ce système de dominations en place et qui emporteront dans leurs tombes les inégalités, l'exploitation, et tout le patatra qui n'a plus aucune raison d'exister"
+"visiter des personnes éloignées en prenant un bateau à voiles"
+"me réjouir chaque jour que plus jamais les humains ne dominerons la planète, car les ressources pour recréer la civilisation ne sont plus disponibles une seconde fois"
+]
+
+@p{Et vous, qu'est ce qui vous ferait plaisir ?}
+
+]
