@@ -37,7 +37,7 @@
      (link ([href "https://ferale.art/feed"] [rel "self"]))
      (link ([href "https://ferale.art"]))
      (id "https://ferale.art")
-     (updated "2022-02-08T19:46:00+01:00")
-     
+     (updated "2022-02-10T01:00:00+01:00")
+
      ,@(map render-article articles)
    ))
