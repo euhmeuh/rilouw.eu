@@ -1,0 +1,85 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Des milliers de corps" '()
+         @pubdate[2022 4 27]
+         '(french poetry transidentity)
+
+@p{
+Des milliers de cellules.@'(br)
+Vivantes.@'(br)
+Grouillantes et bruyantes.@'(br)
+Me relient au monde.@'(br)
+Je suis elles et elles sont moi.@'(br)
+Je suis cette masse collaborative.@'(br)
+Ce numéro d'équilibriste.@'(br)
+Autophage éphémère.
+}
+
+@(fold)
+
+@p{
+Des milliers de sensations.@'(br)
+Brûlantes.@'(br)
+M'envahissent.@'(br)
+Choc électriques du corps. En mouvement.@'(br)
+Elles dansent. Je danse.@'(br)
+}
+
+@p{
+Des milliers de fantomes.@'(br)
+M'habitent.@'(br)
+Connaissent les raccourcis du château hanté.@'(br)
+Spectacle des ombres.@'(br)
+Projetées sur les murs de ma boîte crânienne.
+}
+
+@p{
+Des milliers de frissons.@'(br)
+Parcourent ma peau.@'(br)
+Les vents, les eaux, les langues et les doigts.@'(br)
+Les saisons et les blessures.@'(br)
+Les étoiles et les insectes.@'(br)
+Carressent.
+}
+
+@p{
+Des milliers de regards.@'(br)
+Me découpent.@'(br)
+M'absorbent et me rangent.@'(br)
+Mesurent et projettent.@'(br)
+Que suis-je ? Quels mots ? Quelle case ?@'(br)
+Erreur système.
+}
+
+@p{
+Des milliers d'années.@'(br)
+S'écoulent sans nous.@'(br)
+Sans mon corps.@'(br)
+Et pourtant.@'(br)
+Je suis là.@'(br)
+Nous sommes là.
+}
+
+@p{
+Des milliers d'oiseaux, de loups de bourdons.@'(br)
+Des milliers de fourmis, de vers, de truites.@'(br)
+Des milliers de serpents, de rats, de tulipes.@'(br)
+Des milliers de hêtres, de fresnes, de noisetiers.
+}
+
+@p{
+Nous sommes les corps.@'(br)
+Nous dansons depuis l'existence du monde.@'(br)
+Nous ne nous laisserons pas contrôler.@'(br)
+Nous ne nous laisserons pas enfermer.@'(br)
+Dans le moule de l'humanité.
+}
+
+@p{
+Nous réclamons notre indépendance.@'(br)
+Et la démission des êtres humains@'(br)
+Du poste de régisseurs de l'évolution.
+}
+
+]
+
