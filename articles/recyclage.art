@@ -1,6 +1,6 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-@article["Vous êtes vraiment écolo ? Arrêtez de trier vos déchets." @pubdate[2021 9 26] '(french anti-capitalism ecology stop-recycling)
+@article["Vous êtes vraiment écolo ? Arrêtez de trier vos déchets." '() @pubdate[2021 9 26] '(french anti-capitalism ecology stop-recycling)
 
 @p{Aujourd'hui, j'ai jeté mes cartouches d'imprimante à la poubelle, sous les regards ébahis, choqués et incompréhensifs de mes amis.}
 

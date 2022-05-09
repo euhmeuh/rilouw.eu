@@ -8,6 +8,8 @@
   (except-out (struct-out article) article)
   (rename-out [make-article article])
   draft? ;; is an article a draft?
+  article-id
+  article-has-id?
 
   (struct-out fold)
   render-fold
@@ -65,10 +67,20 @@
 
 ;; --- article ---
 
-(struct article container (id title date tags))
+(struct article container (title slugs date tags))
 
-(define (make-article title date tags . body)
-  (article body (string->symbol (normalize title)) title date tags))
+(define (make-article title slugs date tags . body)
+  (article body title slugs date tags))
+
+(define (article-id article)
+  (if (pair? (article-slugs article))
+    (car (article-slugs article))
+    (string->symbol (normalize (article-title article)))))
+
+(define (article-has-id? article id)
+  (if (pair? (article-slugs article))
+    (memq id (article-slugs article))
+    (eq? (string->symbol (normalize (article-title article))) id)))
 
 (define (draft? article)
   (memq 'draft (article-tags article)))

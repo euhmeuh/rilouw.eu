@@ -1,6 +1,8 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-(article "The programming language of your dreams (part 1)"
+(article "The programming language of your dreams"
+         '(the-programming-language-of-your-dreams
+           the-programming-language-of-your-dreams-part-1)
          (pubdate 2018 11 19)
          '(english technology programming racket lisp)
 

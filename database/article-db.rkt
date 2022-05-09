@@ -42,7 +42,7 @@
     (define/public (find-article-by-id id)
       (findf
         (lambda (article)
-          (eq? (article-id article) id))
+          (article-has-id? article id))
         (get-public-articles)))
 
     (define/public (find-articles-tagged tag)

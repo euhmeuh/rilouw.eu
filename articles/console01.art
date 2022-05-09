@@ -1,6 +1,8 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-@article["Construisons une console de jeu inspirée des années 80 - RIL011W Partie 1"
+@article["Construisons une console de jeu inspirée des années 80 - Ferale"
+        '(construisons-une-console-de-jeu-inspiree-des-annees-80-ferale
+          construisons-une-console-de-jeu-inspiree-des-annees-80-ril011w-partie-1)
          @pubdate[2021 2 23]
          '(french electronics diy technology slow-tech low-level hardware ferale)
 
@@ -26,9 +28,10 @@ Tout ça, uniquement à partir de composants électroniques de base.}
   "Que le processus de création et le fonctionnement de la machine soit intégralement documenté dans un livre-manuel"
   "Apprendre un maximum de trucs"
   "Partager ce savoir aux autres"
+  "Renverser le capitalisme (ça devrait se faire naturellement)"
   ]
 
-@p{J'ai baptisé ce projet RIL011W (prononcez “RILOUW”).}
+@p{J'ai baptisé ce projet Ferale, car c'est un projet d'ensauvagement de l'informatique.}
 
 @p{À travers cette série d'articles, j'ai donc envie de partager cette aventure avec vous,
 et peut-être au passage récolter de précieux conseils. }
@@ -226,7 +229,7 @@ Mais pour vous faire une petite idée du voyage qui nous attend, voila en résum
   "Le premier composant de notre ordinateur : la carte graphique"
   "Super Mario, nous voila : les tiles et les sprites"
   "Appel à un ami : le vénérable 6502"
-  "Notre propre processeur, le RIL01"
+  "Notre propre processeur, Louve"
   "??? (suite à déterminer)"
   ]
 
@@ -239,6 +242,6 @@ Mais pour vous faire une petite idée du voyage qui nous attend, voila en résum
 
 @p{Éventuellement, à la fin de tous ces articles, nous devrions avoir construit un ordinateur !
 D'ici là, portez-vous bien, et si vous avez des commentaires, des suggestions ou des questions,
-n'hésitez pas : laissez un petit pouet sur @'(a ([href "https://mamot.fr/@euhmeuh"]) "Mastodon") avec le mot-clef @ic{#ril011w}.}
+n'hésitez pas : laissez un petit pouet sur @'(a ([href "https://mamot.fr/@euhmeuh"]) "Mastodon") avec le mot-clef @ic{#ferale}.}
 
 ]

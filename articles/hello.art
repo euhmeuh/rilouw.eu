@@ -1,8 +1,8 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-@article["Hello world!" @pubdate[2018 2 15] '(english meta)
+@article["Hello world!" '() @pubdate[2018 2 15] '(english meta)
 
-@p{Hello world! I'm Jérôme, professional developer and hacker.}
+@p{Hello world! I'm @'(s "Jérôme") Zoé, professional developer and hacker.}
 
 @p{This is my brand new blog where I talk about @'|slow-tech|, @'|programming|, @'|feminism|, @'|ecology|,
    and sometimes metaphysical aspects of life...}
@@ -21,7 +21,8 @@
    I want to talk about @'|work|, especially work in the IT industry, and more generally how we seem to build
    hopes in machines to save us (maybe its a kind of new god we're making there?).}
 
-@p{I want to talk about @'|feminism|, especially about being a white european man with full @'privileges in a society that pushes me to destroy
+@p{I want to talk about @'|feminism|, especially about being a white european @'(s "man") (oopsie, this aged well...)
+   with full @'privileges in a society that pushes me to destroy
    others and aim for the top. Rest assured, I promise no mansplaining nor male tears here, I'll start by shutting my mouth, listen to women, discuss
    different subjects in my local feminist association, then I'll be able to talk.}
 

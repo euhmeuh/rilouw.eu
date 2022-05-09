@@ -1,6 +1,6 @@
 #lang at-exp s-exp rilouw-website/database/article-lang
 
-@article["Effondrement et plaisir"
+@article["Effondrement et plaisir" '()
          @pubdate[2022 2 9]
          '(french happy-collapsing pleasure sustainability anarcho-primitivism anarchism slow-tech list-of-things)
 
@@ -45,7 +45,7 @@
 "brasser de la bière et du vin"
 "danser et chanter des paroles anti-capitalistes pour se foutre de la gueule de nos ancètres idiots qui ont mis tout ce système de dominations en place et qui emporteront dans leurs tombes les inégalités, l'exploitation, et tout le patatra qui n'a plus aucune raison d'exister"
 "visiter des personnes éloignées en prenant un bateau à voiles"
-"me réjouir chaque jour que plus jamais les humains ne dominerons la planète, car les ressources pour recréer la civilisation ne sont plus disponibles une seconde fois"
+"me réjouir chaque jour que plus jamais les humains ne domineront la planète, car les ressources pour recréer la civilisation ne sont plus disponibles une seconde fois"
 ]
 
 @p{Et vous, qu'est ce qui vous ferait plaisir ?}
