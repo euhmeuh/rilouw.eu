@@ -1,0 +1,69 @@
+#lang at-exp s-exp rilouw-website/database/article-lang
+
+@article["Beyond the shores of the western world" '()
+         @pubdate[2022 5 9]
+         '(english poetry low-tech slow-tech sustainability technology)
+
+@p{
+Beyond the shores of the western world@'(br)
+The computers rust.@'(br)
+Interconnected sheets of metal.@'(br)
+They no longer fullfil@'(br)
+Our need for virtual contact.@'(br)
+}
+
+@(fold)
+
+@p{
+Beyond the shores of the western world@'(br)
+The internet is catching fish no more.@'(br)
+Your movie doesn't stream@'(br)
+Down your eyes and ears and throat.
+}
+
+@p{
+Beyond the shores of the western world@'(br)
+The cries for attention are not heard.@'(br)
+Birds twitting at land,@'(br)
+Are too far away.
+}
+
+@p{
+Beyond the shores of the western world@'(br)
+What you take for granted,@'(br)
+Is not there.
+}
+
+@p{
+Beyond the shores of the western world@'(br)
+You are becoming human again.@'(br)
+You left your mask@'(br)
+Of simulated sensations@'(br)
+Of cheap dopamine@'(br)
+Of fake accounts@'(br)
+Of circonvoluted goals@'(br)
+Of digital fame@'(br)
+Behind.
+}
+
+@p{
+Beyond the shores of the western world@'(br)
+You are becoming human.@'(br)
+At least.
+}
+
+@p{
+Feel you world, you sensitive being.@'(br)
+The only digits worth having are on your hands.
+}
+
+@'(hr)
+
+@p{This poem was inspired by @link["https://100r.co/site/about_us.html"]{100r.co}.}
+
+@lquote["Hundred Rabbits"
+        @pubdate[2022 5 7]
+        "Their about page"
+  @p{Living in remote uninhabited parts of the world has offered us a playground to learn how technology degrades beyond the shores of the western world.}]
+
+]
